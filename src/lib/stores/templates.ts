@@ -10,7 +10,6 @@ export interface Template {
   features: string[];
   featured?: boolean;
   sponsored?: boolean;
-  // SEO props
   seoTitle?: string;
   seoDescription?: string;
   techStack?: string[];
@@ -41,7 +40,7 @@ export const templates: Template[] = [
       currency: 'USD'
     },
     lastUpdated: '2024-01-15',
-    version: '2.1.0'
+    version: '2.1.0',
   },
   {
     id: 'saas-landing',
@@ -51,7 +50,7 @@ export const templates: Template[] = [
     category: 'landing',
     demoUrl: '/templates/saas-landing',
     features: ['Hero section', 'Feature grid', 'Testimonials', 'Pricing tables'],
-    sponsored: true
+    sponsored: true,
   },
   {
     id: 'admin-pro',
@@ -60,7 +59,7 @@ export const templates: Template[] = [
     image: '/templates/admin-1.png',
     category: 'admin',
     demoUrl: '/templates/admin-pro',
-    features: ['User management', 'Analytics dashboard', 'Settings panel', 'Activity logs']
+    features: ['User management', 'Analytics dashboard', 'Settings panel', 'Activity logs'],
   },
   {
     id: 'auth-starter',
@@ -69,7 +68,7 @@ export const templates: Template[] = [
     image: '/templates/auth-1.png',
     category: 'auth',
     demoUrl: '/templates/auth-starter',
-    features: ['Social login', 'Password reset', '2FA support', 'Profile management']
+    features: ['Social login', 'Password reset', '2FA support', 'Profile management'],
   },
   {
     id: 'minimal-dashboard',
@@ -78,7 +77,7 @@ export const templates: Template[] = [
     image: '/templates/dashboard-2.png',
     category: 'dashboard',
     demoUrl: '/templates/minimal-dashboard',
-    features: ['Clean UI', 'Performance optimized', 'Essential widgets', 'Quick actions']
+    features: ['Clean UI', 'Performance optimized', 'Essential widgets', 'Quick actions'],
   },
   {
     id: 'startup-landing',
@@ -87,7 +86,7 @@ export const templates: Template[] = [
     image: '/templates/landing-2.png',
     category: 'landing',
     demoUrl: '/templates/startup-landing',
-    features: ['Animated sections', 'Newsletter signup', 'Blog section', 'Contact form']
+    features: ['Animated sections', 'Newsletter signup', 'Blog section', 'Contact form'],
   },
   {
     id: 'enterprise-admin',
@@ -96,7 +95,7 @@ export const templates: Template[] = [
     image: '/templates/admin-2.png',
     category: 'admin',
     demoUrl: '/templates/enterprise-admin',
-    features: ['Role-based access', 'Audit logs', 'Batch operations', 'Export tools']
+    features: ['Role-based access', 'Audit logs', 'Batch operations', 'Export tools'],
   },
   {
     id: 'auth-enterprise',
@@ -105,7 +104,7 @@ export const templates: Template[] = [
     image: '/templates/auth-2.png',
     category: 'auth',
     demoUrl: '/templates/auth-enterprise',
-    features: ['SSO integration', 'LDAP support', 'Audit logging', 'Compliance tools']
+    features: ['SSO integration', 'LDAP support', 'Audit logging', 'Compliance tools'],
   },
   {
     id: 'analytics-dashboard',
@@ -114,7 +113,7 @@ export const templates: Template[] = [
     image: '/templates/dashboard-3.png',
     category: 'dashboard',
     demoUrl: '/templates/analytics-dashboard',
-    features: ['Real-time data', 'Custom reports', 'Data export', 'Alert system']
+    features: ['Real-time data', 'Custom reports', 'Data export', 'Alert system'],
   },
   {
     id: 'product-landing',
@@ -123,7 +122,7 @@ export const templates: Template[] = [
     image: '/templates/landing-3.png',
     category: 'landing',
     demoUrl: '/templates/product-landing',
-    features: ['Product showcase', 'Customer reviews', 'FAQ section', 'Integration demos']
+    features: ['Product showcase', 'Customer reviews', 'FAQ section', 'Integration demos'],
   },
   {
     id: 'saas-admin',
@@ -132,7 +131,7 @@ export const templates: Template[] = [
     image: '/templates/admin-3.png',
     category: 'admin',
     demoUrl: '/templates/saas-admin',
-    features: ['Subscription management', 'Customer portal', 'Billing integration', 'Support tickets']
+    features: ['Subscription management', 'Customer portal', 'Billing integration', 'Support tickets'],
   },
   {
     id: 'auth-plus',
@@ -141,7 +140,7 @@ export const templates: Template[] = [
     image: '/templates/auth-3.png',
     category: 'auth',
     demoUrl: '/templates/auth-plus',
-    features: ['Biometric auth', 'Device management', 'Security logs', 'Privacy controls']
+    features: ['Biometric auth', 'Device management', 'Security logs', 'Privacy controls'],
   }
 ];
 

@@ -24,7 +24,6 @@
     goto(template.demoUrl);
   }
 
-  // Determine card border color based on status
   $: cardClasses = `flex flex-col rounded-lg border-[1px] bg-white overflow-hidden cursor-pointer relative ${
     template.featured 
       ? 'border-slate-700/30 hover:border-slate-700/50' 
@@ -32,20 +31,6 @@
         ? 'border-emerald-200 hover:border-emerald-300'
         : 'border-slate-200 hover:border-slate-300'
   }`;
-
-  // Generate structured data for the template
-  $: structuredData = {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    "name": template.title,
-    "description": template.description,
-    "image": template.image,
-    "category": template.category,
-    "offers": {
-      "@type": "Offer",
-      "availability": "https://schema.org/InStock"
-    }
-  };
 </script>
 
 <div 
@@ -74,7 +59,6 @@
       src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
       alt={template.title}
     />
-    <!-- Loading placeholder -->
     <div class="absolute inset-0 bg-gray-200 animate-pulse" />
   </div>
   <div class="flex-1 p-6 flex flex-col justify-between">
@@ -106,11 +90,4 @@
     will-change: transform;
     transform: translateZ(0);
   }
-</style>
-
-<!-- Add structured data to each template card -->
-<svelte:head>
-  <script type="application/ld+json">
-    {JSON.stringify(structuredData)}
-  </script>
-</svelte:head> 
+</style> 
