@@ -1,453 +1,182 @@
 <script lang="ts">
-	let stats = {
-		success: true,
-		merged: 0,
-		closed: 0,
-		open: 0,
-		lastPR: '*blushes* I need your username!',
-		totalRepos: 0,
-		totalCommits: 0,
-		followers: 0,
-		following: 0,
-		avatarUrl: '',
-		bio: ''
-	};
-	let loading = false;
-	let message = '';
-	let username = '';
+	import { templates } from '$lib/stores/templates';
+	import TemplateCard from '$lib/components/TemplateCard.svelte';
+	import Header from '$lib/components/Header.svelte';
+	import CTACard from '$lib/components/CTACard.svelte';
+	import { onMount } from 'svelte';
 
-	function getCommitImage(totalCommits: number): string {
-		if (totalCommits > 1900) {
-			return 'chill-guy/zero.png';
-		} else if (totalCommits >= 1700) {
-			return 'chill-guy/1-5.svg';
-		} else if (totalCommits >= 1500) {
-			return 'chill-guy/5-15.svg';
-		} else if (totalCommits >= 1300) {
-			return 'chill-guy/15-20.svg';
-		} else if (totalCommits >= 1000) {
-			return 'chill-guy/20-30.svg';
-		} else if (totalCommits >= 800) {
-			return 'chill-guy/30-40.svg';
-		} else if (totalCommits >= 600) {
-			return 'chill-guy/40-50.svg';
-		} else if (totalCommits >= 400) {
-			return 'chill-guy/50-70.svg';
-		} else if (totalCommits >= 300) {
-			return 'chill-guy/70-90.svg';
-		} else if (totalCommits >= 150) {
-			return 'chill-guy/chill-2.png';
-		} else if (totalCommits >= 100) {
-			return 'chill-guy/chill.png';
-		} else {
-			return 'chill-guy/chill.png';
-		}
+	// Randomly decide whether to show CTA after hero or among templates
+	const showCtaAfterHero = Math.random() > 1;
+	
+	// If showing among templates, pick a random position
+	const ctaPosition = Math.floor(Math.random() * (templates.length + 1));
+
+	// Pagination
+	const ITEMS_PER_PAGE = 6;
+	let currentPage = 1;
+	let loading = false;
+
+	// Sort templates to show featured and sponsored first
+	$: sortedTemplates = [...templates].sort((a, b) => {
+		if (a.featured && !b.featured) return -1;
+		if (!a.featured && b.featured) return 1;
+		if (a.sponsored && !b.sponsored) return -1;
+		if (!a.sponsored && b.sponsored) return 1;
+		return 0;
+	});
+
+	// Get paginated templates
+	$: paginatedTemplates = sortedTemplates.slice(0, currentPage * ITEMS_PER_PAGE);
+	$: hasMore = paginatedTemplates.length < sortedTemplates.length;
+
+	// Load more function with artificial delay to show loading state
+	async function loadMore() {
+		loading = true;
+		await new Promise(resolve => setTimeout(resolve, 500)); // Simulate network delay
+		currentPage += 1;
+		loading = false;
 	}
 
-	const handleSubmit = async () => {
-		if (!username) {
-			message = 'Please your GitHub username';
-			return;
-		}
+	// Intersection Observer for lazy loading images
+	let observer: IntersectionObserver;
 
-		try {
-			loading = true;
-			const res = await fetch(`/api/increment?username=${encodeURIComponent(username)}`);
-			const data = await res.json();
-
-			if (data.success) {
-				stats = data;
-				message = '';
-			} else {
-				message = data.message || 'Error fetching data.';
+	onMount(() => {
+		observer = new IntersectionObserver(
+			(entries) => {
+				entries.forEach(entry => {
+					if (entry.isIntersecting) {
+						const img = entry.target as HTMLImageElement;
+						img.src = img.dataset.src!;
+						img.onload = () => {
+							img.classList.remove('opacity-0');
+							observer.unobserve(img);
+						};
+					}
+				});
+			},
+			{
+				rootMargin: '50px',
 			}
-		} catch (error) {
-			console.error('Error fetching data:', error);
-			stats = {
-				success: false,
-				merged: 0,
-				closed: 0,
-				open: 0,
-				lastPR: 'Unknown',
-				totalRepos: 0,
-				totalCommits: 0,
-				followers: 0,
-				following: 0,
-				avatarUrl: '',
-				bio: ''
-			};
-			message = 'Error fetching GitHub data. Please check the username and try again.';
-		} finally {
-			loading = false;
-		}
-	};
+		);
+	});
 </script>
 
-<main class="h-screen">
-	<div class="max-w-screen-sm px-8 pt-16 mx-auto pb-44 gap-4 grid">
-		<!-- header -->
-		<header>
-			<svg
-				width="87"
-				height="83"
-				viewBox="0 0 87 83"
-				fill="none"
-				xmlns="http://www.w3.org/2000/svg"
-			>
-				<path
-					fill-rule="evenodd"
-					clip-rule="evenodd"
-					d="M65.5715 8.57139C65.0708 6.38361 64.5944 4.12172 64.143 1.78572C61.7344 0.984624 60.3059 1.81795 59.8573 4.2857C59.3416 4.58393 58.9845 5.06012 58.7859 5.71426C58.5009 5.55112 58.3823 5.31298 58.4287 4.99998C59.3023 0.614512 61.5644 -0.575951 65.2144 1.42858C65.5701 3.79768 65.6894 6.17862 65.5715 8.57139Z"
-					fill="#1E160D"
-				/>
-				<path
-					fill-rule="evenodd"
-					clip-rule="evenodd"
-					d="M78.4281 6.42853C78.1759 2.0082 76.0331 0.698688 71.9996 2.49998C70.2917 4.38361 68.8631 6.40738 67.7139 8.57137C68.281 4.19521 70.6624 1.33808 74.8567 0C78.0131 0.931772 79.2038 3.07461 78.4281 6.42853Z"
-					fill="#312117"
-				/>
-				<path
-					fill-rule="evenodd"
-					clip-rule="evenodd"
-					d="M59.857 4.28516C59.6591 7.66599 59.8977 10.9993 60.5713 14.2851C59.2063 14.9827 57.7777 15.4589 56.2856 15.7136C56.2856 15.2374 56.0477 14.9994 55.5713 14.9994C56.5849 14.32 57.7748 14.0819 59.1427 14.2851C58.4613 12.2012 57.9848 10.0583 57.7141 7.85656C57.722 6.75292 57.9598 5.80057 58.4284 4.99944C58.382 5.31243 58.5006 5.55058 58.7856 5.71372C58.9841 5.05958 59.3413 4.58339 59.857 4.28516Z"
-					fill="#726041"
-				/>
-				<path
-					fill-rule="evenodd"
-					clip-rule="evenodd"
-					d="M77.7144 7.14355C77.0487 10.85 75.6201 14.1833 73.4287 17.1435C74.4666 13.639 75.8951 10.3057 77.7144 7.14355Z"
-					fill="#4C3927"
-				/>
-				<path
-					fill-rule="evenodd"
-					clip-rule="evenodd"
-					d="M73.4283 17.1426C73.9047 18.3331 74.3805 19.5235 74.8569 20.714C74.3805 20.4759 73.9047 20.2378 73.4283 19.9997C72.5812 18.9559 72.5812 18.0036 73.4283 17.1426Z"
-					fill="#19070B"
-				/>
-				<path
-					fill-rule="evenodd"
-					clip-rule="evenodd"
-					d="M44.1424 18.571C45.9195 19.9194 48.0624 20.3956 50.5709 19.9995C50.8981 22.8841 51.3738 25.7412 51.9995 28.5709C49.9095 29.2572 47.7667 29.7333 45.571 29.9995C45.571 29.7614 45.571 29.5232 45.571 29.2852C46.2795 29.4077 46.7552 29.1696 46.9995 28.5709C49.8181 28.5797 51.0088 27.1511 50.5709 24.2852C48.6309 24.1577 46.7259 23.8006 44.8567 23.2138C46.166 21.937 47.5945 21.8179 49.1424 22.8567C49.9309 22.0486 49.6931 21.4534 48.4281 21.0709C46.1381 20.4351 43.9953 20.6732 41.9996 21.7852C42.6767 22.1301 43.391 22.2492 44.1424 22.1424C43.8381 23.3129 43.8381 24.2653 44.1424 24.9995C44.1424 25.7138 44.1424 26.4281 44.1424 27.1423C42.2288 25.2021 41.2767 22.8212 41.2853 19.9995C40.0948 19.9995 38.9044 19.9995 37.7139 19.9995C39.6557 18.9902 41.7988 18.514 44.1424 18.571Z"
-					fill="#8C6E4D"
-				/>
-				<path
-					fill-rule="evenodd"
-					clip-rule="evenodd"
-					d="M65.571 8.57136C65.6189 9.61329 65.381 10.5657 64.8567 11.4285C64.1774 12.4418 63.9396 13.6323 64.1424 14.9999C65.1639 14.9433 66.1167 15.1815 66.9996 15.7142C67.9281 13.7076 67.9281 11.8028 66.9996 9.99993C66.8767 9.29165 67.1153 8.81543 67.7138 8.57136C68.8631 6.40738 70.2917 4.3836 71.9995 2.49998C76.0331 0.698684 78.1759 2.0082 78.4281 6.42852C78.4281 6.90473 78.1902 7.1428 77.7138 7.1428C75.8945 10.3049 74.4659 13.6383 73.4281 17.1427C72.581 18.0037 72.581 18.9561 73.4281 19.9999C71.2603 19.9848 69.5938 19.0324 68.4281 17.1427C67.8838 17.9487 67.4074 18.7819 66.9996 19.6427C68.0517 20.1496 68.5281 20.9829 68.4281 22.1427C69.3803 22.1427 70.3331 22.1427 71.2853 22.1427C71.4067 27.273 70.4538 27.6302 68.4281 23.2141C67.2767 22.6996 66.2053 22.8187 65.2139 23.5713C64.8582 25.019 64.9774 26.4476 65.571 27.8569C65.3439 28.6764 64.8682 29.2717 64.1424 29.6426C60.0789 29.6411 56.0311 29.284 51.9997 28.5712C51.374 25.7415 50.8982 22.8844 50.5711 19.9999C48.0626 20.3959 45.9197 19.9197 44.1426 18.5713C47.984 17.0861 52.0311 16.1337 56.2854 15.7142C57.7775 15.4594 59.206 14.9832 60.571 14.2856C59.8975 10.9998 59.6589 7.66651 59.8568 4.28568C60.3053 1.81793 61.7339 0.984603 64.1424 1.7857C64.5939 4.1217 65.0703 6.38359 65.571 8.57136Z"
-					fill="#A57C44"
-				/>
-				<path
-					fill-rule="evenodd"
-					clip-rule="evenodd"
-					d="M72.7148 7.85645C73.177 8.40923 73.4148 9.12351 73.4291 9.99929C72.042 11.9483 70.9706 14.0912 70.2148 16.4278C70.4034 13.4186 71.2363 10.5615 72.7148 7.85645Z"
-					fill="#603D1C"
-				/>
-				<path
-					fill-rule="evenodd"
-					clip-rule="evenodd"
-					d="M67.0004 10C67.929 11.8029 67.929 13.7077 67.0004 15.7142C66.1175 15.1815 65.1647 14.9434 64.1433 15C63.9404 13.6323 64.1783 12.4419 64.8575 11.4286C64.8575 12.3809 64.8575 13.3333 64.8575 14.2857C65.5718 14.2857 66.2861 14.2857 67.0004 14.2857C67.0004 12.8571 67.0004 11.4286 67.0004 10Z"
-					fill="#231007"
-				/>
-				<path
-					fill-rule="evenodd"
-					clip-rule="evenodd"
-					d="M64.1435 22.1425C60.9957 20.514 57.6621 20.276 54.1436 21.4282C54.9343 19.6917 56.3628 18.9775 58.4292 19.2854C60.9885 19.4245 63.3699 20.1387 65.572 21.4282C65.2456 21.9979 64.7692 22.236 64.1435 22.1425Z"
-					fill="#1F0C01"
-				/>
-				<path
-					fill-rule="evenodd"
-					clip-rule="evenodd"
-					d="M37.0003 19.999C37.0003 20.7133 37.0003 21.4276 37.0003 22.1419C32.4981 22.5255 28.2124 23.5969 24.1433 25.3561C23.7705 25.7571 23.5324 26.2333 23.429 26.7847C24.6439 28.1135 25.3582 29.6611 25.5718 31.4275C24.8803 32.9328 24.6421 34.5994 24.8575 36.4275C24.8575 38.5703 24.8575 40.7132 24.8575 42.856C24.3813 44.0465 23.9052 45.2369 23.429 46.4274C23.8885 38.658 23.1742 31.039 21.2861 23.5704C26.5786 22.6044 31.8167 21.4139 37.0003 19.999Z"
-					fill="#997A4D"
-				/>
-				<path
-					fill-rule="evenodd"
-					clip-rule="evenodd"
-					d="M64.1435 22.1424C63.0378 22.3718 62.5614 23.0861 62.7149 24.2853C60.0957 24.2853 57.4771 24.2853 54.8578 24.2853C55.805 23.0745 55.5671 22.1221 54.1436 21.4281C57.6621 20.2759 60.9957 20.5139 64.1435 22.1424Z"
-					fill="#715D3F"
-				/>
-				<path
-					fill-rule="evenodd"
-					clip-rule="evenodd"
-					d="M55.5714 15C56.0478 15 56.2856 15.2381 56.2856 15.7143C52.0314 16.1338 47.9843 17.0862 44.1429 18.5714C41.7993 18.5145 39.6562 18.9907 37.7143 20C37.4763 20 37.2381 20 37.0001 20C31.8164 21.4149 26.5783 22.6053 21.2859 23.5714C23.1739 31.04 23.8882 38.6589 23.4287 46.4284C22.9039 51.765 20.0468 55.0983 14.8574 56.4283C16.1026 57.5271 17.5311 58.2413 19.143 58.5711C23.4621 60.037 27.9858 60.9894 32.7144 61.4283C33.1686 63.0568 33.8829 64.4854 34.8572 65.7139C33.9049 66.4282 33.9049 67.1425 34.8572 67.8568C33.6434 67.8761 32.6911 68.3523 32.0001 69.2853C31.9167 67.8686 32.3929 66.6781 33.4287 65.7139C32.5378 64.4118 32.0616 62.9832 32.0001 61.4283C20.5192 62.1667 10.8764 58.3573 3.07172 49.9998C-0.628613 42.2927 -0.985754 34.4356 2.0003 26.4285C3.009 25.4954 4.1995 24.9001 5.5717 24.6428C22.2536 21.5027 38.9201 18.2884 55.5714 15Z"
-					fill="#080706"
-				/>
-				<path
-					fill-rule="evenodd"
-					clip-rule="evenodd"
-					d="M37 19.999C37.2381 19.999 37.4763 19.999 37.7143 19.999C38.9048 19.999 40.0952 19.999 41.2857 19.999C41.2772 22.8206 42.2293 25.2016 44.1429 27.1418C44.6193 27.8561 45.095 28.5704 45.5714 29.2847C45.5714 29.5227 45.5714 29.7609 45.5714 29.999C39.0424 31.3433 32.3757 31.8195 25.5716 31.4275C25.3579 29.6611 24.6436 28.1135 23.4287 26.7847C23.5321 26.2333 23.7702 25.7571 24.143 25.3561C28.2121 23.5969 32.4978 22.5255 37 22.1419C37 21.4276 37 20.7133 37 19.999Z"
-					fill="#AF7C40"
-				/>
-				<path
-					fill-rule="evenodd"
-					clip-rule="evenodd"
-					d="M47.0009 28.5715C46.4288 27.4703 46.1909 26.2798 46.2867 25.0001C45.5724 25.0001 44.8581 25.0001 44.1438 25.0001C43.8395 24.2659 43.8395 23.3136 44.1438 22.143C43.3924 22.2498 42.6781 22.1307 42.001 21.7859C43.9967 20.6738 46.1395 20.4357 48.4295 21.0716C49.6945 21.454 49.9324 22.0492 49.1438 22.8573C47.5959 21.8186 46.1674 21.9376 44.8581 23.2144C46.7274 23.8012 48.6324 24.1583 50.5723 24.2858C51.0102 27.1518 49.8195 28.5803 47.0009 28.5715Z"
-					fill="#190A05"
-				/>
-				<path
-					fill-rule="evenodd"
-					clip-rule="evenodd"
-					d="M44.1426 25C44.8569 25 45.5711 25 46.2854 25C46.1897 26.2796 46.4276 27.4701 46.9997 28.5714C46.7554 29.1701 46.2797 29.4083 45.5711 29.2857C45.0947 28.5714 44.619 27.8571 44.1426 27.1428C44.1426 26.4286 44.1426 25.7143 44.1426 25Z"
-					fill="#CDB2A4"
-				/>
-				<path
-					fill-rule="evenodd"
-					clip-rule="evenodd"
-					d="M56.2859 25C57.0002 25 57.7144 25 58.4287 25C58.4287 25.9524 58.4287 26.9048 58.4287 27.8571C57.9366 28.7668 57.3409 28.7668 56.643 27.8571C56.293 26.9334 56.1737 25.981 56.2859 25Z"
-					fill="#D6C3B0"
-				/>
-				<path
-					fill-rule="evenodd"
-					clip-rule="evenodd"
-					d="M54.8574 24.2861C57.4767 24.2861 60.0952 24.2861 62.7145 24.2861C62.9317 24.7503 63.1695 25.2265 63.4288 25.7147C62.3045 26.7748 61.3524 27.9652 60.5717 29.2861C59.8445 28.7915 59.1302 28.3152 58.4288 27.8575C58.4288 26.9052 58.4288 25.9528 58.4288 25.0004C57.7145 25.0004 57.0003 25.0004 56.286 25.0004C55.5774 25.123 55.1017 24.8848 54.8574 24.2861Z"
-					fill="#130804"
-				/>
-				<path
-					fill-rule="evenodd"
-					clip-rule="evenodd"
-					d="M73.4291 19.9997C73.9055 20.2378 74.3812 20.4759 74.8576 20.714C75.3341 23.0949 75.8098 25.4759 76.2862 27.8568C75.3241 27.3774 74.4905 27.3774 73.7862 27.8568C73.4234 36.6724 72.9469 45.4819 72.3577 54.2852C72.0012 50.4831 71.882 46.6736 72.0005 42.8567C68.667 42.8567 65.3341 42.8567 62.0006 42.8567C61.9442 43.8785 62.182 44.8308 62.7149 45.7138C61.8842 48.4954 60.932 51.1145 59.8578 53.5709C55.5949 55.8157 51.0714 57.4824 46.2864 58.5709C46.8757 59.2035 47.59 59.4416 48.4293 59.2851C48.1343 61.2996 48.8485 62.7281 50.5721 63.5708C52.0199 63.6866 53.4485 63.5676 54.8578 63.2137C56.0142 63.0455 56.7285 62.4502 57.0006 61.428C57.8635 60.5123 58.8163 60.5123 59.8578 61.428C58.7999 62.1282 57.8471 62.9615 57.0006 63.928C54.0764 64.3257 51.2192 64.921 48.4293 65.7137C47.4278 64.2974 46.1178 63.1069 44.5007 62.1423C43.3286 60.3887 42.2572 58.603 41.2865 56.7852C38.9012 55.8592 36.5203 55.0259 34.1436 54.2852C34.3861 50.2441 33.1956 46.6727 30.5722 43.571C32.6637 42.868 34.8066 42.63 37.0008 42.8567C37.0008 40.7138 37.0008 38.571 37.0008 36.4282C32.8985 35.8788 28.8509 35.8788 24.858 36.4282C24.6426 34.6001 24.8807 32.9335 25.5723 31.4282C32.3764 31.8202 39.0431 31.344 45.5721 29.9996C47.7678 29.7335 49.9107 29.2574 52.0007 28.5711C56.0321 29.2839 60.0799 29.641 64.1434 29.6425C64.8691 29.2715 65.3449 28.6763 65.572 27.8568C64.9784 26.4474 64.8591 25.0189 65.2149 23.5711C66.2063 22.8185 67.2777 22.6995 68.4291 23.214C70.4548 27.63 71.4077 27.2729 71.2862 22.1425C70.3341 22.1425 69.3813 22.1425 68.4291 22.1425C68.5291 20.9827 68.0527 20.1494 67.0006 19.6426C67.4084 18.7818 67.8848 17.9485 68.4291 17.1426C69.5948 19.0322 71.2612 19.9846 73.4291 19.9997Z"
-					fill="#A6823F"
-				/>
-				<path
-					fill-rule="evenodd"
-					clip-rule="evenodd"
-					d="M74.8574 20.7148C75.6131 21.5007 76.2088 22.4531 76.6431 23.572C78.8381 33.885 78.9567 44.123 77.0003 54.286C77.2353 45.3495 76.9967 36.54 76.286 27.8577C75.8096 25.4767 75.3338 23.0958 74.8574 20.7148Z"
-					fill="#584332"
-				/>
-				<path
-					fill-rule="evenodd"
-					clip-rule="evenodd"
-					d="M24.8575 42.8574C25.4429 44.8613 25.8 47.0041 25.929 49.2859C29.1749 50.7724 30.2464 53.1533 29.1432 56.4288C32.9258 57.0684 32.9258 57.9017 29.1432 58.9287C25.8321 58.8404 22.4988 58.7213 19.1433 58.5716C17.9892 57.2032 18.2274 56.1318 19.8576 55.3573C22.1522 54.8555 24.4141 54.9746 26.6432 55.7145C27.3995 55.6215 27.9947 55.2644 28.4289 54.6431C26.5389 54.2878 24.6342 54.1687 22.7147 54.2859C23.1067 52.5707 23.702 50.9041 24.5004 49.2859C24.8561 47.1562 24.9751 45.0134 24.8575 42.8574Z"
-					fill="#90903C"
-				/>
-				<path
-					fill-rule="evenodd"
-					clip-rule="evenodd"
-					d="M48.429 59.2858C47.5897 59.4422 46.8754 59.2042 46.2861 58.5715C51.0711 57.483 55.5946 55.8164 59.8575 53.5716C60.3275 52.9298 60.8032 52.2156 61.286 51.4287C62.2382 51.9049 63.191 52.3811 64.1432 52.8573C64.761 54.3613 64.2846 54.5994 62.7146 53.5716C58.1703 56.1935 53.4082 58.0982 48.429 59.2858Z"
-					fill="#351C09"
-				/>
-				<path
-					fill-rule="evenodd"
-					clip-rule="evenodd"
-					d="M24.8574 42.8574C24.9749 45.0134 24.8559 47.1562 24.5002 49.2859C23.7018 50.9041 23.1065 52.5707 22.7145 54.2859C24.634 54.1687 26.5388 54.2878 28.4288 54.6431C27.9945 55.2644 27.3993 55.6215 26.6431 55.7145C24.4139 54.9746 22.152 54.8555 19.8574 55.3573C18.2272 56.1318 17.989 57.2032 19.1431 58.5716C17.5312 58.2418 16.1026 57.5275 14.8574 56.4288C20.0469 55.0988 22.904 51.7655 23.4288 46.4288C23.905 45.2383 24.3811 44.0479 24.8574 42.8574Z"
-					fill="#87884D"
-				/>
-				<path
-					fill-rule="evenodd"
-					clip-rule="evenodd"
-					d="M48.4291 65.7131C48.4291 66.1894 48.4291 66.6655 48.4291 67.1417C46.9241 67.8333 45.2569 68.0714 43.4291 67.856C41.2991 67.5254 39.156 67.2873 37.0006 67.1417C36.7711 66.0359 36.0569 65.5597 34.8577 65.7131C33.8834 64.4846 33.1691 63.056 32.7149 61.4275C27.9864 60.9886 23.4626 60.0363 19.1436 58.5703C22.499 58.7201 25.8324 58.8391 29.1435 58.9275C32.926 57.9005 32.926 57.0671 29.1435 56.4275C30.2466 53.152 29.1752 50.7711 25.9292 49.2847C25.8003 47.0029 25.4432 44.86 24.8578 42.8562C24.8578 40.7133 24.8578 38.5705 24.8578 36.4276C28.8507 35.8783 32.8983 35.8783 37.0006 36.4276C37.0006 38.5705 37.0006 40.7133 37.0006 42.8562C34.8064 42.6295 32.6635 42.8675 30.572 43.5704C33.1955 46.6722 34.3859 50.2436 34.1435 54.2847C36.5201 55.0254 38.901 55.8587 41.2863 56.7846C42.257 58.6025 43.3284 60.3882 44.5005 62.1417C46.1177 63.1064 47.4276 64.2969 48.4291 65.7131Z"
-					fill="#9B8641"
-				/>
-				<path
-					fill-rule="evenodd"
-					clip-rule="evenodd"
-					d="M76.2849 27.8566C76.9963 36.5398 77.2349 45.3492 76.9999 54.2858C76.9999 56.6667 76.9999 59.0477 76.9999 61.4286C73.4792 63.7599 69.67 65.4266 65.5714 66.4286C58.2015 68.5071 50.8208 68.9836 43.4287 67.8571C45.2566 68.0726 46.9237 67.8344 48.4287 67.1429C54.4436 67.1946 60.3965 66.5993 66.2857 65.3572C66.0478 65.1191 65.8093 64.881 65.5714 64.6429C66.7136 62.7048 68.38 61.3952 70.5714 60.7143C72.3349 61.7905 73.8821 61.5523 75.2142 60.0001C76.1821 49.3118 76.5392 38.5976 76.2856 27.8574Z"
-					fill="#AE793D"
-				/>
-				<path
-					fill-rule="evenodd"
-					clip-rule="evenodd"
-					d="M57.0008 61.4287C56.7287 62.4509 56.0144 63.0462 54.858 63.2144C53.4487 63.5683 52.0201 63.6873 50.5723 63.5716C50.6516 63.1306 50.8894 62.7734 51.2865 62.5001C53.1922 62.0951 55.0965 61.738 57.0008 61.4287Z"
-					fill="#332515"
-				/>
-				<path
-					fill-rule="evenodd"
-					clip-rule="evenodd"
-					d="M76.2856 27.8574C76.9963 36.5398 77.2349 45.3492 76.9999 54.2858C76.9999 56.6667 76.9999 59.0477 76.9999 61.4286C73.4792 63.7599 69.67 65.4266 65.5714 66.4286C58.2015 68.5071 50.8208 68.9836 43.4287 67.8571C45.2566 68.0726 46.9237 67.8344 48.4287 67.1429C54.4436 67.1946 60.3965 66.5993 66.2857 65.3572C66.0478 65.1191 65.8093 64.881 65.5714 64.6429C66.7136 62.7048 68.38 61.3952 70.5714 60.7143C72.3349 61.7905 73.8821 61.5523 75.2142 60.0001C76.1821 49.3118 76.5392 38.5976 76.2856 27.8574Z"
-					fill="#987A4B"
-				/>
-				<path
-					fill-rule="evenodd"
-					clip-rule="evenodd"
-					d="M79.1426 65.7139C80.5933 66.4558 81.5454 67.6463 81.9997 69.2853C80.509 68.5106 79.5569 67.3201 79.1426 65.7139Z"
-					fill="#292929"
-				/>
-				<path
-					fill-rule="evenodd"
-					clip-rule="evenodd"
-					d="M32.0009 69.2852C30.6161 73.2258 29.5447 77.2737 28.7866 81.4279C28.4418 80.7508 28.3227 80.0365 28.4295 79.2851C28.8432 75.6151 30.0337 72.2816 32.0009 69.2852Z"
-					fill="#2F3331"
-				/>
-				<path
-					fill-rule="evenodd"
-					clip-rule="evenodd"
-					d="M76.9994 61.4287C76.9673 63.2696 77.6815 64.6981 79.1422 65.7144C76.2166 65.1539 73.8351 65.9873 71.9994 68.2144C62.6902 72.7401 52.9281 73.9308 42.7139 71.7858C40.1975 70.9115 37.8166 69.8401 35.5711 68.5715C35.0949 68.5715 34.8568 68.3334 34.8568 67.8572C33.9045 67.143 33.9045 66.4287 34.8568 65.7144C36.056 65.561 36.7703 66.0372 36.9997 67.143C38.4787 68.1752 40.1454 68.8894 41.9996 69.2858C42.0854 70.0615 42.5618 70.5379 43.4282 70.7144C44.2946 70.5379 44.7711 70.0615 44.8568 69.2858C45.0946 69.2858 45.3332 69.2858 45.5711 69.2858C45.5711 70.0001 45.5711 70.7144 45.5711 71.4286C48.3196 71.2936 50.9389 71.2936 53.4281 71.4286C53.9981 71.1022 54.236 70.6258 54.1424 70.0001C54.3803 70.0001 54.6188 70.0001 54.8567 70.0001C55.1924 70.8522 55.9067 71.3286 56.9995 71.4286C58.9367 71.4622 60.4838 70.7479 61.6424 69.2858C61.8802 69.7622 62.1188 70.2379 62.3567 70.7144C63.7902 69.8794 65.3373 69.4037 66.9995 69.2858C67.153 68.0867 66.6766 67.3724 65.5709 67.143C65.5709 66.9049 65.5709 66.6667 65.5709 66.4287C69.6695 65.4267 73.4787 63.76 76.9994 61.4287Z"
-					fill="#363C3B"
-				/>
-				<path
-					fill-rule="evenodd"
-					clip-rule="evenodd"
-					d="M65.5716 67.1426C66.6773 67.372 67.1538 68.0863 67.0002 69.2854C65.3381 69.4033 63.7909 69.879 62.3574 70.714C62.1195 70.2376 61.8809 69.7618 61.6431 69.2854C60.4845 70.7476 58.9374 71.4618 57.0003 71.4283C55.9074 71.3283 55.1931 70.8518 54.8574 69.9997C58.4288 69.0476 62.0002 68.0949 65.5716 67.1426Z"
-					fill="#868C87"
-				/>
-				<path
-					fill-rule="evenodd"
-					clip-rule="evenodd"
-					d="M65.5722 66.4287C65.5722 66.6668 65.5722 66.9049 65.5722 67.143C62.0008 68.0953 58.4294 69.048 54.858 70.0001C54.6201 70.0001 54.3816 70.0001 54.1437 70.0001C51.4309 69.298 48.5738 69.0594 45.5723 69.2858C45.3345 69.2858 45.0959 69.2858 44.8581 69.2858C43.9059 69.2858 42.9531 69.2858 42.0009 69.2858C40.1467 68.8895 38.48 68.1752 37.001 67.143C39.1564 67.2886 41.2995 67.5266 43.4295 67.8573C50.8216 68.9837 58.2023 68.5073 65.5722 66.4287Z"
-					fill="#383319"
-				/>
-				<path
-					fill-rule="evenodd"
-					clip-rule="evenodd"
-					d="M82 69.2852C83.4914 70.5966 84.4436 72.263 84.8571 74.2851C83.3657 72.9737 82.4136 71.3073 82 69.2852Z"
-					fill="#222322"
-				/>
-				<path
-					fill-rule="evenodd"
-					clip-rule="evenodd"
-					d="M84.8564 74.2852C86.1186 75.9223 86.8329 77.8266 86.9993 79.9994C85.7372 78.3623 85.0229 76.458 84.8564 74.2852Z"
-					fill="#2B2F2E"
-				/>
-				<path
-					fill-rule="evenodd"
-					clip-rule="evenodd"
-					d="M73.4284 82.8568C71.1534 78.8497 71.7492 75.2783 75.2141 72.1426C75.3334 72.619 75.452 73.0947 75.5713 73.5711C74.1763 74.8468 73.2234 76.3947 72.7141 78.214C73.1263 79.7404 73.3641 81.2882 73.4284 82.8568Z"
-					fill="#424747"
-				/>
-				<path
-					fill-rule="evenodd"
-					clip-rule="evenodd"
-					d="M42.001 69.2852C42.9531 69.2852 43.906 69.2852 44.8581 69.2852C44.7724 70.0609 44.296 70.5373 43.4295 70.7137C42.5631 70.5373 42.0867 70.0609 42.001 69.2852Z"
-					fill="#8D9593"
-				/>
-				<path
-					fill-rule="evenodd"
-					clip-rule="evenodd"
-					d="M45.5723 69.2849C48.5737 69.0584 51.4308 69.297 54.1436 69.9991C54.2372 70.6249 53.9994 71.1013 53.4294 71.4277C50.9401 71.2927 48.3208 71.2927 45.5723 71.4277C45.5723 70.7134 45.5723 69.9991 45.5723 69.2849Z"
-					fill="#828A82"
-				/>
-			</svg>
-			<h1 class="text-2xl font-semibold text-balance">Chill Developer Analyzer</h1>
-			<h2 class="text-lg text-balance opacity-60">
-				This uses your github stats to analyze if you are a chill developer! 😛
-			</h2>
-      <div class="flex flex-wrap items-center gap-2 mt-4">
-			<div class="flex flex-wrap items-center gap-2 mt-4">
-				<a
-					class="inline-flex text-sm items-center gap-1 px-3 py-2 bg-gray-100 rounded-md "
-					href="https://github.com/zeropsio"
-					target="_blank"
-				>
-					Powered by Zerops
-				</a>
-			</div>
+<Header />
 
-			<div class="flex flex-wrap items-center gap-2 mt-4">
-				<a
-					class="inline-flex text-sm items-center gap-1 px-3 py-2 bg-gray-100 rounded-md "
-					target="_blank"
-					href="https://twitter.com/intent/tweet?text=Know%20if%20you%27re%20a%20chill%20developer%20or%20you%20need%20to%20touch%20grass!%20chill.zerops.xyz%20by%20%40nermalcat69%20%F0%9F%8C%B1&hashtags=ChillDev,GitHub,Developer"
-				>
-					Share on X
-				</a>
-			</div>
-      </div>
-		</header>
-
-		<div class="mb-8 mt-10">
-			<h2 class="text-lg text-center pt-6">
-				<span class="opacity-100">😠</span> <span class="opacity-60">Gimme your GitHub username uGH!</span>
-			</h2>
-			<div class="flex gap-2 mt-2 justify-center">
-				<input
-					type="text"
-					bind:value={username}
-					placeholder="GitHub username"
-					class="h-8 px-2 rounded-md border border-gray-300"
-				/>
-				<button
-					disabled={loading}
-					class="h-8 rounded-md bg-[#25BBAE] px-4 text-white transition-opacity {loading
-						? 'opacity-30'
-						: ''}"
-					on:click={handleSubmit}
-				>
-					Analyze
-				</button>
-			</div>
-			{#if message}
-				<div class="text-red-500 mt-2">{message}</div>
-			{/if}
+<main class="min-h-screen bg-gray-50">
+	<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+		<div class="text-center">
+			<h1 class="text-4xl font-bold text-gray-900 sm:text-5xl md:text-6xl">
+				Premium SaaS Templates
+			</h1>
+			<p class="mt-3 max-w-md mx-auto text-base text-gray-500 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
+				Professional, responsive templates built with Svelte and TailwindCSS. Perfect for modern web applications, dashboards, and landing pages.
+			</p>
 		</div>
-		{#if stats.success && stats.totalCommits > 0}
-			<div class="mt-3 mb-6 flex flex-col items-center">
-				<h3 class="text-lg font-semibold mb-4">Your Chill Guy Type:</h3>
-				{#if getCommitImage(stats.totalCommits)}
-					<img
-						src={getCommitImage(stats.totalCommits)}
-						alt="Chill Guy Type"
-						class="w-60 h-60 object-contain rounded-md"
-					/>
-					<p class="mt-4 text-center opacity-60">
-						{#if stats.totalCommits > 1900}
-							You need to touch grass! Chill out! (you're not even in a chill guy category)
-						{:else if stats.totalCommits >= 1700}
-							Lil Bro, you're literally a head!
-						{:else if stats.totalCommits >= 1500}
-              Chill guy with no legs or even eyes!
-						{:else if stats.totalCommits >= 1300}
-							Where are your clothes, you need to be a little calmer!
-						{:else if stats.totalCommits >= 1000}
-							Believe me, i got no comments for you (also where are your eyes)!
-						{:else if stats.totalCommits >= 800}
-							Oh look at your cute eyes!
-						{:else if stats.totalCommits >= 600}
-							Gawd - literally homeless and still smiling?!
-						{:else if stats.totalCommits >= 400}
-							Topless developer! Kinda- chill 
-						{:else if stats.totalCommits >= 300}
-							Well you are the chill guy! but you cant get a job sorry :c
-						{:else if stats.totalCommits >= 150}
-							You're literally frozen!
-						{:else if stats.totalCommits >= 100}
-							Rahhhhhhh!!!!!
-						{/if}
-					</p>
+
+		<div class="mt-12">
+			<h2 class="sr-only">Our Templates</h2>
+			<div class="grid grid-cols-1 lg:grid-cols-3 gap-5 max-w-lg lg:max-w-none mx-auto">
+				{#each paginatedTemplates as template, i}
+					{#if !showCtaAfterHero && i === ctaPosition}
+						<CTACard />
+					{/if}
+					<TemplateCard {template} {observer} />
+				{/each}
+				{#if !showCtaAfterHero && ctaPosition === paginatedTemplates.length}
+					<CTACard />
 				{/if}
 			</div>
-		{/if}
 
-		<div class="w-full grid grid-cols-1 sm:grid-cols-2 gap-4">
-			{#if stats.avatarUrl}
-				<div class="flex items-center gap-4 bg-gray-100 rounded-md p-4">
-					<img src={stats.avatarUrl} alt="Profile" class="w-16 h-16 rounded-full" />
-					<div>
-						<h3 class="font-semibold">{username}</h3>
-						<p class="text-sm opacity-60">{stats.bio}</p>
-					</div>
+			{#if hasMore}
+				<div class="mt-12 text-center">
+					<button
+						on:click={loadMore}
+						class="inline-flex items-center px-6 py-3 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 disabled:opacity-50"
+						disabled={loading}
+					>
+						{#if loading}
+							<svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-gray-700" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+								<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+								<path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+							</svg>
+							Loading...
+						{:else}
+							Show More Templates
+						{/if}
+					</button>
 				</div>
-			{:else}
-				<div class="bg-gray-100 rounded-md p-4">
-            <span class="opacity-60">🤷‍♂️ I don't know who you are!</span> 
-        </div>
 			{/if}
-			<div class="bg-gray-100 rounded-md px-4 py-4">
-				<div class="grid grid-colsk-1 gap-2">
-					<div class="flex items-center">
-						<span class="font-semibold w-32">Total Commits</span>
-						<span class="opacity-60">{stats.totalCommits}</span>
-					</div>
-					<div class="flex items-center">
-						<span class="font-semibold w-32">Public Repos</span>
-						<span class="opacity-60">{stats.totalRepos}</span>
-					</div>
-					<div class="flex items-center">
-						<span class="font-semibold w-32">Followers</span>
-						<span class="opacity-60">{stats.followers}</span>
-					</div>
-					<div class="flex items-center">
-						<span class="font-semibold w-32">Following</span>
-						<span class="opacity-60">{stats.following}</span>
-					</div>
+		</div>
+
+		<div class="bg-gray-100 mt-20 rounded-2xl border border-gray-200">
+			<div class="max-w-2xl mx-auto text-center py-16 px-4 sm:py-20 sm:px-6 lg:px-8">
+				<h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+					<span class="block">Have a template to share?</span>
+					<span class="block">Submit it today!</span>
+				</h2>
+				<p class="mt-4 text-lg leading-6 text-gray-600">
+					Share your work with thousands of developers and earn recognition for your design skills.
+				</p>
+				<a
+					href="/submit"
+					class="mt-8 w-full inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gray-900 hover:bg-gray-800 sm:w-auto"
+				>
+					Submit Your Template
+				</a>
+			</div>
+		</div>
+
+		<div class="mt-20 text-center">
+			<p class="text-base text-gray-500">Trusted by developers from</p>
+			<div class="mt-6 grid grid-cols-2 gap-8 md:grid-cols-4">
+				<div class="col-span-1 flex justify-center items-center">
+					<img class="h-8" src="/logos/google.svg" alt="Google" />
+				</div>
+				<div class="col-span-1 flex justify-center items-center">
+					<img class="h-8" src="/logos/microsoft.svg" alt="Microsoft" />
+				</div>
+				<div class="col-span-1 flex justify-center items-center">
+					<img class="h-8" src="/logos/amazon.svg" alt="Amazon" />
+				</div>
+				<div class="col-span-1 flex justify-center items-center">
+					<img class="h-8" src="/logos/meta.svg" alt="Meta" />
 				</div>
 			</div>
 		</div>
-    <div class="text-center opacity-80 text-sm mt-20">
-      Made with ❤️ by <a href="https://x.com/nermalcat69" class="text-[#25BBAE]">nermalcat69</a> (pookie follow pls)
-      <br />
-      Don't forget that it's a very basic website and it's not 100% accurate!
-      <br />
-      for accuracy please skibidi!
-    </div>
 	</div>
 </main>
+
+<footer class="bg-white border-t border-gray-200">
+	<div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 md:flex md:items-center md:justify-between lg:px-8">
+		<div class="flex justify-center space-x-6 md:order-2">
+			<a href="https://twitter.com" class="text-gray-400 hover:text-gray-500">
+				<span class="sr-only">Twitter</span>
+				<svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+					<path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
+				</svg>
+			</a>
+		</div>
+		<div class="mt-8 md:mt-0 md:order-1">
+			<div class="flex flex-col items-center md:items-start space-y-2">
+				<p class="text-center text-base text-gray-400">
+					&copy; 2024 SaasPlates. All rights reserved.
+				</p>
+				<div class="flex items-center gap-1 text-sm text-gray-500">
+					<span>Proudly made in India 🇮🇳</span>
+					<span class="px-2 text-gray-300">•</span>
+					<span class="border-neutral-200 border rounded-md px-2 py-1">Deployed on{" "}
+					<a 
+						href="https://zerops.io" 
+						target="_blank" 
+						rel="noopener"
+						class="text-gray-700 hover:text-gray-900 font-medium"
+					>
+						Zerops
+					</a>
+					</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>

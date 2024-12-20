@@ -1,0 +1,28 @@
+import { json } from '@sveltejs/kit';
+import { checkRateLimit } from '$lib/redis';
+import { sendToDiscord } from '$lib/discord';
+
+export async function POST({ request, getClientAddress }) {
+  try {
+    const ip = getClientAddress();
+    const canProceed = await checkRateLimit(ip);
+
+    if (!canProceed) {
+      return json({
+        success: false,
+        message: 'Rate limit exceeded. Please try again in 24 hours.'
+      }, { status: 429 });
+    }
+
+    const data = await request.json();
+    await sendToDiscord('advertise', data);
+
+    return json({ success: true });
+  } catch (error) {
+    console.error('Advertise error:', error);
+    return json({ 
+      success: false, 
+      message: 'An error occurred while processing your request.' 
+    }, { status: 500 });
+  }
+} 

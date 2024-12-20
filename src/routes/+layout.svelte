@@ -1,26 +1,64 @@
 <script>
   import "../app.css";
+
+  const siteName = "SaasPlates";
+  const siteTitle = "SaasPlates | Premium SaaS UI Templates & Components";
+  const siteDescription = "Discover production-ready SaaS UI templates and components. Built with modern tech stacks for rapid development of web applications.";
+  const siteUrl = "https://saasplates.com";
+  const siteKeywords = "saas templates, ui components, react templates, svelte templates, tailwind templates, web development, dashboard templates, admin panels";
 </script>
 
 <svelte:head>
   <!-- Primary Meta Tags -->
-  <title>Chill Developer Analyzer | Check Your Developer Type</title>
-  <meta name="title" content="Chill Developer Analyzer" />
-  <meta name="description" content="Find out if you're a chill developer or you need to chill a little bit!" />
+  <title>{siteTitle}</title>
+  <meta name="title" content={siteTitle} />
+  <meta name="description" content={siteDescription} />
+  <meta name="keywords" content={siteKeywords} />
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://chill.zerops.xyz/" />
-  <meta property="og:title" content="Chill Developer Analyzer" />
-  <meta property="og:description" content="Find out if you're a chill developer or or you need to chill a little bit!" />
-  <meta property="og:image" content="https://chill.zerops.xyz/og.png" />
+  <meta property="og:url" content={siteUrl} />
+  <meta property="og:title" content={siteTitle} />
+  <meta property="og:description" content={siteDescription} />
+  <meta property="og:image" content="{siteUrl}/og-image.png" />
+  <meta property="og:site_name" content={siteName} />
 
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image" />
-  <meta property="twitter:url" content="https://chill.zerops.xyz/" />
-  <meta property="twitter:title" content="Chill Developer Analyzer" />
-  <meta property="twitter:description" content="Find out if you're a chill developer or or you need to chill a little bit!" />
-  <meta property="twitter:image" content="https://chill.zerops.xyz/og.png" />
+  <meta property="twitter:url" content={siteUrl} />
+  <meta property="twitter:title" content={siteTitle} />
+  <meta property="twitter:description" content={siteDescription} />
+  <meta property="twitter:image" content="{siteUrl}/og-image.png" />
+
+  <!-- Additional SEO -->
+  <link rel="canonical" href={siteUrl} />
+  <meta name="robots" content="index, follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#18181B" />
+  
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+    {JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": siteName,
+      "url": siteUrl,
+      "description": siteDescription,
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": `${siteUrl}/search?q={search_term_string}`,
+        "query-input": "required name=search_term_string"
+      }
+    })}
+  </script>
+
+  <!-- Preload critical images -->
+  <link
+    rel="preload"
+    as="image"
+    href="/templates/dashboard-1.png"
+    type="image/png"
+  />
 </svelte:head>
 
 <slot />
