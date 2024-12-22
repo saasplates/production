@@ -1,3 +1,2 @@
-## GitAnalyzer
+## Production of Saasplates (very hardcoded for now)
 
-GitAnalyzer is a tool that analyzes git repositories and provides insights into the codebase.
