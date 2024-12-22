@@ -39,16 +39,13 @@
                   <span class="text-gray-300">•</span>
                   <div class="flex items-center">
                     <img 
-                      src={author.avatar} 
+                      src={author.avatar}
+                      draggable="false"
                       alt={author.name}
                       class="w-5 h-5 rounded-full mr-2"
                     />
-                    <span>{author.name}</span>
+                    <a class="text-gray-500" href={`/authors/${author.id}`}>{author.name}</a>
                   </div>
-                {/if}
-                {#if post.readingTime}
-                  <span class="text-gray-300">•</span>
-                  <span>{post.readingTime}</span>
                 {/if}
               </div>
               <h2 class="text-xl font-semibold text-gray-900 mb-2">{post.title}</h2>

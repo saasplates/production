@@ -17,6 +17,7 @@
           <div class="flex items-center">
             <img 
               src={author.avatar} 
+              draggable="false"
               alt={author.name}
               class="w-24 h-24 rounded-full object-cover"
             />

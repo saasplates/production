@@ -136,111 +136,109 @@
         </div>
       </div>
     </div>
-  </div>
-
-  <!-- Content Section -->
-  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    <div class="bg-white border border-gray-200 rounded-lg">
-      <div class="px-6 py-8 sm:px-12">
-        {#if success}
-          <div class="bg-green-50 p-4 rounded-md mb-6">
-            <p class="text-green-800">Successfully submitted! We'll get back to you soon.</p>
-          </div>
-        {/if}
-
-        {#if error}
-          <div class="bg-red-50 p-4 rounded-md mb-6">
-            <p class="text-red-800">{error}</p>
-          </div>
-        {/if}
-
-        <!-- Form Section -->
-        <form class="space-y-6" on:submit={handleSubmit}>
-          <div class="grid gap-6 md:grid-cols-2">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="bg-white border border-gray-200 rounded-lg">
+        <div class="px-6 py-8 sm:px-12">
+          {#if success}
+            <div class="bg-green-50 p-4 rounded-md mb-6">
+              <p class="text-green-800">Successfully submitted! We'll get back to you soon.</p>
+            </div>
+          {/if}
+  
+          {#if error}
+            <div class="bg-red-50 p-4 rounded-md mb-6">
+              <p class="text-red-800">{error}</p>
+            </div>
+          {/if}
+  
+          <!-- Form Section -->
+          <form class="space-y-6" on:submit={handleSubmit}>
+            <div class="grid gap-6 md:grid-cols-2">
+              <div>
+                <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+                <input 
+                  type="text" 
+                  name="name" 
+                  id="name" 
+                  required
+                  class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500"
+                >
+              </div>
+              <div>
+                <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                <input 
+                  type="email" 
+                  name="email" 
+                  id="email" 
+                  required
+                  class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500"
+                >
+              </div>
+            </div>
+  
             <div>
-              <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+              <label for="company" class="block text-sm font-medium text-gray-700">Company</label>
               <input 
                 type="text" 
-                name="name" 
-                id="name" 
-                required
-                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500"
+                name="company" 
+                id="company" 
+                class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500"
               >
             </div>
-            <div>
-              <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-              <input 
-                type="email" 
-                name="email" 
-                id="email" 
-                required
-                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500"
-              >
-            </div>
-          </div>
-
-          <div>
-            <label for="company" class="block text-sm font-medium text-gray-700">Company</label>
-            <input 
-              type="text" 
-              name="company" 
-              id="company" 
-              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500"
-            >
-          </div>
-
-          <div class="mb-6">
-            <Label class="mb-4 text-gray-700">Select Package</Label>
-            <div class="space-y-4">
-              {#each packages as pkg}
-                <div 
-                  class="relative flex items-start p-4 border rounded-lg cursor-pointer hover:bg-gray-50 transition-colors {selectedPackage === pkg.value ? 'border-gray-400 bg-gray-50 ring-1 ring-gray-400' : 'border-gray-200'}"
-                  on:click={() => selectedPackage = pkg.value}
-                  on:keydown={(e) => e.key === 'Enter' && (selectedPackage = pkg.value)}
-                  tabindex="0"
-                  role="radio"
-                  aria-checked={selectedPackage === pkg.value}
-                >
-                  <div class="flex items-center h-5">
-                    <input
-                      type="radio"
-                      name="package"
-                      value={pkg.value}
-                      checked={selectedPackage === pkg.value}
-                      class="h-4 w-4 text-gray-900 border-gray-300 focus:ring-gray-900"
-                    >
-                  </div>
-                  <div class="ml-3 flex justify-between w-full">
-                    <div>
-                      <p class="text-base font-medium text-gray-900">{pkg.name}</p>
-                      <p class="text-sm text-gray-500">{pkg.description}</p>
+  
+            <div class="mb-6">
+              <Label class="mb-4 text-gray-700">Select Package</Label>
+              <div class="space-y-4">
+                {#each packages as pkg}
+                  <div 
+                    class="relative flex items-start p-4 border rounded-lg cursor-pointer hover:bg-gray-50 transition-colors {selectedPackage === pkg.value ? 'border-gray-400 bg-gray-50 ring-1 ring-gray-400' : 'border-gray-200'}"
+                    on:click={() => selectedPackage = pkg.value}
+                    on:keydown={(e) => e.key === 'Enter' && (selectedPackage = pkg.value)}
+                    tabindex="0"
+                    role="radio"
+                    aria-checked={selectedPackage === pkg.value}
+                  >
+                    <div class="flex items-center h-5">
+                      <input
+                        type="radio"
+                        name="package"
+                        value={pkg.value}
+                        checked={selectedPackage === pkg.value}
+                        class="h-4 w-4 text-gray-900 border-gray-300 focus:ring-gray-900"
+                      >
                     </div>
-                    <p class="text-base font-medium text-gray-900">{pkg.price}</p>
+                    <div class="ml-3 flex justify-between w-full">
+                      <div>
+                        <p class="text-base font-medium text-gray-900">{pkg.name}</p>
+                        <p class="text-sm text-gray-500">{pkg.description}</p>
+                      </div>
+                      <p class="text-base font-medium text-gray-900">{pkg.price}</p>
+                    </div>
                   </div>
-                </div>
-              {/each}
+                {/each}
+              </div>
             </div>
-          </div>
-
-          <div>
-            <label for="message" class="block text-sm font-medium text-gray-700">Message</label>
-            <textarea 
-              id="message" 
-              name="message" 
-              rows="4" 
-              required
-              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500"
-            ></textarea>
-          </div>
-
-          <button 
-            type="submit" 
-            class="w-full flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 disabled:opacity-50"
-            disabled={loading}
-          >
-            {loading ? 'Submitting...' : 'Submit Inquiry'}
-          </button>
-        </form>
+  
+            <div>
+              <label for="message" class="block text-sm font-medium text-gray-700">Message</label>
+              <textarea 
+                id="message" 
+                name="message" 
+                rows="4" 
+                required
+                class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500"
+              ></textarea>
+            </div>
+  
+            <button 
+              type="submit" 
+              class="w-full flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 disabled:opacity-50"
+              disabled={loading}
+            >
+              {loading ? 'Submitting...' : 'Submit Inquiry'}
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   </div>

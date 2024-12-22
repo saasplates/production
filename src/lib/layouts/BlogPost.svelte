@@ -29,10 +29,11 @@
           <div class="flex items-center">
             <img 
               src={author.avatar} 
+              draggable="false"
               alt={author.name}
               class="w-6 h-6 rounded-full mr-2"
             />
-            <span>{author.name}</span>
+            <a class="text-gray-500" href={`/authors/${author.id}`}>{author.name}</a>
           </div>
         {/if}
       </div>

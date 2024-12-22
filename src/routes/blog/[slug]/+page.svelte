@@ -35,10 +35,11 @@
             <div class="flex items-center">
               <img 
                 src={author.avatar} 
+                draggable="false"
                 alt={author.name}
                 class="w-6 h-6 rounded-full mr-2"
               />
-              <span>{author.name}</span>
+              <a class="text-gray-500" href={`/authors/${author.id}`}>{author.name}</a>
             </div>
           {/if}
         </div>
@@ -62,13 +63,14 @@
       {#if author}
         <div class="mt-12 bg-white border border-gray-200 rounded-lg p-8">
           <a 
-            href="/authors/{author.id}" 
+            href={`/authors/${author.id}`} 
             class="block"
           >
             <div class="md:flex md:items-center md:justify-between">
               <div class="flex items-center">
                 <img 
-                  src={author.avatar} 
+                  src={author.avatar}
+                  draggable="false"
                   alt={author.name}
                   class="w-24 h-24 rounded-full object-cover"
                 />

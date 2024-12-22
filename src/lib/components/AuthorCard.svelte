@@ -7,7 +7,8 @@
 <div class="bg-white border border-gray-200 rounded-lg p-6">
   <div class="flex items-center">
     <img 
-      src={author.avatar} 
+      src={author.avatar}
+      draggable="false"
       alt={author.name}
       class="w-16 h-16 rounded-full object-cover"
     />
