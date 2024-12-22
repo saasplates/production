@@ -1,5 +1,4 @@
 <script lang="ts">
-  import Header from '$lib/components/Header.svelte';
   import { goto } from '$app/navigation';
   import CustomTextarea from '$lib/components/CustomTextarea.svelte';
 
@@ -46,8 +45,6 @@
   <meta name="description" content="Share your SaaS template with our community. Get featured and reach thousands of developers looking for quality templates." />
   <link rel="canonical" href="https://saastemplates.dev/submit" />
 </svelte:head>
-
-<Header />
 
 <main class="min-h-screen bg-gray-50">
   <!-- Hero Section with lighter background -->

@@ -63,9 +63,6 @@
   </div>
   <div class="flex-1 p-6 flex flex-col justify-between">
     <div class="flex-1">
-      <p class="text-sm font-medium text-gray-600 uppercase tracking-wider">
-        {template.category}
-      </p>
       <div class="block mt-2">
         <p class="text-xl font-semibold text-gray-900">
           {template.title}

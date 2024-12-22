@@ -1,7 +1,6 @@
 <script lang="ts">
   import { page } from '$app/stores';
   import { marked } from 'marked';
-  import Header from '$lib/components/Header.svelte';
   import { blogPosts } from '$lib/stores/blog';
 
   const post = blogPosts.find(p => p.slug === $page.params.slug);

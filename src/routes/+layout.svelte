@@ -1,12 +1,13 @@
 <script lang="ts">
-  import "../app.css";
-  import Footer from "$lib/components/Footer.svelte";
-
-  const siteName = "SaasPlates";
-  const siteTitle = "SaasPlates | Premium SaaS UI Templates & Components";
-  const siteDescription = "Discover production-ready SaaS UI templates and components. Built with modern tech stacks for rapid development of web applications.";
-  const siteUrl = "https://saasplates.com";
-  const siteKeywords = "saas templates, ui components, react templates, svelte templates, tailwind templates, web development, dashboard templates, admin panels";
+  import Header from '$lib/components/Header.svelte';
+  import Footer from '$lib/components/Footer.svelte';
+  import '../app.css';
+  
+  const siteName = 'SaasPlates';
+  const siteTitle = 'SaasPlates - Modern SaaS Templates';
+  const siteDescription = 'Discover and download modern SaaS templates for your next project';
+  const siteUrl = 'https://saasplates.com';
+  const siteKeywords = 'saas templates, ui components, react templates, svelte templates, tailwind templates, web development, dashboard templates, admin panels';
 </script>
 
 <svelte:head>
@@ -62,9 +63,12 @@
   />
 </svelte:head>
 
-<div class="flex flex-col min-h-screen">
-  <div class="flex-grow">
+<div class="min-h-screen flex flex-col">
+  <Header />
+  
+  <main class="flex-1">
     <slot />
-  </div>
+  </main>
+
   <Footer />
 </div>
