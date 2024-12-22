@@ -5,6 +5,7 @@
 
   export let template: Template;
   export let observer: IntersectionObserver;
+  export let hideFeatures: boolean = false;
 
   let imageRef: HTMLImageElement;
 
@@ -72,13 +73,15 @@
         </p>
       </div>
     </div>
-    <div class="mt-6 flex flex-wrap gap-2">
-      {#each template.features.slice(0, 3) as feature}
-        <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-gray-100 text-gray-800">
-          {feature}
-        </span>
-      {/each}
-    </div>
+    {#if !hideFeatures && template.features?.length}
+      <div class="mt-6 flex flex-wrap gap-2">
+        {#each template.features.slice(0, 3) as feature}
+          <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-gray-100 text-gray-800">
+            {feature}
+          </span>
+        {/each}
+      </div>
+    {/if}
   </div>
 </div>
 

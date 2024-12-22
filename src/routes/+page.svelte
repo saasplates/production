@@ -3,6 +3,7 @@
 	import TemplateCard from '$lib/components/TemplateCard.svelte';
 	import ADDCard from '$lib/components/ADDCard.svelte';
 	import AdvertiseCard from '$lib/components/AdvertiseCard.svelte';
+	import Rectangle from '$lib/components/Rectangle.svelte';
 	import { onMount } from 'svelte';
 
 	// Show ADDCard after first 4 templates
@@ -25,32 +26,51 @@
 		return 0;
 	});
 
-	// Get paginated templates and insert cards
-	$: paginatedTemplatesWithCards = sortedTemplates
+	// Add type definition for card items
+	type CardItem = {
+		type: 'template' | 'add' | 'advertise';
+		content?: any; // or proper Template type if available
+	};
+
+	// Add new filtering state
+	const categories = ['Landing Page', 'Admin Panel', 'Authentication', 'Dashboard', 'E-commerce'];
+	let selectedCategories: string[] = [];
+	let showFeatured = false;
+	let showSponsored = false;
+
+	// Filter templates based on selected filters
+	$: filteredTemplates = sortedTemplates.filter(template => {
+		const categoryMatch = selectedCategories.length === 0 || selectedCategories.includes(template.category);
+		const featuredMatch = !showFeatured || template.featured;
+		const sponsoredMatch = !showSponsored || template.sponsored;
+		return categoryMatch && featuredMatch && sponsoredMatch;
+	});
+
+	// Update pagination to use filtered templates
+	$: paginatedTemplatesWithCards = filteredTemplates
 		.slice(0, currentPage * ITEMS_PER_PAGE)
-		.reduce((acc, template, index) => {
-			// Add advertisement card at random position in first 6 cards
-			if (index === adPosition && currentPage === 1) {
+		.reduce<CardItem[]>((acc, template, index) => {
+			if (index === adPosition) {
 				acc.push({ type: 'advertise' });
 			}
 			
 			acc.push({ type: 'template', content: template });
 			
-			// Add submission card only once after ADD_POSITION templates
-			if (index === ADD_POSITION && currentPage === 1) {
+			if (index === ADD_POSITION) {
 				acc.push({ type: 'add' });
 			}
 			return acc;
 		}, []);
 
-	$: hasMore = currentPage * ITEMS_PER_PAGE < sortedTemplates.length;
+	// Update hasMore to use filtered templates length
+	$: hasMore = currentPage * ITEMS_PER_PAGE < filteredTemplates.length;
 
 	// Load more function with artificial delay to show loading state
 	async function loadMore() {
-		loading = true;
-		await new Promise(resolve => setTimeout(resolve, 500)); // Simulate network delay
-		currentPage += 1;
-		loading = false;
+			loading = true;
+			await new Promise(resolve => setTimeout(resolve, 500)); // Simulate network delay
+			currentPage += 1;
+			loading = false;
 	}
 
 	// Intersection Observer for lazy loading images
@@ -75,52 +95,137 @@
 			}
 		);
 	});
+
+	// Clear filters function
+	function clearFilters() {
+		selectedCategories = [];
+		showFeatured = false;
+		showSponsored = false;
+		currentPage = 1;
+	}
 </script>
 
 <main class="min-h-screen bg-gray-50">
-	<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+	<div class="max-w-7xl mx-auto px-10 lg:px-5 py-12">
 		<div class="text-center py-12">
 			<h1 class="text-4xl font-bold text-gray-900 sm:text-5xl md:text-6xl">
-				Premium SaaS Templates
+				Boring Directory for Saas Plates
 			</h1>
 			<p class="mt-3 max-w-md mx-auto text-base text-gray-500 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
-				Professional, responsive templates built with Svelte and TailwindCSS. Perfect for modern web applications, dashboards, and landing pages.
+				Curated list of SaaS Boilerplates. Free Open Source and Premium Paid SaaS Templates as well.
 			</p>
 		</div>
 
-		<div class="mt-28">
-			<h2 class="text-lg font-medium text-gray-500 mb-4">Our Templates</h2>
-			<div class="grid grid-cols-1 lg:grid-cols-3 gap-5 max-w-lg lg:max-w-none mx-auto">
-				{#each paginatedTemplatesWithCards as item}
-					{#if item.type === 'template'}
-						<TemplateCard template={item.content} {observer} />
-					{:else if item.type === 'add'}
-						<ADDCard />
-					{:else}
-						<AdvertiseCard />
-					{/if}
-				{/each}
+		<!-- Advertisement Rectangle -->
+		<div class="pb-10 sm:pb-20">
+			<Rectangle 
+				url="https://0auth.example"
+				title="Supabase"
+				description="an open source Firebase alternative - Start your project and serve in a weekend."
+				imageUrl="/ads/auth-banner.png"
+			/>
+		</div>
+
+		<hr />
+
+		<!-- Add sidebar and main content layout -->
+		<div class="mt-28 lg:grid lg:grid-cols-[280px,1fr] lg:gap-8">
+			<!-- Sidebar -->
+			<div class="hidden lg:block">
+				<div class="sticky top-6">
+					<div class="bg-white rounded-lg border border-gray-200 overflow-hidden">
+						<div class="p-6">
+							<h3 class="text-lg font-medium text-gray-900 mb-4">Filters</h3>
+							
+							<!-- Categories -->
+							<div class="space-y-4">
+								<div>
+									<h4 class="text-sm font-medium text-gray-700 mb-2">Categories</h4>
+									<div class="space-y-2">
+										{#each categories as category}
+											<label class="flex items-center">
+												<input
+													type="checkbox"
+													class="rounded border-gray-300 text-gray-900 focus:ring-gray-500"
+													bind:group={selectedCategories}
+													value={category}
+												/>
+												<span class="ml-2 text-sm text-gray-600">{category}</span>
+											</label>
+										{/each}
+									</div>
+								</div>
+
+								<!-- Type Filter -->
+								<div>
+									<h4 class="text-sm font-medium text-gray-700 mb-2">Type</h4>
+									<div class="space-y-2">
+										<label class="flex items-center">
+											<input
+												type="checkbox"
+												class="rounded border-gray-300 text-gray-900 focus:ring-gray-500"
+												bind:checked={showFeatured}
+											/>
+											<span class="ml-2 text-sm text-gray-600">Featured</span>
+										</label>
+										<label class="flex items-center">
+											<input
+												type="checkbox"
+												class="rounded border-gray-300 text-gray-900 focus:ring-gray-500"
+												bind:checked={showSponsored}
+											/>
+											<span class="ml-2 text-sm text-gray-600">Sponsored</span>
+										</label>
+									</div>
+								</div>
+
+								<!-- Clear Filters Button -->
+								<button
+									class="w-full px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200"
+									on:click={clearFilters}
+								>
+									Clear Filters
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 
-			{#if hasMore}
-				<div class="mt-12 text-center">
-					<button
-						on:click={loadMore}
-						class="inline-flex items-center px-6 py-3 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 disabled:opacity-50"
-						disabled={loading}
-					>
-						{#if loading}
-							<svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-gray-700" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-								<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-								<path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-							</svg>
-							Loading...
+			<!-- Main content -->
+			<div>
+				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-5">
+					{#each paginatedTemplatesWithCards as item}
+						{#if item.type === 'template'}
+							<TemplateCard template={item.content} {observer} hideFeatures={true} />
+						{:else if item.type === 'add'}
+							<ADDCard />
 						{:else}
-							Show More Templates
+							<AdvertiseCard />
 						{/if}
-					</button>
+					{/each}
 				</div>
-			{/if}
+
+				{#if hasMore}
+					<div class="mt-12 text-center">
+						<button
+							on:click={loadMore}
+							class="inline-flex items-center px-6 py-3 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 disabled:opacity-50"
+							disabled={loading}
+						>
+							{#if loading}
+								<svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-gray-700" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+									<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+									<path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+								</svg>
+								Loading...
+							{:else}
+								Show More Templates
+							{/if}
+						</button>
+					</div>
+				{/if}
+			</div>
 		</div>
 
 		<div
@@ -134,11 +239,12 @@
 				<p class="mt-4 text-lg leading-6 text-gray-600">
 					Share your work with thousands of developers and earn recognition for your design skills.
 				</p>
-				<span
-					class="pointer-events-none mt-8 w-full inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gray-900 group-hover:bg-gray-800 sm:w-auto"
+				<a 
+					href="/submit"
+					class="mt-8 w-full inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gray-900 group-hover:bg-gray-800 sm:w-auto"
 				>
 					Submit Your Template
-				</span>
+				</a>
 			</div>
 		</div>
 <!-- 

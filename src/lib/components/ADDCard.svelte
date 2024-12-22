@@ -28,13 +28,6 @@
           </p>
         </div>
       </div>
-      <div class="mt-6">
-        <span
-          class="pointer-events-none inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-gray-900 group-hover:bg-gray-800 transition-colors"
-        >
-          Submit Now
-        </span>
-      </div>
     </div>
   </div>
 </a> 

@@ -2,7 +2,8 @@
   import Header from '$lib/components/Header.svelte';
   import Footer from '$lib/components/Footer.svelte';
   import '../app.css';
-  
+  import DiscordBanner from '$lib/components/DiscordBanner.svelte';
+
   const siteName = 'SaasPlates';
   const siteTitle = 'SaasPlates - Modern SaaS Templates';
   const siteDescription = 'Discover and download modern SaaS templates for your next project';
@@ -64,6 +65,7 @@
 </svelte:head>
 
 <div class="min-h-screen flex flex-col">
+  <!-- <DiscordBanner /> -->
   <Header />
   
   <main class="flex-1">
