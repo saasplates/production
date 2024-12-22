@@ -2,16 +2,17 @@
 	import { templates } from '$lib/stores/templates';
 	import TemplateCard from '$lib/components/TemplateCard.svelte';
 	import ADDCard from '$lib/components/ADDCard.svelte';
+	import AdvertiseCard from '$lib/components/AdvertiseCard.svelte';
 	import { onMount } from 'svelte';
 
-	// Randomly decide whether to show CTA after hero or among templates
-	const showCtaAfterHero = Math.random() > 1;
+	// Show ADDCard after first 4 templates
+	const ADD_POSITION = 4;
 	
-	// If showing among templates, pick a random position
-	const ctaPosition = Math.floor(Math.random() * (templates.length + 1));
+	// Random position for advertisement (between 1 and 5)
+	const adPosition = Math.floor(Math.random() * 5) + 1;
 
 	// Pagination
-	const ITEMS_PER_PAGE = 6;
+	const ITEMS_PER_PAGE = 12;
 	let currentPage = 1;
 	let loading = false;
 
@@ -24,9 +25,25 @@
 		return 0;
 	});
 
-	// Get paginated templates
-	$: paginatedTemplates = sortedTemplates.slice(0, currentPage * ITEMS_PER_PAGE);
-	$: hasMore = paginatedTemplates.length < sortedTemplates.length;
+	// Get paginated templates and insert cards
+	$: paginatedTemplatesWithCards = sortedTemplates
+		.slice(0, currentPage * ITEMS_PER_PAGE)
+		.reduce((acc, template, index) => {
+			// Add advertisement card at random position in first 6 cards
+			if (index === adPosition && currentPage === 1) {
+				acc.push({ type: 'advertise' });
+			}
+			
+			acc.push({ type: 'template', content: template });
+			
+			// Add submission card only once after ADD_POSITION templates
+			if (index === ADD_POSITION && currentPage === 1) {
+				acc.push({ type: 'add' });
+			}
+			return acc;
+		}, []);
+
+	$: hasMore = currentPage * ITEMS_PER_PAGE < sortedTemplates.length;
 
 	// Load more function with artificial delay to show loading state
 	async function loadMore() {
@@ -74,15 +91,15 @@
 		<div class="mt-12">
 			<h2 class="sr-only">Our Templates</h2>
 			<div class="grid grid-cols-1 lg:grid-cols-3 gap-5 max-w-lg lg:max-w-none mx-auto">
-				{#each paginatedTemplates as template, i}
-					{#if !showCtaAfterHero && i === ctaPosition}
+				{#each paginatedTemplatesWithCards as item}
+					{#if item.type === 'template'}
+						<TemplateCard template={item.content} {observer} />
+					{:else if item.type === 'add'}
 						<ADDCard />
+					{:else}
+						<AdvertiseCard />
 					{/if}
-					<TemplateCard {template} {observer} />
 				{/each}
-				{#if !showCtaAfterHero && ctaPosition === paginatedTemplates.length}
-					<ADDCard />
-				{/if}
 			</div>
 
 			{#if hasMore}
