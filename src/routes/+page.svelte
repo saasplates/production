@@ -79,7 +79,7 @@
 
 <main class="min-h-screen bg-gray-50">
 	<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-		<div class="text-center">
+		<div class="text-center py-12">
 			<h1 class="text-4xl font-bold text-gray-900 sm:text-5xl md:text-6xl">
 				Premium SaaS Templates
 			</h1>
