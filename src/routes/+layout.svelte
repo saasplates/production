@@ -1,5 +1,6 @@
-<script>
+<script lang="ts">
   import "../app.css";
+  import Footer from "$lib/components/Footer.svelte";
 
   const siteName = "SaasPlates";
   const siteTitle = "SaasPlates | Premium SaaS UI Templates & Components";
@@ -61,4 +62,9 @@
   />
 </svelte:head>
 
-<slot />
+<div class="flex flex-col min-h-screen">
+  <div class="flex-grow">
+    <slot />
+  </div>
+  <Footer />
+</div>

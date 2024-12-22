@@ -2,7 +2,7 @@
 	import { templates } from '$lib/stores/templates';
 	import TemplateCard from '$lib/components/TemplateCard.svelte';
 	import Header from '$lib/components/Header.svelte';
-	import CTACard from '$lib/components/CTACard.svelte';
+	import ADDCard from '$lib/components/ADDCard.svelte';
 	import { onMount } from 'svelte';
 
 	// Randomly decide whether to show CTA after hero or among templates
@@ -79,12 +79,12 @@
 			<div class="grid grid-cols-1 lg:grid-cols-3 gap-5 max-w-lg lg:max-w-none mx-auto">
 				{#each paginatedTemplates as template, i}
 					{#if !showCtaAfterHero && i === ctaPosition}
-						<CTACard />
+						<ADDCard />
 					{/if}
 					<TemplateCard {template} {observer} />
 				{/each}
 				{#if !showCtaAfterHero && ctaPosition === paginatedTemplates.length}
-					<CTACard />
+					<ADDCard />
 				{/if}
 			</div>
 
@@ -109,7 +109,9 @@
 			{/if}
 		</div>
 
-		<div class="bg-gray-100 mt-20 rounded-2xl border border-gray-200">
+		<div
+			class="group block bg-white mt-20 rounded-2xl border border-gray-200 transition-colors"
+		>
 			<div class="max-w-2xl mx-auto text-center py-16 px-4 sm:py-20 sm:px-6 lg:px-8">
 				<h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">
 					<span class="block">Have a template to share?</span>
@@ -118,12 +120,11 @@
 				<p class="mt-4 text-lg leading-6 text-gray-600">
 					Share your work with thousands of developers and earn recognition for your design skills.
 				</p>
-				<a
-					href="/submit"
-					class="mt-8 w-full inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gray-900 hover:bg-gray-800 sm:w-auto"
+				<span
+					class="pointer-events-none mt-8 w-full inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gray-900 group-hover:bg-gray-800 sm:w-auto"
 				>
 					Submit Your Template
-				</a>
+				</span>
 			</div>
 		</div>
 <!-- 
