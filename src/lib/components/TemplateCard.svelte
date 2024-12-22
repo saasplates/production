@@ -1,9 +1,9 @@
 <script lang="ts">
-  import type { Template } from '$lib/stores/templates';
+  import type { Boilerplate } from '$lib/stores/boilerplates';
   import { goto } from '$app/navigation';
   import { onMount } from 'svelte';
 
-  export let template: Template;
+  export let boilerplate: Boilerplate;
   export let observer: IntersectionObserver;
   export let hideFeatures: boolean = false;
 
@@ -22,31 +22,31 @@
   });
 
   function handleClick() {
-    goto(template.demoUrl);
+    goto(boilerplate.demoUrl);
   }
 
   $: cardClasses = `flex flex-col rounded-lg border-[1px] bg-white overflow-hidden cursor-pointer relative ${
-    template.featured 
+    boilerplate.featured 
       ? 'border-slate-700/30 hover:border-slate-700/50' 
-      : template.sponsored 
+      : boilerplate.sponsored 
         ? 'border-emerald-200 hover:border-emerald-300'
         : 'border-slate-200 hover:border-slate-300'
   }`;
 </script>
 
 <a 
-  href={template.demoUrl}
+  href={boilerplate.demoUrl}
   class={cardClasses}
 >
   <div class="flex-shrink-0 relative h-48 overflow-hidden bg-gray-100">
-    {#if template.featured || template.sponsored}
+    {#if boilerplate.featured || boilerplate.sponsored}
       <div class="absolute top-4 left-4 flex gap-2 z-10">
-        {#if template.featured}
+        {#if boilerplate.featured}
           <span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium bg-slate-700/90 text-slate-100 shadow-sm backdrop-blur-sm">
             Featured
           </span>
         {/if}
-        {#if template.sponsored}
+        {#if boilerplate.sponsored}
           <span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium bg-emerald-100 text-emerald-800 shadow-sm">
             Sponsored
           </span>
@@ -56,9 +56,9 @@
     <img 
       bind:this={imageRef}
       class="w-full h-full object-cover transition-opacity duration-300 opacity-0"
-      data-src={template.image}
+      data-src={boilerplate.image}
       src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-      alt={template.title}
+      alt={boilerplate.title}
     />
     <div class="absolute inset-0 bg-gray-200 animate-pulse" />
   </div>
@@ -66,16 +66,16 @@
     <div class="flex-1">
       <div class="block mt-2">
         <p class="text-xl font-semibold text-gray-900">
-          {template.title}
+          {boilerplate.title}
         </p>
         <p class="mt-3 text-base text-gray-500">
-          {template.description}
+          {boilerplate.description}
         </p>
       </div>
     </div>
-    {#if !hideFeatures && template.features?.length}
+    {#if !hideFeatures && boilerplate.features?.length}
       <div class="mt-6 flex flex-wrap gap-2">
-        {#each template.features.slice(0, 3) as feature}
+        {#each boilerplate.features.slice(0, 3) as feature}
           <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-gray-100 text-gray-800">
             {feature}
           </span>

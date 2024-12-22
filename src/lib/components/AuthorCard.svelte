@@ -23,8 +23,8 @@
   {#if author.stats}
     <div class="mt-6 grid grid-cols-3 gap-4 border-t border-gray-100 pt-4">
       <div class="text-center">
-        <span class="block text-2xl font-semibold text-gray-900">{author.stats.totalTemplates}</span>
-        <span class="text-sm text-gray-500">Templates</span>
+        <span class="block text-2xl font-semibold text-gray-900">{author.stats.totalBoilerplates}</span>
+        <span class="text-sm text-gray-500">Boilerplates</span>
       </div>
       <div class="text-center">
         <span class="block text-2xl font-semibold text-gray-900">{author.stats.totalDownloads}</span>

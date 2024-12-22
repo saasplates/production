@@ -17,14 +17,14 @@
     <div class="flex-1 p-6 flex flex-col justify-between">
       <div class="flex-1">
         <p class="text-sm font-medium text-gray-600 uppercase tracking-wider">
-          Submit Template
+          Submit Boilerplate
         </p>
         <div class="block mt-2">
           <p class="text-xl font-semibold text-gray-900">
             Share Your Work
           </p>
           <p class="mt-3 text-base text-gray-500">
-            Join thousands of developers and showcase your templates to the community
+            Join thousands of developers and showcase your boilerplates to the community
           </p>
         </div>
       </div>

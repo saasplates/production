@@ -61,4 +61,4 @@ Here are some common patterns you'll use in SaaS applications:
 
 ## Next Steps
 
-Check out our templates to see Tailwind CSS in action, or join our Discord community to learn more from other developers.
+Check out our boilerplates to see Tailwind CSS in action, or join our Discord community to learn more from other developers.

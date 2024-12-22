@@ -1,15 +1,15 @@
 import { error } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
-import { templates } from '$lib/stores/templates';
+import { boilerplates } from '$lib/stores/boilerplates';
 
 export const load: PageLoad = ({ params }) => {
-  const template = templates.find(t => t.id === params.id);
+  const boilerplate = boilerplates.find(t => t.id === params.id);
   
-  if (!template) {
-    throw error(404, 'Template not found');
+  if (!boilerplate) {
+    throw error(404, 'Boilerplate not found');
   }
 
   return {
-    template
+    boilerplate
   };
 }; 

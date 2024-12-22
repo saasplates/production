@@ -5,10 +5,10 @@
   import DiscordBanner from '$lib/components/DiscordBanner.svelte';
 
   const siteName = 'SaasPlates';
-  const siteTitle = 'SaasPlates - Modern SaaS Templates';
-  const siteDescription = 'Discover and download modern SaaS templates for your next project';
+  const siteTitle = 'SaasPlates - Modern SaaS Boilerplates';
+  const siteDescription = 'Discover and download modern SaaS boilerplates for your next project';
   const siteUrl = 'https://saasplates.com';
-  const siteKeywords = 'saas templates, ui components, react templates, svelte templates, tailwind templates, web development, dashboard templates, admin panels';
+  const siteKeywords = 'saas boilerplates, ui components, react boilerplates, svelte boilerplates, tailwind boilerplates, web development, dashboard boilerplates, admin panels';
 </script>
 
 <svelte:head>
@@ -59,7 +59,7 @@
   <link
     rel="preload"
     as="image"
-    href="/templates/dashboard-1.png"
+    href="/boilerplates/dashboard-1.png"
     type="image/png"
   />
 </svelte:head>

@@ -10,13 +10,13 @@
 
   const packages = [
     { 
-      name: 'Featured Template', 
+      name: 'Featured Boilerplate', 
       price: '$299/month', 
       value: 'featured',
       description: 'Premium placement and advanced analytics dashboard'
     },
     { 
-      name: 'Sponsored Template', 
+      name: 'Sponsored Boilerplate', 
       price: '$199/month', 
       value: 'sponsored',
       description: 'Strategic placement and basic analytics'
@@ -60,9 +60,9 @@
 </script>
 
 <svelte:head>
-  <title>Advertise | SaaS Templates Hub - Reach Developers Worldwide</title>
-  <meta name="description" content="Promote your template or service to thousands of developers. Premium placement and sponsored opportunities available." />
-  <link rel="canonical" href="https://saastemplates.dev/advertise" />
+  <title>Advertise | SaaS Boilerplates Hub - Reach Developers Worldwide</title>
+  <meta name="description" content="Promote your boilerplate or service to thousands of developers. Premium placement and sponsored opportunities available." />
+  <link rel="canonical" href="https://saasboilerplates.dev/advertise" />
 </svelte:head>
 
 <main class="min-h-screen bg-gray-50">
@@ -73,7 +73,7 @@
         Advertise with Us
       </h1>
       <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
-        Reach thousands of developers and designers looking for high-quality SaaS templates
+        Reach thousands of developers and designers looking for high-quality SaaS boilerplates
       </p>
     </div>
     <div class="max-w-5xl mx-auto">
@@ -84,8 +84,8 @@
               Most Popular
             </span>
           </div>
-          <h3 class="text-lg font-semibold text-gray-900">Featured Template</h3>
-          <p class="mt-2 text-sm text-gray-600">Premium placement at the top of template listings</p>
+          <h3 class="text-lg font-semibold text-gray-900">Featured Boilerplate</h3>
+          <p class="mt-2 text-sm text-gray-600">Premium placement at the top of boilerplate listings</p>
           <p class="mt-4 text-2xl font-bold text-gray-900">$299<span class="text-base font-normal text-gray-500">/month</span></p>
           <ul class="mt-6 space-y-4 text-sm text-gray-600">
             <li class="flex items-center">
@@ -110,7 +110,7 @@
         </div>
 
         <div class="border border-gray-200 rounded-lg p-6 hover:bg-gray-50 transition-colors">
-          <h3 class="text-lg font-semibold text-gray-900">Sponsored Template</h3>
+          <h3 class="text-lg font-semibold text-gray-900">Sponsored Boilerplate</h3>
           <p class="mt-2 text-sm text-gray-600">Strategic placement throughout the site</p>
           <p class="mt-4 text-2xl font-bold text-gray-900">$199<span class="text-base font-normal text-gray-500">/month</span></p>
           <ul class="mt-6 space-y-4 text-sm text-gray-600">

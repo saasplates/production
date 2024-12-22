@@ -1,6 +1,6 @@
 <svelte:head>
 	<title>About | SaasPlates</title>
-	<meta name="description" content="Learn more about SaasPlates - Your source for modern SaaS templates and boilerplates" />
+	<meta name="description" content="Learn more about SaasPlates - Your source for modern SaaS boilerplates and boilerplates" />
 </svelte:head>
 
 <main class="min-h-screen bg-gray-50 py-12">
@@ -10,20 +10,20 @@
 
 			<div class="prose prose-gray">
 				<p>
-					SaasPlates is a curated collection of modern, production-ready SaaS templates and boilerplates. 
-					We help developers and startups launch faster with high-quality, customizable templates.
+					SaasPlates is a curated collection of modern, production-ready SaaS boilerplates and boilerplates. 
+					We help developers and startups launch faster with high-quality, customizable boilerplates.
 				</p>
 
 				<h2>Our Mission</h2>
 				<p>
 					Our mission is to accelerate SaaS development by providing well-structured, 
-					maintainable templates that follow industry best practices.
+					maintainable boilerplates that follow industry best practices.
 				</p>
 
 				<h2>Features</h2>
 				<ul>
 					<li>Modern tech stack (Svelte, TailwindCSS, TypeScript)</li>
-					<li>Production-ready templates</li>
+					<li>Production-ready boilerplates</li>
 					<li>Best practices and patterns</li>
 					<li>Responsive and accessible design</li>
 					<li>Comprehensive documentation</li>
@@ -31,7 +31,7 @@
 
 				<h2>Get Started</h2>
 				<p>
-					Browse our collection of templates or submit your own work to share with the community.
+					Browse our collection of boilerplates or submit your own work to share with the community.
 					Join our Discord server to connect with other developers and get support.
 				</p>
 
@@ -40,7 +40,7 @@
 						href="/submit" 
 						class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-gray-900 hover:bg-gray-800"
 					>
-						Submit Template
+						Submit Boilerplate
 					</a>
 					<a 
 						href="/discord" 

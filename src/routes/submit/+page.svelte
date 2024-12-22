@@ -41,9 +41,9 @@
 </script>
 
 <svelte:head>
-  <title>Submit Template | SaaS Templates Hub - Share Your Work</title>
-  <meta name="description" content="Share your SaaS template with our community. Get featured and reach thousands of developers looking for quality templates." />
-  <link rel="canonical" href="https://saastemplates.dev/submit" />
+  <title>Submit Boilerplate | SaaS Boilerplates Hub - Share Your Work</title>
+  <meta name="description" content="Share your SaaS boilerplate with our community. Get featured and reach thousands of developers looking for quality boilerplates." />
+  <link rel="canonical" href="https://saasboilerplates.dev/submit" />
 </svelte:head>
 
 <main class="mb-20 bg-gray-50">
@@ -51,10 +51,10 @@
   <div class="bg-white">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 text-center">
       <h1 class="text-3xl font-bold text-gray-900 sm:text-4xl">
-        Submit Your Template
+        Submit Your Boilerplate
       </h1>
       <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
-        Share your work with thousands of developers and designers looking for high-quality SaaS templates
+        Share your work with thousands of developers and designers looking for high-quality SaaS boilerplates
       </p>
     </div>
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -75,7 +75,7 @@
           <form class="space-y-6" on:submit={handleSubmit}>
             <div class="grid gap-6 md:grid-cols-2">
               <div>
-                <label for="title" class="block text-sm font-medium text-gray-700">Template Title</label>
+                <label for="title" class="block text-sm font-medium text-gray-700">Boilerplate Title</label>
                 <input 
                   type="text" 
                   name="title" 
@@ -107,7 +107,7 @@
                 name="description" 
                 rows="3"
                 required
-                placeholder="Tell us about your template..."
+                placeholder="Tell us about your boilerplate..."
                 class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 p-2"
               >
               </textarea>
@@ -118,7 +118,7 @@
               class="w-full flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 disabled:opacity-50"
               disabled={loading}
             >
-              {loading ? 'Submitting...' : 'Submit Template'}
+              {loading ? 'Submitting...' : 'Submit Boilerplate'}
             </button>
           </form>
         </div>

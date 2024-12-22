@@ -4,7 +4,7 @@ export async function sendToDiscord(type: 'submit' | 'advertise', data: any) {
   const embedColor = type === 'submit' ? 0x4F545C : 0x2F3136; // Different colors for different forms
 
   const embed = {
-    title: type === 'submit' ? 'New Template Submission' : 'New Advertising Inquiry',
+    title: type === 'submit' ? 'New Boilerplate Submission' : 'New Advertising Inquiry',
     color: embedColor,
     fields: Object.entries(data).map(([key, value]) => ({
       name: key.charAt(0).toUpperCase() + key.slice(1),

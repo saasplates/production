@@ -20,11 +20,11 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  <!-- Dynamically generate template URLs -->
-  {templates.map(template => `
+  <!-- Dynamically generate boilerplate URLs -->
+  {boilerplates.map(boilerplate => `
   <url>
-    <loc>https://saasplates.com/templates/${template.id}</loc>
-    <lastmod>${template.lastUpdated}</lastmod>
+    <loc>https://saasplates.com/boilerplates/${boilerplate.id}</loc>
+    <lastmod>${boilerplate.lastUpdated}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>

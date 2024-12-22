@@ -11,10 +11,10 @@
 
 <svelte:head>
   {#if post}
-    <title>{post.title} | SaaS Templates Hub Blog</title>
+    <title>{post.title} | SaaS Boilerplates Hub Blog</title>
     <meta name="description" content={post.description} />
     <meta name="author" content={author?.name || ''} />
-    <link rel="canonical" href="https://saastemplates.dev/blog/{post.slug}" />
+    <link rel="canonical" href="https://saasboilerplates.dev/blog/{post.slug}" />
   {/if}
 </svelte:head>
 
