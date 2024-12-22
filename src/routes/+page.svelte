@@ -88,8 +88,8 @@
 			</p>
 		</div>
 
-		<div class="mt-12">
-			<h2 class="sr-only">Our Templates</h2>
+		<div class="mt-28">
+			<h2 class="text-lg font-medium text-gray-500 mb-4">Our Templates</h2>
 			<div class="grid grid-cols-1 lg:grid-cols-3 gap-5 max-w-lg lg:max-w-none mx-auto">
 				{#each paginatedTemplatesWithCards as item}
 					{#if item.type === 'template'}
