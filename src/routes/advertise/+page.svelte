@@ -1,10 +1,29 @@
 <script lang="ts">
+  import { Label } from 'flowbite-svelte';
   import Header from '$lib/components/Header.svelte';
+  import CustomTextarea from '$lib/components/CustomTextarea.svelte';
   import { goto } from '$app/navigation';
 
   let loading = false;
   let error = '';
   let success = false;
+
+  const packages = [
+    { 
+      name: 'Featured Template', 
+      price: '$299/month', 
+      value: 'featured',
+      description: 'Premium placement and advanced analytics dashboard'
+    },
+    { 
+      name: 'Sponsored Template', 
+      price: '$199/month', 
+      value: 'sponsored',
+      description: 'Strategic placement and basic analytics'
+    }
+  ];
+
+  let selectedPackage = '';
 
   async function handleSubmit(event: SubmitEvent) {
     event.preventDefault();
@@ -48,20 +67,82 @@
 
 <Header />
 
-<main class="min-h-screen bg-gray-50 py-12">
-  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="bg-white shadow rounded-lg overflow-hidden">
-      <!-- Hero Section -->
-      <div class="bg-gray-900 px-6 py-16 sm:px-12 sm:py-20 text-center">
-        <h1 class="text-3xl font-bold text-white sm:text-4xl">
-          Advertise with Us
-        </h1>
-        <p class="mt-4 text-lg text-gray-300 max-w-2xl mx-auto">
-          Reach thousands of developers and designers looking for high-quality SaaS templates
-        </p>
-      </div>
+<main class="min-h-screen bg-gray-50">
+  <!-- Hero Section with lighter background -->
+  <div class="bg-white border-b border-gray-200">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 text-center">
+      <h1 class="text-3xl font-bold text-gray-900 sm:text-4xl">
+        Advertise with Us
+      </h1>
+      <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
+        Reach thousands of developers and designers looking for high-quality SaaS templates
+      </p>
+    </div>
+    <div class="max-w-5xl mx-auto">
+      <div class="grid gap-6 md:grid-cols-2 mb-12">
+        <div class="border border-gray-200 rounded-lg p-6 bg-gray-50 hover:bg-gray-100 transition-colors relative">
+          <div class="absolute -top-3 left-1/2 transform -translate-x-1/2">
+            <span class="bg-gray-600 text-white text-xs font-semibold px-3 py-1 rounded-full">
+              Most Popular
+            </span>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-900">Featured Template</h3>
+          <p class="mt-2 text-sm text-gray-600">Premium placement at the top of template listings</p>
+          <p class="mt-4 text-2xl font-bold text-gray-900">$299<span class="text-base font-normal text-gray-500">/month</span></p>
+          <ul class="mt-6 space-y-4 text-sm text-gray-600">
+            <li class="flex items-center">
+              <svg class="h-4 w-4 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              Top placement in search results
+            </li>
+            <li class="flex items-center">
+              <svg class="h-4 w-4 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              Featured badge
+            </li>
+            <li class="flex items-center">
+              <svg class="h-4 w-4 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              Analytics dashboard
+            </li>
+          </ul>
+        </div>
 
-      <!-- Content -->
+        <div class="border border-gray-200 rounded-lg p-6 hover:bg-gray-50 transition-colors">
+          <h3 class="text-lg font-semibold text-gray-900">Sponsored Template</h3>
+          <p class="mt-2 text-sm text-gray-600">Strategic placement throughout the site</p>
+          <p class="mt-4 text-2xl font-bold text-gray-900">$199<span class="text-base font-normal text-gray-500">/month</span></p>
+          <ul class="mt-6 space-y-4 text-sm text-gray-600">
+            <li class="flex items-center">
+              <svg class="h-4 w-4 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              Sponsored badge
+            </li>
+            <li class="flex items-center">
+              <svg class="h-4 w-4 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              Priority support
+            </li>
+            <li class="flex items-center">
+              <svg class="h-4 w-4 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              Basic analytics
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Content Section -->
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="bg-white border border-gray-200 rounded-lg">
       <div class="px-6 py-8 sm:px-12">
         {#if success}
           <div class="bg-green-50 p-4 rounded-md mb-6">
@@ -75,69 +156,7 @@
           </div>
         {/if}
 
-        <!-- Pricing Cards -->
-        <div class="grid gap-6 md:grid-cols-2 mb-12">
-          <div class="border rounded-lg p-6 bg-gray-50">
-            <div class="flex justify-between items-start">
-              <div>
-                <h3 class="text-lg font-semibold text-gray-900">Featured Template</h3>
-                <p class="mt-2 text-sm text-gray-600">Premium placement at the top of template listings</p>
-              </div>
-              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
-                Popular
-              </span>
-            </div>
-            <p class="mt-4 text-2xl font-bold text-gray-900">$299<span class="text-base font-normal text-gray-500">/month</span></p>
-            <ul class="mt-6 space-y-4 text-sm text-gray-600">
-              <li class="flex items-center">
-                <svg class="h-4 w-4 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                </svg>
-                Top placement in search results
-              </li>
-              <li class="flex items-center">
-                <svg class="h-4 w-4 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                </svg>
-                Featured badge
-              </li>
-              <li class="flex items-center">
-                <svg class="h-4 w-4 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                </svg>
-                Analytics dashboard
-              </li>
-            </ul>
-          </div>
-
-          <div class="border rounded-lg p-6">
-            <h3 class="text-lg font-semibold text-gray-900">Sponsored Template</h3>
-            <p class="mt-2 text-sm text-gray-600">Strategic placement throughout the site</p>
-            <p class="mt-4 text-2xl font-bold text-gray-900">$199<span class="text-base font-normal text-gray-500">/month</span></p>
-            <ul class="mt-6 space-y-4 text-sm text-gray-600">
-              <li class="flex items-center">
-                <svg class="h-4 w-4 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                </svg>
-                Sponsored badge
-              </li>
-              <li class="flex items-center">
-                <svg class="h-4 w-4 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                </svg>
-                Priority support
-              </li>
-              <li class="flex items-center">
-                <svg class="h-4 w-4 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                </svg>
-                Basic analytics
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- Contact Form -->
+        <!-- Form Section -->
         <form class="space-y-6" on:submit={handleSubmit}>
           <div class="grid gap-6 md:grid-cols-2">
             <div>
@@ -172,17 +191,37 @@
             >
           </div>
 
-          <div>
-            <label for="package" class="block text-sm font-medium text-gray-700">Package</label>
-            <select 
-              id="package" 
-              name="package" 
-              required
-              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500"
-            >
-              <option value="featured">Featured Template ($299/month)</option>
-              <option value="sponsored">Sponsored Template ($199/month)</option>
-            </select>
+          <div class="mb-6">
+            <Label class="mb-4 text-gray-700">Select Package</Label>
+            <div class="space-y-4">
+              {#each packages as pkg}
+                <div 
+                  class="relative flex items-start p-4 border rounded-lg cursor-pointer hover:bg-gray-50 transition-colors {selectedPackage === pkg.value ? 'border-gray-400 bg-gray-50 ring-1 ring-gray-400' : 'border-gray-200'}"
+                  on:click={() => selectedPackage = pkg.value}
+                  on:keydown={(e) => e.key === 'Enter' && (selectedPackage = pkg.value)}
+                  tabindex="0"
+                  role="radio"
+                  aria-checked={selectedPackage === pkg.value}
+                >
+                  <div class="flex items-center h-5">
+                    <input
+                      type="radio"
+                      name="package"
+                      value={pkg.value}
+                      checked={selectedPackage === pkg.value}
+                      class="h-4 w-4 text-gray-900 border-gray-300 focus:ring-gray-900"
+                    >
+                  </div>
+                  <div class="ml-3 flex justify-between w-full">
+                    <div>
+                      <p class="text-base font-medium text-gray-900">{pkg.name}</p>
+                      <p class="text-sm text-gray-500">{pkg.description}</p>
+                    </div>
+                    <p class="text-base font-medium text-gray-900">{pkg.price}</p>
+                  </div>
+                </div>
+              {/each}
+            </div>
           </div>
 
           <div>
@@ -198,7 +237,7 @@
 
           <button 
             type="submit" 
-            class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gray-900 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-700 disabled:opacity-50"
+            class="w-full flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 disabled:opacity-50"
             disabled={loading}
           >
             {loading ? 'Submitting...' : 'Submit Inquiry'}
