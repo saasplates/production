@@ -20,8 +20,6 @@
 					&copy; 2024 SaasPlates. All rights reserved.
 				</p> -->
 				<div class="flex items-center gap-1 text-sm text-gray-500">
-					<span>Proudly made in India 🇮🇳</span>
-					<span class="px-2 text-gray-300">•</span>
 					<span class="border-neutral-200 border rounded-md px-2 py-1">Deployed on{" "}
 					<a 
 						href="https://zerops.io" 

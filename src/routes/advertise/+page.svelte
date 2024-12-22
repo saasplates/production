@@ -65,8 +65,6 @@
   <link rel="canonical" href="https://saastemplates.dev/advertise" />
 </svelte:head>
 
-<Header />
-
 <main class="min-h-screen bg-gray-50">
   <!-- Hero Section with lighter background -->
   <div class="bg-white border-b border-gray-200">

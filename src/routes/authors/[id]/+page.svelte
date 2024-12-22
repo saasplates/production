@@ -1,22 +1,12 @@
 <script lang="ts">
   import { page } from '$app/stores';
-  import { authors } from '$lib/stores/authors';
-  import { templates } from '$lib/stores/templates';
-  import Header from '$lib/components/Header.svelte';
-  import TemplateCard from '$lib/components/TemplateCard.svelte';
-  
-  const author = authors.find(a => a.id === $page.params.id);
-  $: authorTemplates = templates.filter(t => t.authorId === author?.id);
+  import { authorsStore } from '$lib/stores/authors';
+  import { blogStore, authorPostCounts } from '$lib/stores/blog';
+
+  const author = $authorsStore.find(a => a.id === $page.params.id);
+  $: authorPosts = $blogStore.filter(post => post.authorId === author?.id);
+  $: postCount = $authorPostCounts.get(author?.id || '') || 0;
 </script>
-
-<svelte:head>
-  {#if author}
-    <title>{author.name} | SaasPlates Author Profile</title>
-    <meta name="description" content={author.bio} />
-  {/if}
-</svelte:head>
-
-<Header />
 
 {#if author}
   <main class="min-h-screen bg-gray-50 py-12">
@@ -44,12 +34,12 @@
           <div class="mt-6 flex flex-wrap gap-4 md:mt-0">
             {#if author.twitter}
               <a 
-                href={`https://twitter.com/${author.twitter.replace('@', '')}`}
+                href={`https://twitter.com/intent/follow?screen_name=${author.twitter.replace('@', '')}`}
                 class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
                 target="_blank"
                 rel="noopener"
               >
-                Follow on Twitter
+                Follow on X
               </a>
             {/if}
             {#if author.website}
@@ -65,34 +55,61 @@
           </div>
         </div>
 
-        <div class="mt-8">
-          <p class="text-lg text-gray-600">{author.bio}</p>
-        </div>
+        <p class="mt-6 text-gray-600">{author.bio}</p>
 
-        {#if author.stats}
-          <div class="mt-8 grid grid-cols-3 gap-8 border-t border-gray-100 pt-8">
-            <div>
-              <p class="text-3xl font-semibold text-gray-900">{author.stats.totalTemplates}</p>
-              <p class="mt-1 text-base text-gray-500">Templates</p>
-            </div>
-            <div>
-              <p class="text-3xl font-semibold text-gray-900">{author.stats.totalDownloads}</p>
-              <p class="mt-1 text-base text-gray-500">Downloads</p>
-            </div>
-            <div>
-              <p class="text-3xl font-semibold text-gray-900">{author.stats.rating}</p>
-              <p class="mt-1 text-base text-gray-500">Average Rating</p>
-            </div>
-          </div>
-        {/if}
+        <div class="mt-6 flex items-center gap-4 text-sm text-gray-500">
+          <span>{postCount} posts</span>
+          <span>•</span>
+          <span>
+            Joined {new Date(author.stats.joinedDate).toLocaleDateString('en-US', { 
+              month: 'long', 
+              year: 'numeric' 
+            })}
+          </span>
+        </div>
       </div>
 
-      <!-- Author's Templates -->
-      <h2 class="text-2xl font-bold text-gray-900 mb-8">Templates by {author.name}</h2>
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
-        {#each authorTemplates as template}
-          <TemplateCard {template} />
-        {/each}
+      <!-- Author's Posts -->
+      <div class="space-y-8">
+        <h2 class="text-xl font-bold text-gray-900">Posts by {author.name}</h2>
+        {#if authorPosts.length > 0}
+          {#each authorPosts as post}
+            <article class="bg-white rounded-lg border border-gray-200 overflow-hidden hover:border-gray-300 transition-colors">
+              <a href={`/blog/${post.slug}`} class="block p-6">
+                <div class="flex items-center gap-2 text-sm text-gray-500 mb-2">
+                  <time datetime={post.date}>
+                    {new Date(post.date).toLocaleDateString('en-US', { 
+                      year: 'numeric', 
+                      month: 'long', 
+                      day: 'numeric' 
+                    })}
+                  </time>
+                  {#if post.publishedAt}
+                    <span>•</span>
+                    <span>Published {new Date(post.publishedAt).toLocaleDateString('en-US', {
+                      month: 'long',
+                      day: 'numeric',
+                      year: 'numeric'
+                    })}</span>
+                  {/if}
+                </div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-2">{post.title}</h3>
+                <p class="text-gray-600">{post.description}</p>
+                {#if post.tags?.length}
+                  <div class="mt-4 flex flex-wrap gap-2">
+                    {#each post.tags as tag}
+                      <span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium bg-gray-100 text-gray-800">
+                        {tag}
+                      </span>
+                    {/each}
+                  </div>
+                {/if}
+              </a>
+            </article>
+          {/each}
+        {:else}
+          <p class="text-gray-500">No posts yet.</p>
+        {/if}
       </div>
     </div>
   </main>

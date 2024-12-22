@@ -2,7 +2,7 @@
 title: Getting Started with SaaS Templates
 description: A comprehensive guide to using and customizing our SaaS templates effectively
 date: 2024-02-15
-author: johndoe
+author: arjun
 tags:
   - Templates
   - Getting Started

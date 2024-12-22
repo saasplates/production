@@ -122,7 +122,6 @@
 				url="https://0auth.example"
 				title="Supabase"
 				description="an open source Firebase alternative - Start your project and serve in a weekend."
-				imageUrl="/ads/auth-banner.png"
 			/>
 		</div>
 

@@ -2,7 +2,7 @@
 title: Advanced React Performance Optimization
 description: Deep dive into React performance optimization strategies for large-scale applications.
 date: 2024-01-20
-author: sarahsmith
+author: arjun
 tags:
   - React
   - Performance

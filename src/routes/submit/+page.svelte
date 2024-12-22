@@ -109,7 +109,6 @@
               id="description" 
               name="description" 
               size="3" 
-              required
               placeholder="Tell us about your template..." 
             />
           </div>
