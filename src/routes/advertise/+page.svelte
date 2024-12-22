@@ -161,7 +161,7 @@
                   name="name" 
                   id="name" 
                   required
-                  class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500"
+                  class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 p-2"
                 >
               </div>
               <div>
@@ -171,7 +171,7 @@
                   name="email" 
                   id="email" 
                   required
-                  class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500"
+                  class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 p-2"
                 >
               </div>
             </div>
@@ -182,7 +182,7 @@
                 type="text" 
                 name="company" 
                 id="company" 
-                class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500"
+                class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 p-2"
               >
             </div>
   
@@ -226,7 +226,7 @@
                 name="message" 
                 rows="4" 
                 required
-                class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500"
+                class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 p-2"
               ></textarea>
             </div>
   
