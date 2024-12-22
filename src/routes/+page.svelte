@@ -126,7 +126,7 @@
 				</a>
 			</div>
 		</div>
-
+<!-- 
 		<div class="mt-20 text-center">
 			<p class="text-base text-gray-500">Trusted by developers from</p>
 			<div class="mt-6 grid grid-cols-2 gap-8 md:grid-cols-4">
@@ -143,7 +143,7 @@
 					<img class="h-8" src="/logos/meta.svg" alt="Meta" />
 				</div>
 			</div>
-		</div>
+		</div> -->
 	</div>
 </main>
 
@@ -159,9 +159,9 @@
 		</div>
 		<div class="mt-8 md:mt-0 md:order-1">
 			<div class="flex flex-col items-center md:items-start space-y-2">
-				<p class="text-center text-base text-gray-400">
+				<!-- <p class="text-center text-base text-gray-400">
 					&copy; 2024 SaasPlates. All rights reserved.
-				</p>
+				</p> -->
 				<div class="flex items-center gap-1 text-sm text-gray-500">
 					<span>Proudly made in India 🇮🇳</span>
 					<span class="px-2 text-gray-300">•</span>
