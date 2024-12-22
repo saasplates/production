@@ -2,9 +2,9 @@
   import { goto } from '$app/navigation';
 </script>
 
-<div 
-  class="flex flex-col rounded-lg border-[1px] border-slate-200 bg-white overflow-hidden cursor-pointer hover:border-slate-300 transition-colors"
-  on:click={() => goto('https://0auth.example')}
+<a 
+  href="https://0auth.example"
+  class="flex flex-col rounded-lg border-[1px] border-slate-200 bg-white overflow-hidden hover:border-slate-300 transition-colors"
 >
   <div class="flex-shrink-0 relative h-48 overflow-hidden bg-gradient-to-br from-indigo-50 to-indigo-100">
     <div class="absolute top-4 left-4 flex gap-2 z-10">
@@ -35,4 +35,4 @@
       </div>
     </div>
   </div>
-</div> 
+</a> 

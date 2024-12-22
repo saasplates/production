@@ -1,26 +1,55 @@
 <svelte:head>
-	<title>About</title>
-	<meta name="description" content="About this app" />
+	<title>About | SaasPlates</title>
+	<meta name="description" content="Learn more about SaasPlates - Your source for modern SaaS templates and boilerplates" />
 </svelte:head>
 
-<div class="text-column">
-	<h1>About this app</h1>
+<main class="min-h-screen bg-gray-50 py-12">
+	<div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+		<div class="bg-white rounded-lg border border-gray-200 p-8">
+			<h1 class="text-3xl font-bold text-gray-900 mb-6">About SaasPlates</h1>
 
-	<p>
-		This is a <a href="https://svelte.dev/docs/kit">SvelteKit</a> app. You can make your own by typing
-		the following into your command line and following the prompts:
-	</p>
+			<div class="prose prose-gray">
+				<p>
+					SaasPlates is a curated collection of modern, production-ready SaaS templates and boilerplates. 
+					We help developers and startups launch faster with high-quality, customizable templates.
+				</p>
 
-	<pre>npx sv create</pre>
+				<h2>Our Mission</h2>
+				<p>
+					Our mission is to accelerate SaaS development by providing well-structured, 
+					maintainable templates that follow industry best practices.
+				</p>
 
-	<p>
-		The page you're looking at is purely static HTML, with no client-side interactivity needed.
-		Because of that, we don't need to load any JavaScript. Try viewing the page's source, or opening
-		the devtools network panel and reloading.
-	</p>
+				<h2>Features</h2>
+				<ul>
+					<li>Modern tech stack (Svelte, TailwindCSS, TypeScript)</li>
+					<li>Production-ready templates</li>
+					<li>Best practices and patterns</li>
+					<li>Responsive and accessible design</li>
+					<li>Comprehensive documentation</li>
+				</ul>
 
-	<p>
-		The <a href="/sverdle">Sverdle</a> page illustrates SvelteKit's data loading and form handling. Try
-		using it with JavaScript disabled!
-	</p>
-</div>
+				<h2>Get Started</h2>
+				<p>
+					Browse our collection of templates or submit your own work to share with the community.
+					Join our Discord server to connect with other developers and get support.
+				</p>
+
+				<div class="mt-8 flex gap-4">
+					<a 
+						href="/submit" 
+						class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-gray-900 hover:bg-gray-800"
+					>
+						Submit Template
+					</a>
+					<a 
+						href="/discord" 
+						class="inline-flex items-center px-4 py-2 border border-gray-300 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
+					>
+						Join Discord
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</main>

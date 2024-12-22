@@ -46,15 +46,6 @@ Our templates are built with modern technologies and best practices in mind:
    - Add your features
    - Update content
 
-## Best Practices
-
-When customizing your template, keep these tips in mind:
-
-- Keep the component structure
-- Follow the existing patterns
-- Use the built-in utilities
-- Document your changes
-
 ## Need Help?
 
 Check out our documentation for detailed guides or join our community for support. 

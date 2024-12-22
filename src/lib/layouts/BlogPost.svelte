@@ -1,19 +1,17 @@
-<script>
-  import Header from '$lib/components/Header.svelte';
+<script lang="ts">
   import { authors } from '$lib/stores/authors';
 
   /** @type {any} */
-  export let metadata;
+  export let metadata = {
+    title: '',
+    description: '',
+    date: '',
+    author: '',
+    tags: []
+  };
 
-  $: author = authors.find(a => a.id === metadata.author);
+  $: author = metadata?.author ? authors.find(a => a.id === metadata.author) : null;
 </script>
-
-<svelte:head>
-  <title>{metadata.title} | SaasPlates Blog</title>
-  <meta name="description" content={metadata.description} />
-</svelte:head>
-
-<Header />
 
 <main class="min-h-screen bg-gray-50 py-12">
   <article class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -40,7 +38,7 @@
       </div>
       <h1 class="text-4xl font-bold text-gray-900 mb-4">{metadata.title}</h1>
       <p class="text-xl text-gray-600">{metadata.description}</p>
-      {#if metadata.tags}
+      {#if metadata.tags?.length}
         <div class="mt-4 flex flex-wrap gap-2 justify-center">
           {#each metadata.tags as tag}
             <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-gray-100 text-gray-800">

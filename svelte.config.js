@@ -6,7 +6,16 @@ import remarkGfm from 'remark-gfm';
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	kit: {
-		adapter: adapter()
+		adapter: adapter(),
+		prerender: {
+			handleHttpError: ({ path, referrer, message }) => {
+				// Ignore missing pages that are dynamically generated
+				if (path === '/sverdle') return;
+				
+				// Otherwise, fail the build
+				throw new Error(message);
+			}
+		}
 	},
 	extensions: ['.svelte', '.md'],
 	preprocess: [
@@ -14,9 +23,9 @@ const config = {
 		mdsvex({
 			extensions: ['.md'],
 			remarkPlugins: [remarkGfm],
-			layout: {
-				_: 'src/lib/layouts/BlogPost.svelte'
-			}
+				smartypants: {
+					dashes: 'oldschool'
+				}
 		})
 	]
 };

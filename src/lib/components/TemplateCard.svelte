@@ -34,9 +34,9 @@
   }`;
 </script>
 
-<div 
+<a 
+  href={template.demoUrl}
   class={cardClasses}
-  on:click={handleClick}
 >
   <div class="flex-shrink-0 relative h-48 overflow-hidden bg-gray-100">
     {#if template.featured || template.sponsored}
@@ -83,7 +83,7 @@
       </div>
     {/if}
   </div>
-</div>
+</a>
 
 <style>
   div {

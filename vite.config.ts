@@ -4,11 +4,16 @@ import { defineConfig } from 'vite';
 export default defineConfig({
 	plugins: [sveltekit()],
 	server: {
-		hmr: {
-			port: 3000
-		},
 		fs: {
 			allow: ['content']
+		}
+	},
+	ssr: {
+		noExternal: ['redis']
+	},
+	build: {
+		rollupOptions: {
+			external: ['redis']
 		}
 	}
 });

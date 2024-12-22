@@ -39,18 +39,6 @@ export const authors: Author[] = [
     expertise: ['React', 'TypeScript', 'Web Performance']
   },
   {
-    id: 'mikewong',
-    name: 'Mike Wong',
-    avatar: '/authors/mike-wong.jpg',
-    role: 'Cloud Architect',
-    bio: 'Writing about cloud architecture, serverless, and DevOps best practices. AWS Community Builder.',
-    location: 'Singapore',
-    company: 'CloudScale',
-    website: 'https://mikewong.cloud',
-    twitter: '@mikeclouddev',
-    expertise: ['AWS', 'Serverless', 'DevOps']
-  },
-  {
     id: 'annapatel',
     name: 'Anna Patel',
     avatar: '/authors/anna-patel.jpg',

@@ -1,33 +1,20 @@
 <script lang="ts">
-  import { page } from '$app/stores';
-  import { marked } from 'marked';
-  import { blogPosts } from '$lib/stores/blog';
+  import Header from '$lib/components/Header.svelte';
+  import { authors } from '$lib/stores/authors';
 
-  const post = blogPosts.find(p => p.slug === $page.params.slug);
-  const htmlContent = post ? marked(post.content) : '';
-
-  // Generate meta description from content
-  $: metaDescription = post?.content
-    ? post.content.substring(0, 160).replace(/[#*`]/g, '').trim() + '...'
-    : '';
+  export let data;
+  const { post } = data;
+  const author = authors.find(a => a.id === post?.authorId);
 </script>
 
 <svelte:head>
   {#if post}
     <title>{post.title} | SaaS Templates Hub Blog</title>
-    <meta name="description" content={metaDescription} />
-    <meta name="author" content={post.author} />
+    <meta name="description" content={post.description} />
+    <meta name="author" content={author?.name || ''} />
     <link rel="canonical" href="https://saastemplates.dev/blog/{post.slug}" />
-    
-    <!-- Open Graph -->
-    <meta property="og:title" content={post.title} />
-    <meta property="og:description" content={metaDescription} />
-    <meta property="article:published_time" content={post.date} />
-    <meta property="article:author" content={post.author} />
   {/if}
 </svelte:head>
-
-<Header />
 
 {#if post}
   <main class="min-h-screen bg-gray-50 py-12">
@@ -41,15 +28,33 @@
               day: 'numeric' 
             })}
           </time>
-          <span class="text-gray-300">•</span>
-          <span>By {post.author}</span>
+          {#if author}
+            <span class="text-gray-300">•</span>
+            <div class="flex items-center">
+              <img 
+                src={author.avatar} 
+                alt={author.name}
+                class="w-6 h-6 rounded-full mr-2"
+              />
+              <span>{author.name}</span>
+            </div>
+          {/if}
         </div>
         <h1 class="text-4xl font-bold text-gray-900 mb-4">{post.title}</h1>
         <p class="text-xl text-gray-600">{post.description}</p>
+        {#if post.tags?.length}
+          <div class="mt-4 flex flex-wrap gap-2 justify-center">
+            {#each post.tags as tag}
+              <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-gray-100 text-gray-800">
+                {tag}
+              </span>
+            {/each}
+          </div>
+        {/if}
       </header>
 
       <div class="prose prose-gray max-w-none bg-white rounded-lg border border-gray-200 p-8">
-        {@html htmlContent}
+        <svelte:component this={post.content} />
       </div>
     </article>
   </main>
