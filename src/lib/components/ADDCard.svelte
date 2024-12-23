@@ -4,7 +4,7 @@
 
 <a 
   href="/submit"
-  class="flex flex-col rounded-lg border-[1px] border-slate-200 bg-white overflow-hidden hover:border-slate-300 transition-colors h-[22rem]"
+  class="flex flex-col rounded-lg border-[1px] border-slate-200 bg-white overflow-hidden hover:border-slate-300 transition-colors"
 >
   <div class="flex-shrink-0 relative h-48 bg-gray-100 flex items-center justify-center">
     <div class="rounded-full bg-gray-200 p-4">

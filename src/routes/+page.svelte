@@ -2,7 +2,7 @@
 	import { boilerplates } from '$lib/stores/boilerplates';
 	import TemplateCard from '$lib/components/TemplateCard.svelte';
 	import ADDCard from '$lib/components/ADDCard.svelte';
-	import AdvertiseCard from '$lib/components/AdvertiseCard.svelte';
+	// import AdvertiseCard from '$lib/components/AdvertiseCard.svelte';
 	import Rectangle from '$lib/components/Rectangle.svelte';
 	import { onMount } from 'svelte';
 	import { getRandomAd } from '$lib/stores/ads';
@@ -129,7 +129,7 @@
 
 
 		<!-- Add sidebar and main content layout -->
-		<div class="mt-28">
+		<div class="mt-28 mx-10">
 			<!-- Main content -->
 			<div class="max-w-7xl mx-auto">
 				<FilterButtons 
@@ -137,18 +137,19 @@
 					on:filter={handleFilter}
 				/>
 
-				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-5">
+				<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-5">
 					{#each paginatedBoilerplatesWithCards as item}
 						{#if item.type === 'boilerplate' && item.content}
 							<TemplateCard boilerplate={item.content} {observer} hideFeatures={true} />
 						{:else if item.type === 'add'}
 							<ADDCard />
-						{:else if item.type === 'advertise'}
+						{/if}
+						<!-- {:else if item.type === 'advertise'}
 							<AdvertiseCard 
 								image={ad.image}
 								href={ad.href}
 							/>
-						{/if}
+						{/if} -->
 					{/each}
 				</div>
 

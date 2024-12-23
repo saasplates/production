@@ -8,24 +8,24 @@ export interface Advertisement {
 }
 
 export const ads: Advertisement[] = [
-  {
-    id: 'auth0-ad',
-    image: '/ad/auth0.png',
-    href: 'https://auth0.com',
-    active: true
-  },
-  {
-    id: 'vercel-ad',
-    image: '/ad/auth0.png',
-    href: 'https://auth0.com',
-    active: true
-  },
-  {
-    id: 'stripe-ad',
-    image: '/ad/auth0.png',
-    href: 'https://auth0.com',
-    active: true
-  }
+//   {
+//     id: 'auth0-ad',
+//     image: '/ad/auth0.png',
+//     href: 'https://auth0.com',
+//     active: true
+//   },
+//   {
+//     id: 'vercel-ad',
+//     image: '/ad/auth0.png',
+//     href: 'https://auth0.com',
+//     active: true
+//   },
+//   {
+//     id: 'stripe-ad',
+//     image: '/ad/auth0.png',
+//     href: 'https://auth0.com',
+//     active: true
+//   }
 ];
 
 export const adsStore = writable(ads);

@@ -5,7 +5,7 @@
 
 <a 
   {href}
-  class="flex flex-col h-[22rem] rounded-lg border-[1px] border-slate-200 bg-white overflow-hidden hover:border-slate-300 transition-colors"
+  class="flex flex-col rounded-lg border-[1px] border-slate-200 bg-white overflow-hidden hover:border-slate-300 transition-colors"
 >
   <div class="relative w-full h-48">
     <img 

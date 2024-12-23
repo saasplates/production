@@ -8,7 +8,7 @@
 
 <a 
   href={boilerplate.demoUrl}
-  class="flex flex-col h-[22rem] rounded-lg border-[1px] border-slate-200 bg-white overflow-hidden hover:border-slate-300 transition-colors"
+  class="flex flex-col rounded-lg border-[1px] border-slate-200 bg-white overflow-hidden hover:border-slate-300 transition-colors"
 >
   <!-- 16:9 aspect ratio container -->
   <div class="relative w-full pt-[56.25%] bg-gray-100"> <!-- 56.25% = 9/16 -->
