@@ -36,7 +36,7 @@
 
 <a 
   href={boilerplate.demoUrl}
-  class="flex flex-col rounded-lg border-[1px] border-slate-200 bg-white overflow-hidden hover:border-slate-300 transition-colors h-[22rem]"
+  class={cardClasses}
 >
   <div class="flex-shrink-0 relative h-48 overflow-hidden bg-gray-100">
     <img 
@@ -44,6 +44,7 @@
       class="w-full h-full object-cover transition-opacity duration-300"
       data-src={boilerplate.image}
       src={boilerplate.image}
+      draggable="false"
       alt={boilerplate.title}
       loading="lazy"
       onload="this.classList.remove('opacity-0')"

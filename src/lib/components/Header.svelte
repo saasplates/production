@@ -15,12 +15,12 @@
       <!-- Navigation -->
       <div class="flex items-center gap-6">
         <div class="flex items-center gap-4">
-          <a 
+          <!-- <a 
             href="/blog" 
             class="inline-flex items-center px-4 py-2 border border-slate-200 text-sm font-medium rounded-md text-gray-600 bg-white hover:bg-gray-50"
             >
           Blog
-        </a>
+        </a> -->
         <a 
           href="/advertise" 
           class="inline-flex items-center px-4 py-2 border border-slate-200 text-sm font-medium rounded-md text-gray-600 bg-white hover:bg-gray-50"
