@@ -8,6 +8,7 @@
 	import { getRandomAd } from '$lib/stores/ads';
 
 	import LargeAdvertiseCard from '$lib/components/LargeAdvertiseCard.svelte';
+	import FilterButtons from '$lib/components/FilterButtons.svelte';
 
 	// Show ADDCard after first 4 boilerplates
 	const ADD_POSITION = 4;
@@ -20,7 +21,13 @@
 	let currentPage = 1;
 	let loading = false;
 
-	// Sort boilerplates to show featured and sponsored first
+	// Define proper types
+	interface CardItem {
+		type: 'boilerplate' | 'add' | 'advertise';
+		content?: Boilerplate;
+	}
+
+	// Initial sorting and filtering
 	$: sortedBoilerplates = [...boilerplates].sort((a, b) => {
 		if (a.featured && !b.featured) return -1;
 		if (!a.featured && b.featured) return 1;
@@ -29,28 +36,17 @@
 		return 0;
 	});
 
-	// Add type definition for card items
-	type CardItem = {
-		type: 'boilerplate' | 'add' | 'advertise';
-		content?: any; // or proper Boilerplate type if available
-	};
+	// Single source of filtering
+	let activeCategory = 'All';
+	const categories = ['All', 'Dashboard', 'Landing Page', 'E-commerce', 'Blog'];
 
-	// Add new filtering state
-	const categories = ['Landing Page', 'Admin Panel', 'Authentication', 'Dashboard', 'E-commerce'];
-	let selectedCategories: string[] = [];
-	let showFeatured = false;
-	let showSponsored = false;
+	// First filter by category
+	$: categoryFilteredBoilerplates = activeCategory === 'All' 
+		? sortedBoilerplates 
+		: sortedBoilerplates.filter(item => item.category === activeCategory);
 
-	// Filter boilerplates based on selected filters
-	$: filteredBoilerplates = sortedBoilerplates.filter(boilerplate => {
-		const categoryMatch = selectedCategories.length === 0 || selectedCategories.includes(boilerplate.category);
-		const featuredMatch = !showFeatured || boilerplate.featured;
-		const sponsoredMatch = !showSponsored || boilerplate.sponsored;
-		return categoryMatch && featuredMatch && sponsoredMatch;
-	});
-
-	// Update pagination to use filtered boilerplates
-	$: paginatedBoilerplatesWithCards = filteredBoilerplates
+	// Then create paginated cards with ads
+	$: paginatedBoilerplatesWithCards = categoryFilteredBoilerplates
 		.slice(0, currentPage * ITEMS_PER_PAGE)
 		.reduce<CardItem[]>((acc, boilerplate, index) => {
 			if (index === adPosition) {
@@ -65,8 +61,8 @@
 			return acc;
 		}, []);
 
-	// Update hasMore to use filtered boilerplates length
-	$: hasMore = currentPage * ITEMS_PER_PAGE < filteredBoilerplates.length;
+	// Update hasMore calculation
+	$: hasMore = currentPage * ITEMS_PER_PAGE < categoryFilteredBoilerplates.length;
 
 	// Load more function with artificial delay to show loading state
 	async function loadMore() {
@@ -99,16 +95,13 @@
 		);
 	});
 
-	// Clear filters function
-	function clearFilters() {
-		selectedCategories = [];
-		showFeatured = false;
-		showSponsored = false;
-		currentPage = 1;
-	}
-
 	// Get a random ad when the component loads
 	const ad = getRandomAd();
+
+	function handleFilter(event: CustomEvent<{category: string}>) {
+		activeCategory = event.detail.category;
+		currentPage = 1; // Reset pagination when filter changes
+	}
 </script>
 
 <main class="min-h-screen bg-gray-50">
@@ -136,81 +129,23 @@
 
 
 		<!-- Add sidebar and main content layout -->
-		<div class="mt-28 lg:grid lg:grid-cols-[280px,1fr] lg:gap-8">
-			<!-- Sidebar -->
-			<div class="hidden lg:block">
-				<div class="sticky top-6">
-					<div class="bg-white rounded-lg border border-gray-200 overflow-hidden">
-						<div class="p-6">
-							<h3 class="text-lg font-medium text-gray-900 mb-4">Filters</h3>
-							
-							<!-- Categories -->
-							<div class="space-y-4">
-								<div>
-									<h4 class="text-sm font-medium text-gray-700 mb-2">Categories</h4>
-									<div class="space-y-2">
-										{#each categories as category}
-											<label class="flex items-center">
-												<input
-													type="checkbox"
-													class="rounded border-gray-300 text-gray-900 focus:ring-gray-500"
-													bind:group={selectedCategories}
-													value={category}
-												/>
-												<span class="ml-2 text-sm text-gray-600">{category}</span>
-											</label>
-										{/each}
-									</div>
-								</div>
-
-								<!-- Type Filter -->
-								<div>
-									<h4 class="text-sm font-medium text-gray-700 mb-2">Type</h4>
-									<div class="space-y-2">
-										<label class="flex items-center">
-											<input
-												type="checkbox"
-												class="rounded border-gray-300 text-gray-900 focus:ring-gray-500"
-												bind:checked={showFeatured}
-											/>
-											<span class="ml-2 text-sm text-gray-600">Featured</span>
-										</label>
-										<label class="flex items-center">
-											<input
-												type="checkbox"
-												class="rounded border-gray-300 text-gray-900 focus:ring-gray-500"
-												bind:checked={showSponsored}
-											/>
-											<span class="ml-2 text-sm text-gray-600">Sponsored</span>
-										</label>
-									</div>
-								</div>
-
-								<!-- Clear Filters Button -->
-								<button
-									class="w-full px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200"
-									on:click={clearFilters}
-								>
-									Clear Filters
-								</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
+		<div class="mt-28">
 			<!-- Main content -->
-			<div>
+			<div class="max-w-7xl mx-auto">
+				<FilterButtons 
+					{activeCategory}
+					on:filter={handleFilter}
+				/>
+
 				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-5">
 					{#each paginatedBoilerplatesWithCards as item}
-						{#if item.type === 'boilerplate'}
+						{#if item.type === 'boilerplate' && item.content}
 							<TemplateCard boilerplate={item.content} {observer} hideFeatures={true} />
 						{:else if item.type === 'add'}
 							<ADDCard />
 						{:else if item.type === 'advertise'}
 							<AdvertiseCard 
 								image={ad.image}
-								description={ad.description}
 								href={ad.href}
 							/>
 						{/if}
