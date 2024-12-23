@@ -5,6 +5,7 @@
 	import AdvertiseCard from '$lib/components/AdvertiseCard.svelte';
 	import Rectangle from '$lib/components/Rectangle.svelte';
 	import { onMount } from 'svelte';
+	import { getRandomAd } from '$lib/stores/ads';
 
 	// Show ADDCard after first 4 boilerplates
 	const ADD_POSITION = 4;
@@ -103,6 +104,9 @@
 		showSponsored = false;
 		currentPage = 1;
 	}
+
+	// Get a random ad when the component loads
+	const ad = getRandomAd();
 </script>
 
 <main class="min-h-screen bg-gray-50">
@@ -199,8 +203,12 @@
 							<TemplateCard boilerplate={item.content} {observer} hideFeatures={true} />
 						{:else if item.type === 'add'}
 							<ADDCard />
-						{:else}
-							<AdvertiseCard />
+						{:else if item.type === 'advertise'}
+							<AdvertiseCard 
+								image={ad.image}
+								description={ad.description}
+								href={ad.href}
+							/>
 						{/if}
 					{/each}
 				</div>

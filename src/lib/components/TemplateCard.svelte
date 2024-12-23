@@ -36,7 +36,7 @@
 
 <a 
   href={boilerplate.demoUrl}
-  class={cardClasses}
+  class="flex flex-col rounded-lg border-[1px] border-slate-200 bg-white overflow-hidden hover:border-slate-300 transition-colors h-[28rem]"
 >
   <div class="flex-shrink-0 relative h-48 overflow-hidden bg-gray-100">
     <img 
@@ -49,7 +49,7 @@
       onload="this.classList.remove('opacity-0')"
     />
   </div>
-  <div class="flex-1 p-5 flex flex-col justify-between border-t border-gray-200">
+  <div class="flex-1 p-5 flex flex-col justify-between">
     <div class="flex-1">
       {#if boilerplate.featured || boilerplate.sponsored}
         <div class="flex gap-1 mb-2">
@@ -66,10 +66,10 @@
         </div>
       {/if}
       <div class="block">
-        <p class="text-xl font-semibold text-gray-900">
+        <p class="text-xl font-semibold text-gray-900 line-clamp-1">
           {boilerplate.title}
         </p>
-        <p class="mt-2 text-base text-gray-500">
+        <p class="mt-2 text-base text-gray-500 line-clamp-2">
           {boilerplate.description}
         </p>
       </div>
