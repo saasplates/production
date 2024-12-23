@@ -139,8 +139,8 @@
 		<div class="pb-5 sm:pb-10">
 			<Rectangle 
 				url="/advertise"
-				title="Promoted"
-				description="Buy this spot for $399 for 3 months."
+				title="Promoted #1"
+				description="Buy this spot for $459 for 3 months."
 				imgSrc="/logos/star.svg"
 			/>
 		</div>
@@ -215,10 +215,12 @@
 			</div>
 		</div> -->
 		<div class="mt-14">
-			<LargeAdvertiseCard 
-				image="/ad/notion.avif"
-				href="https://notion.com"
-			/>
+			<!-- <LargeAdvertiseCard
+				title="Last Promoted Card"
+				description="Buy this spot for $399 for 3 months."
+				href="/advertise"
+				image="/rectangle.webp"
+			/> -->
 		</div>
 
 

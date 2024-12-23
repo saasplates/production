@@ -92,10 +92,11 @@
                   required
                   class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 p-2"
                 >
-                  <option value="Next.js">Next.js</option>
-                  <option value="landing">Laravel</option>
-                  <option value="auth">Authentication</option>
-                  <option value="admin">Admin Panel</option>
+                  <option value="nextjs">Next.js</option>
+                  <option value="laravel">Laravel</option>
+                  <option value="sveltekit">SvelteKit</option>
+                  <option value="remix">Remix</option>
+                  <option value="other">Other</option>
                 </select>
               </div>
             </div>
@@ -109,8 +110,19 @@
                 required
                 placeholder="Tell us about your boilerplate..."
                 class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 p-2"
-              >
-              </textarea>
+              ></textarea>
+            </div>
+
+            <div>
+              <label for="link" class="block text-sm font-medium text-gray-700">Link to Boilerplate</label>
+              <input 
+                type="url"
+                id="link" 
+                name="link" 
+                required
+                placeholder="https://github.com/username/repo"
+                class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 p-2"
+              />
             </div>
   
             <button 

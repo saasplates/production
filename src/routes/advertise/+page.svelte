@@ -13,13 +13,13 @@
       name: 'Featured Boilerplate', 
       price: '$299/month', 
       value: 'featured',
-      description: 'Premium placement and advanced analytics Next.js'
+      description: 'Premium placement with detailed analytics and priority support'
     },
     { 
       name: 'Sponsored Boilerplate', 
       price: '$199/month', 
       value: 'sponsored',
-      description: 'Strategic placement and basic analytics'
+      description: 'Enhanced visibility with basic analytics and standard support'
     }
   ];
 
@@ -92,19 +92,19 @@
               <svg class="h-4 w-4 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
               </svg>
-              Top placement in search results
+              Premium placement in search results
             </li>
             <li class="flex items-center">
               <svg class="h-4 w-4 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
               </svg>
-              Featured badge
+              Detailed performance analytics
             </li>
             <li class="flex items-center">
               <svg class="h-4 w-4 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
               </svg>
-              Analytics Next.js
+              Priority support & consultation
             </li>
           </ul>
         </div>
@@ -161,6 +161,8 @@
                   name="name" 
                   id="name" 
                   required
+                  placeholder="Your full name"
+                  aria-label="Your full name"
                   class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 p-2"
                 >
               </div>
@@ -171,6 +173,8 @@
                   name="email" 
                   id="email" 
                   required
+                  placeholder="your@email.com"
+                  aria-label="Your email address"
                   class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 p-2"
                 >
               </div>
@@ -182,6 +186,8 @@
                 type="text" 
                 name="company" 
                 id="company" 
+                placeholder="Your company name"
+                aria-label="Your company name"
                 class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 p-2"
               >
             </div>
@@ -226,6 +232,8 @@
                 name="message" 
                 rows="4" 
                 required
+                placeholder="Tell us about your boilerplate and any specific requirements..."
+                aria-label="Your message"
                 class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 p-2"
               ></textarea>
             </div>

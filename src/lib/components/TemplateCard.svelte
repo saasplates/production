@@ -2,8 +2,6 @@
   import type { Boilerplate } from '$lib/stores/boilerplates';
   
   export let boilerplate: Boilerplate;
-  export let observer: IntersectionObserver | null = null;
-  export let hideFeatures = false;
 </script>
 
 <a 
@@ -44,7 +42,7 @@
         {boilerplate.description}
       </p>
     </div>
-    
+<!--     
     {#if !hideFeatures && boilerplate.features?.length}
       <div class="mt-4 flex flex-wrap gap-2">
         {#each boilerplate.features.slice(0, 3) as feature}
@@ -53,7 +51,7 @@
           </span>
         {/each}
       </div>
-    {/if}
+    {/if} -->
   </div>
 </a>
 
