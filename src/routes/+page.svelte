@@ -38,7 +38,7 @@
 
 	// Single source of filtering
 	let activeCategory = 'All';
-	const categories = ['All', 'Dashboard', 'Landing Page', 'E-commerce', 'Blog'];
+	const categories = ['All', 'Next.js', 'Laravel', 'Free', 'Paid'];
 
 	// First filter by category
 	$: categoryFilteredBoilerplates = activeCategory === 'All' 

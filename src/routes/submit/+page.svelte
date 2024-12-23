@@ -92,8 +92,8 @@
                   required
                   class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 p-2"
                 >
-                  <option value="dashboard">Dashboard</option>
-                  <option value="landing">Landing Page</option>
+                  <option value="Next.js">Next.js</option>
+                  <option value="landing">Laravel</option>
                   <option value="auth">Authentication</option>
                   <option value="admin">Admin Panel</option>
                 </select>

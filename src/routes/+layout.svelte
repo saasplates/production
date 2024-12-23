@@ -8,7 +8,7 @@
   const siteTitle = 'SaasPlates - Modern SaaS Boilerplates';
   const siteDescription = 'Discover and download modern SaaS boilerplates for your next project';
   const siteUrl = 'https://saasplates.com';
-  const siteKeywords = 'saas boilerplates, ui components, react boilerplates, svelte boilerplates, tailwind boilerplates, web development, dashboard boilerplates, admin panels';
+  const siteKeywords = 'saas boilerplates, ui components, react boilerplates, svelte boilerplates, tailwind boilerplates, web development, Next.js boilerplates, admin panels';
 </script>
 
 <svelte:head>
@@ -59,7 +59,7 @@
   <link
     rel="preload"
     as="image"
-    href="/boilerplates/dashboard-1.png"
+    href="/boilerplates/Next.js-1.png"
     type="image/png"
   />
 </svelte:head>
