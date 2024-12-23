@@ -10,16 +10,48 @@
 
   const packages = [
     { 
-      name: 'Featured Boilerplate', 
-      price: '$299/month', 
+      name: 'Sponsored Boilerplate', 
+      price: '$29/month', 
       value: 'featured',
-      description: 'Premium placement with detailed analytics and priority support'
+      description: 'Premium placement across all categories and sections',
+      features: [
+        'Top placement in all categories',
+        'Visible in both free and paid sections',
+        'Priority listing in search results',
+      ]
     },
     { 
-      name: 'Sponsored Boilerplate', 
-      price: '$199/month', 
+      name: 'Promoted Boilerplate', 
+      price: '$19/month', 
       value: 'sponsored',
-      description: 'Enhanced visibility with basic analytics and standard support'
+      description: 'Enhanced visibility within specific categories (paid templates only)',
+      features: [
+        'Enhanced placement in selected category',
+        'Visible in paid templates section',
+        'Promoted badge on listing',
+      ]
+    },
+    {
+      name: 'Promoted #1 Platform', 
+      price: '$459/quarter', 
+      value: 'platform-hero',
+      description: 'Hero section placement on landing page and all boilerplate pages',
+      features: [
+        'Hero section placement',
+        'Visible on all pages',
+        'Custom banner design',
+      ]
+    },
+    {
+      name: 'Large Advertisement', 
+      price: '$359/quarter', 
+      value: 'platform-footer',
+      description: 'Footer placement across all pages',
+      features: [
+        'Footer section placement',
+        'Visible on all pages',
+        'Standard banner design',
+      ]
     }
   ];
 
@@ -67,7 +99,7 @@
 
 <main class="min-h-screen bg-gray-50">
   <!-- Hero Section with lighter background -->
-  <div class="bg-white border-b border-gray-200">
+  <div class="bg-white pb-20">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 text-center">
       <h1 class="text-3xl font-bold text-gray-900 sm:text-4xl">
         Advertise with Us
@@ -78,65 +110,33 @@
     </div>
     <div class="max-w-5xl mx-auto">
       <div class="grid gap-6 md:grid-cols-2 mb-12">
-        <div class="border border-gray-200 rounded-lg p-6 bg-gray-50 hover:bg-gray-100 transition-colors relative">
-          <div class="absolute -top-3 left-1/2 transform -translate-x-1/2">
-            <span class="bg-gray-600 text-white text-xs font-semibold px-3 py-1 rounded-full">
-              Most Popular
-            </span>
+        {#each packages as pkg}
+          <div class="border border-gray-200 rounded-lg p-6 bg-gray-50 hover:bg-gray-100 transition-colors relative">
+            {#if pkg.value === 'featured'}
+              <div class="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                <span class="bg-gray-600 text-white text-xs font-semibold px-3 py-1 rounded-full">
+                  Most Popular
+                </span>
+              </div>
+            {/if}
+            <h3 class="text-lg font-semibold text-gray-900">{pkg.name}</h3>
+            <p class="mt-2 text-sm text-gray-600">{pkg.description}</p>
+            <p class="mt-4 text-2xl font-bold text-gray-900">{pkg.price}</p>
+            <ul class="mt-4 space-y-2">
+              {#each pkg.features as feature}
+                <li class="flex items-start">
+                  <svg class="h-5 w-5 text-gray-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span class="text-sm text-gray-600">{feature}</span>
+                </li>
+              {/each}
+            </ul>
           </div>
-          <h3 class="text-lg font-semibold text-gray-900">Featured Boilerplate</h3>
-          <p class="mt-2 text-sm text-gray-600">Premium placement at the top of boilerplate listings</p>
-          <p class="mt-4 text-2xl font-bold text-gray-900">$299<span class="text-base font-normal text-gray-500">/month</span></p>
-          <ul class="mt-6 space-y-4 text-sm text-gray-600">
-            <li class="flex items-center">
-              <svg class="h-4 w-4 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-              </svg>
-              Premium placement in search results
-            </li>
-            <li class="flex items-center">
-              <svg class="h-4 w-4 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-              </svg>
-              Detailed performance analytics
-            </li>
-            <li class="flex items-center">
-              <svg class="h-4 w-4 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-              </svg>
-              Priority support & consultation
-            </li>
-          </ul>
-        </div>
-
-        <div class="border border-gray-200 rounded-lg p-6 hover:bg-gray-50 transition-colors">
-          <h3 class="text-lg font-semibold text-gray-900">Sponsored Boilerplate</h3>
-          <p class="mt-2 text-sm text-gray-600">Strategic placement throughout the site</p>
-          <p class="mt-4 text-2xl font-bold text-gray-900">$199<span class="text-base font-normal text-gray-500">/month</span></p>
-          <ul class="mt-6 space-y-4 text-sm text-gray-600">
-            <li class="flex items-center">
-              <svg class="h-4 w-4 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-              </svg>
-              Sponsored badge
-            </li>
-            <li class="flex items-center">
-              <svg class="h-4 w-4 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-              </svg>
-              Priority support
-            </li>
-            <li class="flex items-center">
-              <svg class="h-4 w-4 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-              </svg>
-              Basic analytics
-            </li>
-          </ul>
-        </div>
+        {/each}
       </div>
     </div>
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-12">
       <div class="bg-white border border-gray-200 rounded-lg">
         <div class="px-6 py-8 sm:px-12">
           {#if success}

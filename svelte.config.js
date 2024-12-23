@@ -5,6 +5,11 @@ import remarkGfm from 'remark-gfm';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
+	server: {
+		hmr: {
+			clientPort: 3000
+		}
+	},
 	kit: {
 		adapter: adapter(),
 		prerender: {

@@ -1,5 +1,5 @@
 zerops:
-  - setup: chillguy
+  - setup: web
     build:
       base: nodejs@20
       buildCommands:
@@ -14,4 +14,4 @@ zerops:
       ports:
         - port: 3000
           httpSupport: true
-      start: node ./build
+      start: pnpm start
