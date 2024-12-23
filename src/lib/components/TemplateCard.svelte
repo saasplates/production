@@ -36,7 +36,7 @@
 
 <a 
   href={boilerplate.demoUrl}
-  class="flex flex-col rounded-lg border-[1px] border-slate-200 bg-white overflow-hidden hover:border-slate-300 transition-colors h-[28rem]"
+  class="flex flex-col rounded-lg border-[1px] border-slate-200 bg-white overflow-hidden hover:border-slate-300 transition-colors h-[22rem]"
 >
   <div class="flex-shrink-0 relative h-48 overflow-hidden bg-gray-100">
     <img 

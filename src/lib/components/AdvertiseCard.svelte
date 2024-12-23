@@ -5,7 +5,7 @@
 
 <a 
   {href}
-  class="flex flex-col rounded-lg border-[1px] border-slate-200 bg-white overflow-hidden hover:border-slate-300 transition-colors h-[28rem]"
+  class="flex flex-col h-[22rem] rounded-lg border-[1px] border-slate-200 bg-white overflow-hidden hover:border-slate-300 transition-colors"
 >
   <div class="relative flex-1 overflow-hidden">
     <img src={image} alt="Advertisement" class="h-full w-full object-cover" />

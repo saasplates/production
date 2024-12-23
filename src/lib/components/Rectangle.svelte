@@ -4,6 +4,7 @@
   export let url: string = 'https://0auth.example';
   export let title: string = 'Advertisement';
   export let description: string = 'Sponsored content';
+  export let imgSrc: string | undefined = undefined;
 </script>
 
 <a 
@@ -12,6 +13,14 @@
 >
   <div class="p-4 flex flex-row justify-between items-center">
     <div class="flex flex-row items-center flex-grow">
+      {#if imgSrc}
+        <img
+          src={imgSrc}
+          alt={title}
+          draggable="false"
+          class="w-8 h-8 rounded-full mr-3 object-cover"
+        />
+      {/if}
       <h3 class="text-md font-semibold text-gray-900">
         {title}
       </h3>

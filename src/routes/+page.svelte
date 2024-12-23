@@ -7,6 +7,8 @@
 	import { onMount } from 'svelte';
 	import { getRandomAd } from '$lib/stores/ads';
 
+	import LargeAdvertiseCard from '$lib/components/LargeAdvertiseCard.svelte';
+
 	// Show ADDCard after first 4 boilerplates
 	const ADD_POSITION = 4;
 	
@@ -126,10 +128,12 @@
 				url="https://0auth.example"
 				title="Supabase"
 				description="an open source Firebase alternative - Start your project and serve in a weekend."
+				imgSrc="/logos/supabase.svg"
 			/>
 		</div>
 
 		<hr />
+
 
 		<!-- Add sidebar and main content layout -->
 		<div class="mt-28 lg:grid lg:grid-cols-[280px,1fr] lg:gap-8">
@@ -234,7 +238,7 @@
 				{/if}
 			</div>
 		</div>
-
+<!-- 
 		<div
 			class="group block bg-white mt-20 rounded-2xl border border-gray-200 transition-colors"
 		>
@@ -253,8 +257,16 @@
 					Submit Your Boilerplate
 				</a>
 			</div>
+		</div> -->
+		<div class="mt-14">
+			<LargeAdvertiseCard 
+				image="/ad/notion.avif"
+				href="https://notion.com"
+			/>
 		</div>
-<!-- 
+
+
+		<!-- 
 		<div class="mt-20 text-center">
 			<p class="text-base text-gray-500">Trusted by developers from</p>
 			<div class="mt-6 grid grid-cols-2 gap-8 md:grid-cols-4">
