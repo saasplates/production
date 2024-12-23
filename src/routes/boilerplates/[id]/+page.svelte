@@ -63,11 +63,12 @@
         </p>
       </div>
 
-      <div class="mt-10">
+      <div class="mt-10 flex justify-center">
         <img 
           src={boilerplate.image} 
           alt={boilerplate.title}
-          class="rounded-lg shadow-xl"
+          draggable="false"
+          class="rounded-lg border border-gray-200"
         />
       </div>
 

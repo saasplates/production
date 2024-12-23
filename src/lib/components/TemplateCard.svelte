@@ -39,36 +39,37 @@
   class={cardClasses}
 >
   <div class="flex-shrink-0 relative h-48 overflow-hidden bg-gray-100">
-    {#if boilerplate.featured || boilerplate.sponsored}
-      <div class="absolute top-4 left-4 flex gap-2 z-10">
-        {#if boilerplate.featured}
-          <span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium bg-slate-700/90 text-slate-100 shadow-sm backdrop-blur-sm">
-            Featured
-          </span>
-        {/if}
-        {#if boilerplate.sponsored}
-          <span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium bg-emerald-100 text-emerald-800 shadow-sm">
-            Sponsored
-          </span>
-        {/if}
-      </div>
-    {/if}
     <img 
       bind:this={imageRef}
-      class="w-full h-full object-cover transition-opacity duration-300 opacity-0"
+      class="w-full h-full object-cover transition-opacity duration-300"
       data-src={boilerplate.image}
-      src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+      src={boilerplate.image}
       alt={boilerplate.title}
+      loading="lazy"
+      onload="this.classList.remove('opacity-0')"
     />
-    <div class="absolute inset-0 bg-gray-200 animate-pulse" />
   </div>
-  <div class="flex-1 p-6 flex flex-col justify-between">
+  <div class="flex-1 p-5 flex flex-col justify-between border-t border-gray-200">
     <div class="flex-1">
-      <div class="block mt-2">
+      {#if boilerplate.featured || boilerplate.sponsored}
+        <div class="flex gap-1 mb-2">
+          {#if boilerplate.featured}
+            <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-slate-700/90 text-slate-100 shadow-sm">
+              Featured
+            </span>
+          {/if}
+          {#if boilerplate.sponsored}
+            <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800 shadow-sm">
+              Sponsored
+            </span>
+          {/if}
+        </div>
+      {/if}
+      <div class="block">
         <p class="text-xl font-semibold text-gray-900">
           {boilerplate.title}
         </p>
-        <p class="mt-3 text-base text-gray-500">
+        <p class="mt-2 text-base text-gray-500">
           {boilerplate.description}
         </p>
       </div>
