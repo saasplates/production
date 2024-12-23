@@ -192,7 +192,7 @@ export const boilerplates: Boilerplate[] = [
     title: 'Inventory Next.js',
     description: 'Real-time inventory tracking system',
     image: '/plate/nextjs-saas-starter.png',
-    category: ['Next.js', 'Paid']  ,
+    category: ['Next.js', 'Paid'],
     demoUrl: '/boilerplates/inventory-management',
     features: ['Stock tracking', 'Order management', 'Supplier portal', 'Reports'],
   },

@@ -3,7 +3,7 @@
   
   const dispatch = createEventDispatcher();
   
-  export let categories = ['All', 'Next.js', 'Laravel', 'Free', 'Paid'];
+  export let categories = ['All', 'Next.js', 'Remix', 'Svelte', 'Laravel', 'Free', 'Paid'];
   export let activeCategory = 'All';
   
   function handleFilter(category: string) {

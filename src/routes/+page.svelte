@@ -38,31 +38,36 @@
 
 	// Single source of filtering
 	let activeCategory = 'All';
-	const categories = ['All', 'Next.js', 'Laravel', 'Free', 'Paid'];
+	// Update categories based on actual categories in boilerplates
+	$: categories = ['All', ...new Set(boilerplates.flatMap(b => b.category))];
 
 	// First filter by category
 	$: categoryFilteredBoilerplates = activeCategory === 'All' 
 		? sortedBoilerplates 
-		: sortedBoilerplates.filter(item => item.category === activeCategory);
+		: sortedBoilerplates.filter(item => 
+			Array.isArray(item.category) 
+				? item.category.includes(activeCategory)
+				: item.category === activeCategory
+		);
 
-	// Then create paginated cards with ads
-	$: paginatedBoilerplatesWithCards = categoryFilteredBoilerplates
-		.slice(0, currentPage * ITEMS_PER_PAGE)
-		.reduce<CardItem[]>((acc, boilerplate, index) => {
-			if (index === adPosition) {
-				acc.push({ type: 'advertise' });
-			}
-			
-			acc.push({ type: 'boilerplate', content: boilerplate });
-			
-			if (index === ADD_POSITION) {
-				acc.push({ type: 'add' });
-			}
-			return acc;
-		}, []);
+	// First create the filtered and paginated cards
+	$: paginatedBoilerplatesWithCards = [
+		// First add all the boilerplate cards
+		...categoryFilteredBoilerplates
+			.slice(0, currentPage * ITEMS_PER_PAGE)
+			.reduce<CardItem[]>((acc, boilerplate, index) => {
+				if (index === adPosition) {
+					acc.push({ type: 'advertise' });
+				}
+				acc.push({ type: 'boilerplate', content: boilerplate });
+				return acc;
+			}, []),
+		// Then add the ADDCard at the very end
+		{ type: 'add' }
+	];
 
-	// Update hasMore calculation
-	$: hasMore = currentPage * ITEMS_PER_PAGE < categoryFilteredBoilerplates.length;
+	// Update hasMore calculation to not count the ADDCard
+	$: hasMore = (currentPage * ITEMS_PER_PAGE) < categoryFilteredBoilerplates.length;
 
 	// Load more function with artificial delay to show loading state
 	async function loadMore() {
