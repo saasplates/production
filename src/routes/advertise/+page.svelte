@@ -197,7 +197,7 @@
               <div class="space-y-4">
                 {#each packages as pkg}
                   <div 
-                    class="relative flex items-start p-4 border rounded-lg cursor-pointer hover:bg-gray-50 transition-colors {selectedPackage === pkg.value ? 'border-gray-400 bg-gray-50 ring-1 ring-gray-400' : 'border-gray-200'}"
+                    class="relative flex items-start p-4 border rounded-lg cursor-pointer hover:bg-gray-50 transition-colors {selectedPackage === pkg.value ? 'border-gray-700 bg-gray-100 ring-1 ring-gray-900' : 'border-gray-200'}"
                     on:click={() => selectedPackage = pkg.value}
                     on:keydown={(e) => e.key === 'Enter' && (selectedPackage = pkg.value)}
                     tabindex="0"
