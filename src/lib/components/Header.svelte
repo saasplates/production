@@ -13,11 +13,12 @@
       </div>
 
       <!-- Navigation -->
-      <div class="flex items-center gap-3">
-        <a 
-          href="/blog" 
-          class="text-gray-600 hover:text-gray-900"
-        >
+      <div class="flex items-center gap-6">
+        <div class="flex items-center gap-4">
+          <a 
+            href="/blog" 
+            class="inline-flex items-center px-4 py-2 border border-slate-200 text-sm font-medium rounded-md text-gray-600 bg-white hover:bg-gray-50"
+            >
           Blog
         </a>
         <a 
@@ -25,13 +26,14 @@
           class="inline-flex items-center px-4 py-2 border border-slate-200 text-sm font-medium rounded-md text-gray-600 bg-white hover:bg-gray-50"
         >
           Advertise
-        </a>
+          </a>
+        </div>
         <a 
           href="/submit" 
           class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gray-900 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-700"
-        >
-          Submit Boilerplate
-        </a>
+      >
+        Submit Boilerplate
+      </a>
       </div>
     </div>
   </div>
