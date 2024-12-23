@@ -123,10 +123,10 @@
 		<!-- Advertisement Rectangle -->
 		<div class="pb-10 sm:pb-20">
 			<Rectangle 
-				url="https://0auth.example"
-				title="Supabase"
-				description="an open source Firebase alternative - Start your project and serve in a weekend."
-				imgSrc="/logos/supabase.svg"
+				url="/advertise"
+				title="Promoted"
+				description="Buy this spot for $399 for 3 months."
+				imgSrc="/logos/star.svg"
 			/>
 		</div>
 
