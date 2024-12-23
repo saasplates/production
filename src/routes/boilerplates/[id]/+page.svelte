@@ -11,7 +11,7 @@
     "name": boilerplate.title,
     "description": boilerplate.description,
     "image": boilerplate.image,
-    "category": boilerplate.category,
+    "framework": boilerplate.framework,
     "offers": {
       "@type": "Offer",
       "price": boilerplate.pricing?.amount,
@@ -27,18 +27,18 @@
 <svelte:head>
   {#if boilerplate}
     <title>{boilerplate.seoTitle || `${boilerplate.title} | SaasPlates`}</title>
-    <meta name="description" content={boilerplate.seoDescription || boilerplate.description} />
+    <meta name="description" content={boilerplate.description} />
     <link rel="canonical" href="https://saasplates.com/boilerplates/{boilerplate.id}" />
     
     <!-- Open Graph -->
-    <meta property="og:title" content={boilerplate.seoTitle || boilerplate.title} />
-    <meta property="og:description" content={boilerplate.seoDescription || boilerplate.description} />
+    <meta property="og:title" content={boilerplate.title} />
+    <meta property="og:description" content={boilerplate.description} />
     <meta property="og:image" content={boilerplate.image} />
     <meta property="og:type" content="product" />
     
     <!-- Product Specific -->
-    {#if boilerplate.techStack}
-      <meta name="keywords" content={`${boilerplate.techStack.join(', ')}, ${boilerplate.category}, boilerplate, ui kit`} />
+    {#if boilerplate.framework}
+      <meta name="keywords" content={`${boilerplate.framework.join(', ')}, ${boilerplate.framework}, boilerplate, ui kit`} />
     {/if}
     {#if boilerplate.lastUpdated}
       <meta property="product:modified_time" content={boilerplate.lastUpdated} />

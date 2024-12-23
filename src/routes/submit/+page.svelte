@@ -85,10 +85,10 @@
                 >
               </div>
               <div>
-                <label for="category" class="block text-sm font-medium text-gray-700">Category</label>
+                <label for="framework" class="block text-sm font-medium text-gray-700">Framework</label>
                 <select 
-                  id="category" 
-                  name="category" 
+                  id="framework" 
+                  name="framework" 
                   required
                   class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 p-2"
                 >

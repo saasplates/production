@@ -36,24 +36,34 @@
 		return 0;
 	});
 
-	// Single source of filtering
-	let activeCategory = 'All';
-	// Update categories based on actual categories in boilerplates
-	$: categories = ['All', ...new Set(boilerplates.flatMap(b => b.category))];
+	// Update Frameworks to exclude price
+	$: Frameworks = [
+		'All',
+		...new Set(boilerplates.flatMap(b => b.framework))
+	];
 
-	// First filter by category
-	$: categoryFilteredBoilerplates = activeCategory === 'All' 
-		? sortedBoilerplates 
-		: sortedBoilerplates.filter(item => 
-			Array.isArray(item.category) 
-				? item.category.includes(activeCategory)
-				: item.category === activeCategory
-		);
+	// Set default values
+	let activeFramework = 'All';    // Default to 'All'
+	let activePrice = 'Free';      // Default to 'Free'
+
+	// Update filtering logic to handle both framework and price
+	$: filteredBoilerplates = sortedBoilerplates
+		.filter(item => {
+			const frameworkMatch = activeFramework === 'All' 
+				? true 
+				: Array.isArray(item.framework) 
+					? item.framework.includes(activeFramework)
+					: item.framework === activeFramework;
+					
+			const priceMatch = item.price === activePrice;
+			
+			return frameworkMatch && priceMatch;
+		});
 
 	// First create the filtered and paginated cards
 	$: paginatedBoilerplatesWithCards = [
 		// First add all the boilerplate cards
-		...categoryFilteredBoilerplates
+		...filteredBoilerplates
 			.slice(0, currentPage * ITEMS_PER_PAGE)
 			.reduce<CardItem[]>((acc, boilerplate, index) => {
 				if (index === adPosition) {
@@ -67,12 +77,12 @@
 	];
 
 	// Update hasMore calculation to not count the ADDCard
-	$: hasMore = (currentPage * ITEMS_PER_PAGE) < categoryFilteredBoilerplates.length;
+	$: hasMore = (currentPage * ITEMS_PER_PAGE) < filteredBoilerplates.length;
 
 	// Load more function with artificial delay to show loading state
 	async function loadMore() {
 			loading = true;
-			await new Promise(resolve => setTimeout(resolve, 500)); // Simulate network delay
+			await new Promise(resolve => setTimeout(resolve, 250)); // Simulate network delay
 			currentPage += 1;
 			loading = false;
 	}
@@ -103,14 +113,19 @@
 	// Get a random ad when the component loads
 	const ad = getRandomAd();
 
-	function handleFilter(event: CustomEvent<{category: string}>) {
-		activeCategory = event.detail.category;
-		currentPage = 1; // Reset pagination when filter changes
+	function handleFrameworkFilter(event: CustomEvent<{framework: string}>) {
+		activeFramework = event.detail.framework;
+		currentPage = 1;
+	}
+
+	function handlePriceFilter(event: CustomEvent<{price: string}>) {
+		activePrice = event.detail.price;
+		currentPage = 1;
 	}
 </script>
 
 <main class="min-h-screen bg-gray-50">
-	<div class="max-w-7xl mx-auto px-10 lg:px-5 py-12">
+	<div class="max-w-7xl mx-auto px-10 lg:px-5 py-10">
 		<div class="text-center py-12">
 			<h1 class="text-4xl font-bold text-gray-900 sm:text-5xl md:text-6xl">
 				Boring Directory for Saas Plates
@@ -121,7 +136,7 @@
 		</div>
 
 		<!-- Advertisement Rectangle -->
-		<div class="pb-10 sm:pb-20">
+		<div class="pb-5 sm:pb-10">
 			<Rectangle 
 				url="/advertise"
 				title="Promoted"
@@ -130,22 +145,22 @@
 			/>
 		</div>
 
-		<hr />
-
 
 		<!-- Add sidebar and main content layout -->
-		<div class="mt-28 mx-10">
+		<div class="mt-10 mx-10">
 			<!-- Main content -->
 			<div class="max-w-7xl mx-auto">
 				<FilterButtons 
-					{activeCategory}
-					on:filter={handleFilter}
+					{activeFramework}
+					{activePrice}
+					on:filterFramework={handleFrameworkFilter}
+					on:filterPrice={handlePriceFilter}
 				/>
 
 				<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-5">
 					{#each paginatedBoilerplatesWithCards as item}
 						{#if item.type === 'boilerplate' && item.content}
-							<TemplateCard boilerplate={item.content} {observer} hideFeatures={true} />
+						<TemplateCard boilerplate={item.content} {observer} />
 						{:else if item.type === 'add'}
 							<ADDCard />
 						{/if}
