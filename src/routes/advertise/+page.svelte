@@ -13,7 +13,7 @@
       name: 'Sponsored Boilerplate', 
       price: '$29/month', 
       value: 'featured',
-      description: 'Premium placement across all categories and sections',
+      description: ' placement across all categories and sections',
       features: [
         'Top placement in all categories',
         'Visible in both free and paid sections',
@@ -93,7 +93,7 @@
 
 <svelte:head>
   <title>Advertise | SaaS Boilerplates Hub - Reach Developers Worldwide</title>
-  <meta name="description" content="Promote your boilerplate or service to thousands of developers. Premium placement and sponsored opportunities available." />
+  <meta name="description" content="Promote your boilerplate or service to thousands of developers.  placement and sponsored opportunities available." />
   <link rel="canonical" href="https://saasboilerplates.dev/advertise" />
 </svelte:head>
 

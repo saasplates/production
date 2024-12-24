@@ -28,7 +28,7 @@
       value: 'paid',
       description: 'List your premium boilerplate with enhanced visibility',
       features: [
-        'Premium placement in paid section',
+        ' placement in paid section',
         'Priority support',
         'Detailed analytics',
       ]
