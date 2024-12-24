@@ -27,7 +27,7 @@ export interface Boilerplate {
   title: string;
   description: string;
   image: string;
-  pngImage?: string;
+  mainImage?: string;
   framework: string[];
   price: 'Free' | 'Paid';
   demoUrl: string;
@@ -44,7 +44,7 @@ export const boilerplates: Boilerplate[] = [
     title: 'Next.js SaaS Starter',
     description: 'Clean and modern Next.js boilerplate with dark mode support',
     image: '/plate/nextjs-saas-starter.webp',
-    pngImage: '/plate/nextjs-saas-starter.png',
+    mainImage: '/plate/nextjs-saas-starter-main.webp',
     framework: ['Next.js', 'TypeScript', 'Tailwind CSS'],
     price: 'Free',
     demoUrl: '/boilerplates/next-saas-starter',
@@ -102,7 +102,7 @@ npm run dev</code></pre>
     title: 'Nuxt UI Pro Saas',
     description: 'A SaaS template made with Nuxt UI Pro.',
     image: '/plate/nuxt-saas.webp',
-    pngImage: '/plate/nuxt-saas.png',
+    mainImage: '/plate/nuxt-saas-main.webp',
     framework: ['Nuxt'],
     price: 'Free',
     demoUrl: 'https://saas-template.nuxt.dev/'
@@ -112,7 +112,7 @@ npm run dev</code></pre>
     title: 'Remix SaaS',
     description: 'A Lightweight, Production-Ready Remix Stack for your next SaaS application.',
     image: '/plate/remix-saas.webp',
-    pngImage: '/plate/remix-saas.png',
+    mainImage: '/plate/remix-saas-main.webp',
     framework: ['Remix'],
     price: 'Free',
     featured: true,
@@ -123,7 +123,7 @@ npm run dev</code></pre>
     title: 'Larafast',
     description: 'Convert visitors with this optimized SaaS Laravel',
     image: '/plate/larafast.webp',
-    pngImage: '/plate/larafast.png',
+    mainImage: '/plate/larafast-main.webp',
     framework: ['Laravel'],
     price: 'Paid',
     demoUrl: '/boilerplates/larafast',

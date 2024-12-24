@@ -76,8 +76,8 @@
 
       <!-- Main Content -->
       <div class="flex-1 space-y-8">
-        <img 
-          src={boilerplate.pngImage}
+        <img
+          src={boilerplate.mainImage}
           alt={boilerplate.title}
           draggable="false"
           loading="lazy"
