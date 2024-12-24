@@ -223,7 +223,7 @@
 
 		<div class="mt-14">
 			<LargeAdvertiseCard
-				title="Last Promoted Card"
+				title="Footer Promotion Card"
 				description="Buy this spot for $399 for 3 months."
 				href="/advertise"
 				image="/rectangle.webp"
