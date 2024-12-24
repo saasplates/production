@@ -238,6 +238,31 @@
               ></textarea>
             </div>
   
+            <div class="grid gap-6 md:grid-cols-2">
+              <div>
+                <label for="discord" class="block text-sm font-medium text-gray-700">Discord Username</label>
+                <input 
+                  type="text" 
+                  name="discord" 
+                  id="discord"
+                  placeholder="username"
+                  aria-label="Your Discord username"
+                  class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 p-2"
+                >
+              </div>
+              <div>
+                <label for="x_username" class="block text-sm font-medium text-gray-700">X (Twitter) Username</label>
+                <input 
+                  type="text" 
+                  name="x_username" 
+                  id="x_username"
+                  placeholder="@username"
+                  aria-label="Your X (Twitter) username"
+                  class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 p-2"
+                >
+              </div>
+            </div>
+  
             <button 
               type="submit" 
               class="w-full flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 disabled:opacity-50"
