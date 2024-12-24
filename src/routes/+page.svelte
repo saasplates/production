@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { boilerplates } from '$lib/stores/boilerplates';
+	import { scrollPosition } from '$lib/stores/scroll';
 	import TemplateCard from '$lib/components/TemplateCard.svelte';
 	import ADDCard from '$lib/components/ADDCard.svelte';
 	// import AdvertiseCard from '$lib/components/AdvertiseCard.svelte';
@@ -148,6 +149,20 @@
 		activePrices = event.detail.prices;
 		currentPage = 1;
 	}
+
+	// Save scroll position when navigating away
+	onMount(() => {
+		// Restore scroll position if it exists
+		if ($scrollPosition > 0) {
+			window.scrollTo(0, $scrollPosition);
+			scrollPosition.set(0); // Reset after restoring
+		}
+
+		// Save scroll position when navigating away
+		return () => {
+			scrollPosition.set(window.scrollY);
+		};
+	});
 </script>
 
 <main class="min-h-screen bg-gray-50">
