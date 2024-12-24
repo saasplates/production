@@ -11,46 +11,63 @@
   const packages = [
     { 
       name: 'Sponsored Boilerplate', 
-      price: '$29/month', 
+      price: '$49/month', 
       value: 'featured',
       description: ' placement across all categories and sections',
       features: [
         'Top placement in all categories',
         'Visible in both free and paid sections',
-        'Priority listing in search results',
+        'User Interaction Analytics',
       ]
     },
     { 
       name: 'Promoted Boilerplate', 
-      price: '$19/month', 
+      price: '$29/month', 
       value: 'sponsored',
       description: 'Enhanced visibility within specific categories (paid templates only)',
       features: [
         'Enhanced placement in selected category',
         'Visible in paid templates section',
-        'Promoted badge on listing',
+        'User Interaction Analytics',
       ]
     },
     {
       name: 'Promoted #1 Platform', 
-      price: '$459/ 3 months', 
+      price: '$659/ 3 months', 
       value: 'platform-hero',
       description: 'Hero section placement on landing page and all boilerplate pages',
       features: [
         'Hero section placement',
         'Visible on all pages',
-        'Custom banner design',
+        'User Interaction Analytics',
       ]
     },
     {
       name: 'Large Advertisement', 
-      price: '$359/ 3 months', 
+      price: '$459/ 3 months', 
       value: 'platform-footer',
-      description: 'Footer placement across all pages',
+      description: 'Placement in the footer of all major pages',
       features: [
         'Footer section placement',
         'Visible on all pages',
-        'Standard banner design',
+        'Custom banner design',
+        'User Interaction Analytics',
+      ]
+    }
+  ];
+
+  const allPackages = [
+    ...packages,
+    {
+      name: 'Custom Package',
+      price: 'Contact Us',
+      value: 'custom',
+      description: 'Create a custom advertising package tailored to your needs',
+      features: [
+        'Customized placement options',
+        'Flexible duration',
+        'Personalized strategy',
+        'Priority support'
       ]
     }
   ];
@@ -136,6 +153,11 @@
         {/each}
       </div>
     </div>
+
+    <p class="text-sm text-center text-gray-600">
+      If you're confused about the packages, please join our <a href="/discord" class="text-gray-900 hover:text-gray-700 font-semibold hover:underline">Discord Server</a> and we'll help you out.
+    </p>
+
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-12">
       <div class="bg-white border border-gray-200 rounded-lg">
         <div class="px-6 py-8 sm:px-12">
@@ -195,7 +217,7 @@
             <div class="mb-6">
               <Label class="mb-4 text-gray-700">Select Package</Label>
               <div class="space-y-4">
-                {#each packages as pkg}
+                {#each allPackages as pkg}
                   <div 
                     class="relative flex items-start p-4 border rounded-lg cursor-pointer hover:bg-gray-50 transition-colors {selectedPackage === pkg.value ? 'border-gray-700 bg-gray-100 ring-1 ring-gray-900' : 'border-gray-200'}"
                     on:click={() => selectedPackage = pkg.value}
@@ -223,6 +245,7 @@
                   </div>
                 {/each}
               </div>
+              
             </div>
   
             <div>

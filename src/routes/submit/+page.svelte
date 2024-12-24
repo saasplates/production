@@ -15,22 +15,22 @@
       name: 'Free & Open Source', 
       price: '$0', 
       value: 'free',
-      description: 'List your open source boilerplate with our community',
+      description: 'List a Free & Open Source Boilerplate.',
       features: [
         'Standard listing placement',
-        'Community support',
-        'Basic analytics',
+        'Priority support',
       ]
     },
     { 
       name: 'Paid Boilerplate Listing', 
       price: '$19', 
       value: 'paid',
-      description: 'List your premium boilerplate with enhanced visibility',
+      description: 'List a Paid Boilerplate.',
       features: [
-        ' placement in paid section',
+        'Placement in paid section',
         'Priority support',
-        'Detailed analytics',
+        'User Interaction Analytics',
+        '7 day Refund Guarantee',
       ]
     }
   ];
