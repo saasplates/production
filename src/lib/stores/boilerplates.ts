@@ -42,13 +42,14 @@ export const boilerplates: Boilerplate[] = [
     demoUrl: '/boilerplates/enterprise-admin'
   },
   {
-    id: 'hr-admin',
-    title: 'HR Admin Panel',
-    description: 'Complete HR management system',
-    image: '/plate/nextjs-saas-starter.png',
+    id: 'remix-saas',
+    title: 'Remix SaaS',
+    description: 'A Lightweight, Production-Ready Remix Stack for your next SaaS application.',
+    image: '/plate/remix-saas.png',
     framework: ['Remix'],
     price: 'Free',
-    demoUrl: '/boilerplates/hr-admin'
+    featured: true,
+    demoUrl: '/boilerplates/remix-saas'
   },
   {
     id: 'svelte-starter',
