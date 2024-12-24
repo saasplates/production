@@ -6,9 +6,34 @@
 	import Rectangle from '$lib/components/Rectangle.svelte';
 	import { onMount } from 'svelte';
 	import { getRandomAd } from '$lib/stores/ads';
+	import SectionTwo from '$lib/components/SectionTwo.svelte';
 
 	import LargeAdvertiseCard from '$lib/components/LargeAdvertiseCard.svelte';
 	import FilterButtons from '$lib/components/FilterButtons.svelte';
+
+	const sectionTwoData = {
+    title: "Trusted by thousands of developers and organizations to:",
+    features: [
+      {
+        emoji: '🔎',
+        text: 'Discover Free Open Source Boilerplates'
+      },
+      {
+        emoji: '🪄',
+        text: 'Filter by your needs'
+      },
+      {
+        emoji: '✅',
+        text: 'Join our Discord Community and get help',
+		href: 'https://discord.gg/cNHTKmGSUv'
+      },
+      {
+        emoji: '💸',
+        text: 'Submit your boilerplate and get some exposure'
+      }
+    ]
+  };
+
 
 	// Show ADDCard after first 4 boilerplates
 	const ADD_POSITION = 4;
@@ -194,18 +219,27 @@
 				{/if}
 			</div>
 		</div>
-<!-- 
+
+		<div class="mt-14">
+			<LargeAdvertiseCard
+				title="Last Promoted Card"
+				description="Buy this spot for $399 for 3 months."
+				href="/advertise"
+				image="/rectangle.webp"
+			/>
+		</div>
+		
 		<div
 			class="group block bg-white mt-20 rounded-2xl border border-gray-200 transition-colors"
 		>
-			<div class="max-w-2xl mx-auto text-center py-16 px-4 sm:py-20 sm:px-6 lg:px-8">
+			<div class="max-w-2xl mx-auto text-start py-16 px-4 sm:py-20 sm:px-6 lg:px-8">
 				<h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">
-					<span class="block">Have a boilerplate to share?</span>
-					<span class="block">Submit it today!</span>
+					<span class="block">Trusted by thousands of developers and organizations to:</span>
 				</h2>
-				<p class="mt-4 text-lg leading-6 text-gray-600">
-					Share your work with thousands of developers and get recognized.
-				</p>
+				<SectionTwo 
+				title={sectionTwoData.title}
+				features={sectionTwoData.features}
+			/>
 				<a 
 					href="/submit"
 					class="mt-8 w-full inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gray-900 group-hover:bg-gray-800 sm:w-auto"
@@ -213,15 +247,8 @@
 					Submit Your Boilerplate
 				</a>
 			</div>
-		</div> -->
-		<div class="mt-14">
-			<!-- <LargeAdvertiseCard
-				title="Last Promoted Card"
-				description="Buy this spot for $399 for 3 months."
-				href="/advertise"
-				image="/rectangle.webp"
-			/> -->
 		</div>
+
 
 
 		<!-- 

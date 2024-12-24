@@ -8,7 +8,7 @@
 <a 
   href={href} 
   rel="noopener" 
-  class="group block bg-white rounded-2xl border border-gray-200 hover:border-gray-300 transition-colors overflow-hidden"
+  class="group block rounded-2xl border border-gray-200 hover:border-gray-300 transition-colors overflow-hidden mx-auto max-w-3xl"
 >
   <div class="relative w-full bg-emerald-50 text-emerald-950">
     <div class="absolute left-4 top-3 z-10">
