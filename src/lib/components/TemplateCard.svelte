@@ -5,7 +5,7 @@
 </script>
 
 <a 
-  href={boilerplate.demoUrl}
+  href={`/boilerplates/${boilerplate.id}`}
   class="flex flex-col rounded-lg border-[1px] border-slate-200 bg-white overflow-hidden hover:border-slate-300 transition-colors"
 >
   <!-- 16:9 aspect ratio container -->

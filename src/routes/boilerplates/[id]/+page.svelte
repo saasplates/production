@@ -1,97 +1,47 @@
 <script lang="ts">
-  import { page } from '$app/stores';
-  import { boilerplates } from '$lib/stores/boilerplates';
-  
-  const boilerplate = boilerplates.find(t => t.id === $page.params.id);
-
-  // Generate structured data
-  $: structuredData = boilerplate ? {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    "name": boilerplate.title,
-    "description": boilerplate.description,
-    "image": boilerplate.image,
-    "framework": boilerplate.framework,
-    "offers": {
-      "@type": "Offer",
-      "price": boilerplate.pricing?.amount,
-      "priceCurrency": boilerplate.pricing?.currency,
-      "availability": "https://schema.org/InStock"
-    },
-    "dateModified": boilerplate.lastUpdated,
-    "version": boilerplate.version,
-    "technicalSpecification": boilerplate.techStack?.join(', ')
-  } : null;
+  export let data;
+  const { boilerplate } = data;
 </script>
 
-<svelte:head>
-  {#if boilerplate}
-    <title>{boilerplate.seoTitle || `${boilerplate.title} | SaasPlates`}</title>
-    <meta name="description" content={boilerplate.description} />
-    <link rel="canonical" href="https://saasplates.com/boilerplates/{boilerplate.id}" />
-    
-    <!-- Open Graph -->
-    <meta property="og:title" content={boilerplate.title} />
-    <meta property="og:description" content={boilerplate.description} />
-    <meta property="og:image" content={boilerplate.image} />
-    <meta property="og:type" content="product" />
-    
-    <!-- Product Specific -->
-    {#if boilerplate.framework}
-      <meta name="keywords" content={`${boilerplate.framework.join(', ')}, ${boilerplate.framework}, boilerplate, ui kit`} />
-    {/if}
-    {#if boilerplate.lastUpdated}
-      <meta property="product:modified_time" content={boilerplate.lastUpdated} />
-    {/if}
-    
-    <!-- Structured Data -->
-    <script type="application/ld+json">
-      {JSON.stringify(structuredData)}
-    </script>
-  {/if}
-</svelte:head>
-
 {#if boilerplate}
-  <main class="min-h-screen bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <div class="lg:text-center">
-        <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-          {boilerplate.title}
-        </h2>
-        <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
-          {boilerplate.description}
-        </p>
-      </div>
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="max-w-3xl mx-auto">
+      <h1 class="text-4xl font-bold text-gray-900 mb-4">
+        {boilerplate.title}
+      </h1>
+      
+      <p class="text-lg text-gray-600 mb-8">
+        {boilerplate.description}
+      </p>
 
-      <div class="mt-10 flex justify-center">
-        <img 
-          src={boilerplate.image} 
-          alt={boilerplate.title}
-          draggable="false"
-          class="rounded-lg border border-gray-200"
-        />
-      </div>
-
-      <div class="mt-10">
-        <h3 class="text-2xl font-bold text-gray-900">Features</h3>
-        <ul class="mt-4 space-y-4">
-          {#each boilerplate.features as feature}
-            <li class="flex items-center">
-              <svg class="h-6 w-6 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-              </svg>
-              <span class="ml-3 text-lg text-gray-700">{feature}</span>
-            </li>
+      <!-- Only render if framework exists and is an array -->
+      {#if boilerplate.framework && Array.isArray(boilerplate.framework)}
+        <div class="flex items-center gap-4 mb-8">
+          {#each boilerplate.framework as tech}
+            <span class="px-3 py-1 rounded-full text-sm bg-gray-100 text-gray-800">
+              {tech}
+            </span>
           {/each}
-        </ul>
-      </div>
+          <span class="px-3 py-1 rounded-full text-sm {boilerplate.price === 'Free' ? 'bg-green-100 text-green-800' : 'bg-blue-100 text-blue-800'}">
+            {boilerplate.price}
+          </span>
+        </div>
+      {/if}
 
-      <div class="mt-10 flex justify-center">
+      <img 
+        src={boilerplate.image} 
+        alt={boilerplate.title}
+        class="w-full rounded-lg shadow-lg mb-8"
+      />
+
+      <div class="flex justify-center">
         <a
           href={boilerplate.demoUrl}
-          class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-gray-900 hover:bg-gray-800"
         >
-          View Live Demo
+          View Demo
         </a>
       </div>
     </div>
