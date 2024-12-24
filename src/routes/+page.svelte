@@ -29,7 +29,8 @@
       },
       {
         emoji: '💸',
-        text: 'Submit your boilerplate and get some exposure'
+        text: 'Submit your boilerplate and get some exposure',
+		href: '/submit'
       }
     ]
   };
@@ -232,7 +233,7 @@
 		<div
 			class="group block bg-white mt-20 rounded-2xl border border-gray-200 transition-colors"
 		>
-			<div class="max-w-2xl mx-auto text-start py-16 px-4 sm:py-20 sm:px-6 lg:px-8">
+			<div class="max-w-2xl mx-auto text-start py-16 px-4 sm:py-14 sm:px-6 lg:px-8">
 				<h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">
 					<span class="block">Trusted by thousands of developers and organizations to:</span>
 				</h2>
@@ -240,12 +241,12 @@
 				title={sectionTwoData.title}
 				features={sectionTwoData.features}
 			/>
-				<a 
+				<!-- <a 
 					href="/submit"
 					class="mt-8 w-full inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gray-900 group-hover:bg-gray-800 sm:w-auto"
 				>
 					Submit Your Boilerplate
-				</a>
+				</a> -->
 			</div>
 		</div>
 
