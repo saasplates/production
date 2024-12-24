@@ -10,7 +10,7 @@
 </script>
 
 <section class="features">
-  <h2>{title}</h2>
+  <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">{title}</h2>
   
   <ul>
     {#each features as feature}

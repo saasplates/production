@@ -13,27 +13,30 @@
     <img
       src={boilerplate.image}
       alt={boilerplate.title}
+      draggable="false"
       class="absolute top-0 left-0 w-full h-full object-cover"
       loading="lazy"
     />
-    {#if boilerplate.featured}
-      <div class="absolute top-4 left-4 flex gap-2 z-10">
-        <span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium bg-blue-100 text-blue-800">
-          Featured
-        </span>
-      </div>
-    {/if}
-    {#if boilerplate.sponsored}
-      <div class="absolute top-4 left-4 flex gap-2 z-10">
-        <span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium bg-emerald-100 text-emerald-800">
-          Sponsored
-        </span>
-      </div>
-    {/if}
   </div>
 
   <!-- Content section -->
-  <div class="flex-1 p-6">
+  <div class="flex-1 p-6 border-t-[1px] border-slate-100">
+    <!-- Tags section -->
+    {#if boilerplate.featured || boilerplate.sponsored}
+      <div class="flex gap-2 mb-2">
+        {#if boilerplate.featured}
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-[10px] font-medium bg-blue-100 text-blue-800">
+            Featured
+          </span>
+        {/if}
+        {#if boilerplate.sponsored}
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-[10px] font-medium bg-emerald-100 text-emerald-800">
+            Sponsored
+          </span>
+        {/if}
+      </div>
+    {/if}
+
     <div class="flex-1">
       <h3 class="text-xl font-semibold text-gray-900 line-clamp-1">
         {boilerplate.title}
@@ -42,16 +45,6 @@
         {boilerplate.description}
       </p>
     </div>
-<!--     
-    {#if !hideFeatures && boilerplate.features?.length}
-      <div class="mt-4 flex flex-wrap gap-2">
-        {#each boilerplate.features.slice(0, 3) as feature}
-          <span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium bg-gray-100 text-gray-800">
-            {feature}
-          </span>
-        {/each}
-      </div>
-    {/if} -->
   </div>
 </a>
 

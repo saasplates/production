@@ -24,41 +24,23 @@ export const boilerplates: Boilerplate[] = [
     featured: true
   },
   {
-    id: 'project-management',
-    title: 'Project Management',
-    description: 'Comprehensive project management Next.js',
-    image: '/plate/nextjs-saas-starter.png',
-    framework: ['Next.js'],
+    id: 'nuxt-ui-pro-saas',
+    title: 'Nuxt UI Pro Saas',
+    description: 'A SaaS template made with Nuxt UI Pro.',
+    image: '/plate/nuxt-saas.webp',
+    framework: ['Nuxt'],
     price: 'Free',
-    demoUrl: '/boilerplates/project-management'
-  },
-  {
-    id: 'enterprise-admin',
-    title: 'Enterprise Admin',
-    description: 'Enterprise-grade admin panel with advanced features',
-    image: '/plate/nextjs-saas-starter.png',
-    framework: ['Remix'],
-    price: 'Paid',
-    demoUrl: '/boilerplates/enterprise-admin'
+    demoUrl: 'https://saas-template.nuxt.dev/'
   },
   {
     id: 'remix-saas',
     title: 'Remix SaaS',
     description: 'A Lightweight, Production-Ready Remix Stack for your next SaaS application.',
-    image: '/plate/remix-saas.png',
+    image: '/plate/remix-saas.webp',
     framework: ['Remix'],
     price: 'Free',
     featured: true,
     demoUrl: '/boilerplates/remix-saas'
-  },
-  {
-    id: 'svelte-starter',
-    title: 'Svelte Starter',
-    description: 'Modern SvelteKit starter template with essential features',
-    image: '/plate/nextjs-saas-starter.png',
-    framework: ['SvelteKit'],
-    price: 'Free',
-    demoUrl: '/boilerplates/svelte-starter'
   },
   {
     id: 'larafast',

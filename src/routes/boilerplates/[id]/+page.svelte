@@ -18,11 +18,11 @@
       {#if boilerplate.framework && Array.isArray(boilerplate.framework)}
         <div class="flex items-center gap-4 mb-8">
           {#each boilerplate.framework as tech}
-            <span class="px-3 py-1 rounded-full text-sm bg-gray-100 text-gray-800">
+            <span class="px-3 py-1 rounded-md text-sm bg-gray-100 text-gray-800">
               {tech}
             </span>
           {/each}
-          <span class="px-3 py-1 rounded-full text-sm {boilerplate.price === 'Free' ? 'bg-green-100 text-green-800' : 'bg-blue-100 text-blue-800'}">
+          <span class="px-3 py-1 rounded-md text-sm {boilerplate.price === 'Free' ? 'bg-green-100 text-green-800' : 'bg-blue-100 text-blue-800'}">
             {boilerplate.price}
           </span>
         </div>
@@ -31,7 +31,8 @@
       <img 
         src={boilerplate.image} 
         alt={boilerplate.title}
-        class="w-full rounded-lg shadow-lg mb-8"
+        draggable="false"
+        class="w-[80%] mx-auto rounded-lg border border-slate-300 mb-8"
       />
 
       <div class="flex justify-center">

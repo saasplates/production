@@ -62,17 +62,17 @@
 		return 0;
 	});
 
-	// Update Frameworks to exclude price
+	// Default filter values
+	let activeFramework = 'All';    // Default to 'All'
+	let activePrices = ['Free', 'Paid'];  // Both selected by default
+
+	// Framework options are dynamically generated from boilerplates
 	$: Frameworks = [
 		'All',
 		...new Set(boilerplates.flatMap(b => b.framework))
 	];
 
-	// Set default values
-	let activeFramework = 'All';    // Default to 'All'
-	let activePrice = 'Free';      // Default to 'Free'
-
-	// Update filtering logic to handle both framework and price
+	// Update filtering logic to handle multiple price selections
 	$: filteredBoilerplates = sortedBoilerplates
 		.filter(item => {
 			const frameworkMatch = activeFramework === 'All' 
@@ -81,7 +81,7 @@
 					? item.framework.includes(activeFramework)
 					: item.framework === activeFramework;
 					
-			const priceMatch = item.price === activePrice;
+			const priceMatch = activePrices.includes(item.price);
 			
 			return frameworkMatch && priceMatch;
 		});
@@ -144,8 +144,8 @@
 		currentPage = 1;
 	}
 
-	function handlePriceFilter(event: CustomEvent<{price: string}>) {
-		activePrice = event.detail.price;
+	function handlePriceFilter(event: CustomEvent<{prices: string[]}>) {
+		activePrices = event.detail.prices;
 		currentPage = 1;
 	}
 </script>
@@ -178,7 +178,7 @@
 			<div class="max-w-7xl mx-auto">
 				<FilterButtons 
 					{activeFramework}
-					{activePrice}
+					activePrices={activePrices}
 					on:filterFramework={handleFrameworkFilter}
 					on:filterPrice={handlePriceFilter}
 				/>
@@ -233,10 +233,7 @@
 		<div
 			class="group block bg-white mt-20 rounded-2xl border border-gray-200 transition-colors"
 		>
-			<div class="max-w-2xl mx-auto text-start py-16 px-4 sm:py-14 sm:px-6 lg:px-8">
-				<h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">
-					<span class="block">Trusted by thousands of developers and organizations to:</span>
-				</h2>
+			<div class="max-w-2xl mx-auto text-start py-16 px-4 sm:py-14">
 				<SectionTwo 
 				title={sectionTwoData.title}
 				features={sectionTwoData.features}
