@@ -1,6 +1,9 @@
 <footer class="bg-white border-t border-gray-200">
 	<div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 md:flex md:items-center md:justify-between lg:px-8">
 		<div class="flex justify-center space-x-6 md:order-2">
+			<a href="/about" class="text-gray-400 hover:text-gray-500">
+				About
+			</a>
 			<a href="https://twitter.com" class="text-gray-400 hover:text-gray-500">
 				<span class="sr-only">Twitter</span>
 				<svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
@@ -16,10 +19,10 @@
 		</div>
 		<div class="mt-8 md:mt-0 md:order-1">
 			<div class="flex flex-col items-center md:items-start space-y-2">
-				<!-- <p class="text-center text-base text-gray-400">
-					&copy; 2024 SaasPlates. All rights reserved.
-				</p> -->
-				<div class="flex items-center gap-1 text-sm text-gray-500">
+				<p class="text-center text-base text-gray-400">
+					&copy; 2024 SaasPlates. Maintained by <a href="https://x.com/arjvnz" class="text-gray-700 hover:text-gray-900 hover:underline font-medium">Arjun Aditya</a>.
+				</p>
+				<div class="flex items-center gap-1 pt-3 text-sm text-gray-500">
 					<span class="border-neutral-200 border rounded-md px-2 py-1">Deployed on{" "}
 					<a 
 						href="https://zerops.io" 

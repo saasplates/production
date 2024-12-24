@@ -248,7 +248,48 @@
 					Submit Your Boilerplate
 				</a> -->
 			</div>
-		</div>
+		<!-- </div>
+		<div class="bg-white border border-gray-200 rounded-lg p-8 my-12 max-w-2xl mx-auto">
+			<div class="md:flex md:items-center md:justify-between">
+			  <div class="flex items-center">
+				<img 
+				  src="/author/arjun.webp" 
+				  draggable="false"
+				  alt="Arjun Aditya"
+				  class="w-24 h-24 rounded-full object-cover"
+				/>
+				<div class="ml-6">
+				  <h1 class="text-2xl font-bold text-gray-900">Arjun Aditya</h1>
+				  <p class="text-lg text-gray-500">Creator</p>
+				  <p class="mt-1 text-sm text-gray-500">
+					  <span class="inline-block align-middle">📍</span> India
+					</p>
+				</div>
+			  </div>
+			  
+			  <div class="mt-6 flex flex-wrap gap-4 md:mt-0">
+				  <a 
+					href="https://twitter.com/intent/follow?screen_name=arjvnz"
+					class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
+					target="_blank"
+					rel="noopener"
+				  >
+					Follow on X
+				  </a>
+				  <a 
+					href="https://arjunaditya.xyz"
+					class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
+					target="_blank"
+					rel="noopener"
+				  >
+					Visit Website
+				  </a>
+			  </div>
+			</div>
+	
+			<p class="mt-6 text-gray-600">Arjun</p>
+
+		  </div> -->
 
 
 

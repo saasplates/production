@@ -33,7 +33,7 @@
     },
     {
       name: 'Promoted #1 Platform', 
-      price: '$459/quarter', 
+      price: '$459/ 3 months', 
       value: 'platform-hero',
       description: 'Hero section placement on landing page and all boilerplate pages',
       features: [
@@ -44,7 +44,7 @@
     },
     {
       name: 'Large Advertisement', 
-      price: '$359/quarter', 
+      price: '$359/ 3 months', 
       value: 'platform-footer',
       description: 'Footer placement across all pages',
       features: [

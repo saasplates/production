@@ -1,6 +1,6 @@
 <svelte:head>
 	<title>About | SaasPlates</title>
-	<meta name="description" content="Learn more about SaasPlates - Your source for modern SaaS boilerplates and boilerplates" />
+	<meta name="description" content="Learn more about SaasPlates - Your source for modern SaaS boilerplates and templates" />
 </svelte:head>
 
 <main class="min-h-screen bg-gray-50 py-12">
@@ -10,8 +10,8 @@
 
 			<div class="prose prose-gray">
 				<p>
-					SaasPlates is a curated collection of modern, production-ready SaaS boilerplates and boilerplates. 
-					We help developers and startups launch faster with high-quality, customizable boilerplates.
+					SaasPlates is a curated collection of modern, production-ready SaaS boilerplates and templates. 
+					We help developers and startups launch faster with high-quality, customizable templates.
 				</p>
 
 				<h2>Our Mission</h2>
