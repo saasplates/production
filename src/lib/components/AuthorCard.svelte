@@ -42,7 +42,7 @@
     {#if author.twitter}
       <a 
         href={`https://twitter.com/${author.twitter.replace('@', '')}`}
-        class="text-gray-400 hover:text-gray-500"
+        class="text-gray-500 hover:text-gray-600"
         target="_blank"
         rel="noopener"
       >
@@ -55,7 +55,7 @@
     {#if author.website}
       <a 
         href={author.website}
-        class="text-gray-400 hover:text-gray-500"
+        class="text-gray-500 hover:text-gray-600"
         target="_blank"
         rel="noopener"
       >
