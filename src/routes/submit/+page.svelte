@@ -42,6 +42,10 @@
     const data = Object.fromEntries(formData);
 
     try {
+      // Send to Discord webhook
+      await sendToDiscord('submit', data);
+
+      // Send to API
       const res = await fetch('/api/submit', {
         method: 'POST',
         body: JSON.stringify(data),
@@ -58,7 +62,7 @@
       }
 
       success = true;
-      setTimeout(() => goto('/'), 2000); // Redirect after showing success message
+      setTimeout(() => goto('/'), 2000);
     } catch (e) {
       error = 'Failed to submit form';
     } finally {
@@ -168,18 +172,31 @@
               </div>
               <div>
                 <label for="framework" class="block text-sm font-medium text-gray-700">Framework</label>
-                <select 
-                  id="framework" 
-                  name="framework" 
-                  required
-                  class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 p-2"
-                >
-                  <option value="nextjs">Next.js</option>
-                  <option value="laravel">Laravel</option>
-                  <option value="sveltekit">SvelteKit</option>
-                  <option value="remix">Remix</option>
-                  <option value="other">Other</option>
-                </select>
+                <div class="relative">
+                  <select 
+                    id="framework" 
+                    name="framework" 
+                    required
+                    class="appearance-none mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 p-2 h-[42px] text-base bg-white pr-8"
+                  >
+                    <option value="" disabled selected>Select a framework</option>
+                    <option value="nextjs">Next.js</option>
+                    <option value="laravel">Laravel</option>
+                    <option value="sveltekit">SvelteKit</option>
+                    <option value="remix">Remix</option>
+                    <option value="nuxt">Nuxt</option>
+                    <option value="django">Django</option>
+                    <option value="rails">Ruby on Rails</option>
+                    <option value="express">Express.js</option>
+                    <option value="flask">Flask</option>
+                    <option value="other">Other</option>
+                  </select>
+                  <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                    <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </div>
+                </div>
               </div>
             </div>
 
