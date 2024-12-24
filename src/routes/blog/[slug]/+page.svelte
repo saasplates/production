@@ -36,6 +36,7 @@
               <img 
                 src={author.avatar} 
                 draggable="false"
+                loading="lazy"
                 alt={author.name}
                 class="w-6 h-6 rounded-full mr-2"
               />
@@ -71,6 +72,7 @@
                 <img 
                   src={author.avatar}
                   draggable="false"
+                  loading="lazy"
                   alt={author.name}
                   class="w-24 h-24 rounded-full object-cover"
                 />

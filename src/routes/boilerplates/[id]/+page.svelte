@@ -80,6 +80,7 @@
           src={boilerplate.pngImage}
           alt={boilerplate.title}
           draggable="false"
+          loading="lazy"
           class="w-full rounded-lg border border-slate-200"
         />
 

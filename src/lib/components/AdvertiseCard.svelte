@@ -10,6 +10,7 @@
   <div class="relative w-full h-48">
     <img 
       src={image} 
+      loading="lazy"
       alt="Advertisement" 
       class="absolute inset-0 w-full h-full object-cover"
     />

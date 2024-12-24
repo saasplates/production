@@ -21,6 +21,7 @@
       src={image} 
       draggable="false"
       loading="lazy"
+      loading="lazy"
       alt={title}
       class="w-full h-[200px] object-cover transition-transform duration-500" 
     />

@@ -19,6 +19,8 @@
               src={author.avatar} 
               draggable="false"
               alt={author.name}
+              loading="lazy"
+
               class="w-24 h-24 rounded-full object-cover"
             />
             <div class="ml-6">

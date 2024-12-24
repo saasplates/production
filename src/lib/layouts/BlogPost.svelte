@@ -31,6 +31,7 @@
               src={author.avatar} 
               draggable="false"
               alt={author.name}
+              loading="lazy"
               class="w-6 h-6 rounded-full mr-2"
             />
             <a class="text-gray-500" href={`/authors/${author.id}`}>{author.name}</a>
