@@ -1,0 +1,12 @@
+.flowbite-textarea {
+  min-height: 120px;
+  max-height: 400px;
+  resize: vertical;
+  background-color: white !important;
+  border-color: #D1D5DB !important;
+}
+
+.flowbite-textarea:focus {
+  border-color: #6B7280 !important;
+  box-shadow: 0 0 0 1px #6B7280 !important;
+} 
