@@ -228,7 +228,7 @@
 				image="/rectangle.webp"
 			/>
 		</div>
-		
+
 		<div
 			class="group block bg-white mt-20 rounded-2xl border border-gray-200 transition-colors"
 		>

@@ -2,6 +2,8 @@
   import { goto } from '$app/navigation';
   import CustomTextarea from '$lib/components/CustomTextarea.svelte';
   import { Label } from 'flowbite-svelte';
+  import { sendToDiscord } from '$lib/discord';
+  
   let loading = false;
   let error = '';
   let success = false;
