@@ -3,7 +3,7 @@
   
   const dispatch = createEventDispatcher();
   
-  export let Frameworks = ['All', 'Next.js', 'Remix', 'Nuxt', 'SvelteKit', 'Laravel'];
+  export let Frameworks = ['All', 'Next.js', 'Remix', 'Angular', 'Nuxt', 'SvelteKit', 'Laravel'];
   export let prices = ['Free', 'Paid'];
   export let activeFramework = 'All';
   export let activePrices = ['Free', 'Paid'];

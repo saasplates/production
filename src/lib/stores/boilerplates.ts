@@ -46,9 +46,9 @@ export const boilerplates: Boilerplate[] = [
     id: 'larafast',
     title: 'Larafast',
     description: 'Convert visitors with this optimized SaaS Laravel',
-    image: '/plate/nextjs-saas-starter.png',
+    image: '/plate/larafast.webp',
     framework: ['Laravel'],
-    price: 'Free',
+    price: 'Paid',
     demoUrl: '/boilerplates/larafast',
     sponsored: true
   }
