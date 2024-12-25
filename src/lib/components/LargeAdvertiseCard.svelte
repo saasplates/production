@@ -9,10 +9,10 @@
 
   async function handleClick() {
     try {
-      // Track click in Redis
+      // Track click in Redis and get updated count
       const clickCount = await trackClickAndGetCount(`ad:${title}`);
       
-      // Send to Discord webhook
+      // Send to Discord webhook with click count
       await trackInteraction({
         page: window.location.pathname,
         element: 'large-ad-card',
@@ -21,6 +21,13 @@
       });
     } catch (error) {
       console.error('Error tracking ad click:', error);
+      // Still track the click even if Redis fails
+      await trackInteraction({
+        page: window.location.pathname,
+        element: 'large-ad-card',
+        action: 'clicked',
+        additionalInfo: `Clicked ad: ${title} - ${description}`
+      }).catch(e => console.error('Failed to send to Discord:', e));
     }
   }
 </script>
