@@ -31,6 +31,7 @@ export interface Boilerplate {
   framework: string[];
   price: 'Free' | 'Paid';
   demoUrl: string;
+  sourceCodeUrl: string;
   featured?: boolean;
   sponsored?: boolean;
   features?: Feature[];
@@ -42,35 +43,58 @@ export const boilerplates: Boilerplate[] = [
   {
     id: 'next-saas-starter',
     title: 'Next.js SaaS Starter',
-    description: 'Clean and modern Next.js boilerplate with dark mode support',
+    description: 'Get started quickly with Next.js, Postgres, Stripe, and shadcn/ui.',
     image: '/plate/nextjs-saas-starter.webp',
     mainImage: '/plate/nextjs-saas-starter-main.webp',
-    framework: ['Next.js', 'TypeScript', 'Tailwind CSS'],
+    framework: ['Next.js', 'TypeScript', 'Tailwind CSS', 'PostgreSQL', 'Drizzle ORM'],
     price: 'Free',
-    demoUrl: '/boilerplates/next-saas-starter',
+    demoUrl: 'https://next-saas-start.vercel.app/',
+    sourceCodeUrl: 'https://github.com/leerob/next-saas-starter',
     featured: true,
     features: [
       {
-        title: 'Dark Mode Support',
-        description: 'Built-in dark mode with system preference detection'
+        title: 'Authentication System',
+        description: 'Email/password authentication with JWT tokens stored in cookies'
       },
       {
-        title: 'TypeScript Ready',
-        description: 'Fully typed codebase with TypeScript configuration'
+        title: 'Stripe Integration',
+        description: 'Complete payment system with Stripe Checkout and Customer Portal'
+      },
+      {
+        title: 'Dashboard & CRUD',
+        description: 'Full-featured dashboard with user/team management and CRUD operations'
+      },
+      {
+        title: 'Role-Based Access Control',
+        description: 'Built-in RBAC system with Owner and Member roles'
+      },
+      {
+        title: 'Activity Logging',
+        description: 'Comprehensive system for tracking user events and activities'
       }
     ],
     customContent: [
       {
-        title: 'Getting Started',
-        description: 'Clone the repository and install dependencies to get started.',
+        title: 'Tech Stack',
+        description: 'Built with modern technologies for scalability and performance',
         links: [
           {
-            text: 'Documentation',
-            url: '#'
+            text: 'Next.js Documentation',
+            url: 'https://nextjs.org/docs'
           },
           {
+            text: 'Stripe Documentation',
+            url: 'https://stripe.com/docs'
+          }
+        ]
+      },
+      {
+        title: 'Getting Started',
+        description: 'Follow these steps to set up your development environment.',
+        links: [
+          {
             text: 'GitHub Repository',
-            url: '#'
+            url: 'https://github.com/leerob/next-saas-starter'
           }
         ]
       }
@@ -79,20 +103,39 @@ export const boilerplates: Boilerplate[] = [
       {
         title: 'Installation',
         content: `
-          <pre class="bg-gray-50 p-4 rounded-md"><code>git clone https://github.com/your-repo/next-saas-starter
-npm install
-npm run dev</code></pre>
+          <pre class="bg-gray-50 p-4 rounded-md"><code># Setup environment variables
+pnpm db:setup
+
+# Run database migrations and seed
+pnpm db:migrate
+pnpm db:seed
+
+# Start development server
+pnpm dev</code></pre>
         `
       },
       {
         title: 'Key Features',
         content: `
           <ul class="list-disc pl-4">
-            <li>Authentication with NextAuth.js</li>
-            <li>Database integration with Prisma</li>
-            <li>Stripe payment integration</li>
-            <li>Email notifications with React Email</li>
+            <li>Marketing landing page with animated Terminal</li>
+            <li>Pricing page with Stripe Checkout integration</li>
+            <li>Dashboard with CRUD operations for users/teams</li>
+            <li>Role-based access control (RBAC)</li>
+            <li>Subscription management via Stripe Customer Portal</li>
+            <li>Email/password authentication with JWT</li>
+            <li>Global and local middleware protection</li>
+            <li>Activity logging system</li>
           </ul>
+        `
+      },
+      {
+        title: 'Default Credentials',
+        content: `
+          <div class="bg-gray-50 p-4 rounded-md">
+            <p><strong>Email:</strong> test@test.com</p>
+            <p><strong>Password:</strong> admin123</p>
+          </div>
         `
       }
     ]
@@ -121,7 +164,7 @@ npm run dev</code></pre>
   {
     id: 'larafast',
     title: 'Larafast',
-    description: 'Convert visitors with this optimized SaaS Laravel',
+    description: 'Production ready SaaS Starter Kit with everything to start your SaaS app.',
     image: '/plate/larafast.webp',
     mainImage: '/plate/larafast-main.webp',
     framework: ['Laravel'],

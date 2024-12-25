@@ -3,8 +3,20 @@
   const { boilerplate } = data;
   import { scrollPosition } from '$lib/stores/scroll';
   import { fade } from 'svelte/transition';
+  import { onMount } from 'svelte';
   
   let imageLoaded = false;
+  let imgElement: HTMLImageElement;
+
+  onMount(() => {
+    // Reset image loaded state on mount
+    imageLoaded = false;
+    
+    // If the image is already cached, it might not trigger onload
+    if (imgElement?.complete) {
+      imageLoaded = true;
+    }
+  });
 
   function handleBackClick() {
     history.back();
@@ -49,7 +61,7 @@
 
           <!-- Technologies -->
           <div class="space-y-2">
-            <h2 class="font-semibold text-gray-700">Framework</h2>
+            <h2 class="font-semibold text-gray-700">Tech Stack</h2>
             <div class="flex flex-wrap gap-2">
               {#each boilerplate.framework as tech}
                 <span class="px-3 py-1 rounded-md text-sm bg-gray-100 text-gray-800">
@@ -68,24 +80,39 @@
           </div>
 
           <!-- Demo Button -->
-          <a
-            href={boilerplate.demoUrl}
-            target="_blank"
+          <div>
+            <h2 class="font-semibold text-gray-700 mb-2">Links</h2>
+            <div class="flex flex-row gap-2">
+              <a
+                href={boilerplate.demoUrl}
+              target="_blank"
             rel="noopener noreferrer"
-            class="w-full inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-gray-900 hover:bg-gray-800"
-          >
+            class="inline-flex items-center px-4 py-2 border border-slate-200 text-sm font-medium rounded-md text-gray-600 bg-white hover:bg-gray-50"
+            >
             View Demo
           </a>
+
+          <a
+            href={boilerplate.sourceCodeUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center px-4 py-2 border border-slate-200 text-sm font-medium rounded-md text-gray-600 bg-white hover:bg-gray-50"
+            >
+            Source Code
+          </a>
+          </div>
+          </div>
         </div>
       </div>
 
       <!-- Main Content -->
       <div class="flex-1 space-y-8">
-        <div class="relative w-full aspect-video bg-gray-100 rounded-lg overflow-hidden">
+        <div class="relative w-full aspect-video rounded-lg overflow-hidden bg-gray-100">
           {#if !imageLoaded}
-            <div class="absolute inset-0 animate-pulse bg-gray-200" />
+            <div class="absolute inset-0 animate-pulse bg-gray-100" />
           {/if}
           <img
+            bind:this={imgElement}
             src={boilerplate.mainImage}
             alt={boilerplate.title}
             draggable="false"
