@@ -161,7 +161,7 @@ pnpm dev</code></pre>
     framework: ['Remix'],
     price: 'Free',
     featured: true,
-    demoUrl: '/boilerplates/remix-saas',
+    demoUrl: 'https://github.com/dev-xo/remix-saas',
     sourceCodeUrl: 'https://github.com/dev-xo/remix-saas'
   },
   {

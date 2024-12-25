@@ -4,7 +4,8 @@
   import { scrollPosition } from '$lib/stores/scroll';
   import { fade } from 'svelte/transition';
   import { onMount } from 'svelte';
-  
+  import LargeAdvertiseCard from '$lib/components/LargeAdvertiseCard.svelte';
+
   let imageLoaded = false;
   let imgElement: HTMLImageElement;
 
@@ -89,7 +90,7 @@
             rel="noopener noreferrer"
             class="inline-flex items-center px-4 py-2 border border-slate-200 text-sm font-medium rounded-md text-gray-600 bg-white hover:bg-gray-50"
             >
-            View Demo
+            Preview
           </a>
 
           <a
@@ -198,6 +199,14 @@
           </div>
         {/if}
       </div>
+    </div>
+    <div class="mt-14">
+      <LargeAdvertiseCard
+        title="Footer Promotion Card"
+        description="Buy this spot for $399 for 3 months."
+        href="/advertise"
+        image="/rectangle.webp"
+      />
     </div>
   </main>
 {:else}
