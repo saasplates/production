@@ -151,9 +151,9 @@
 </script>
 
 <svelte:head>
-  <title>Advertise | SaaS Boilerplates Hub - Reach Developers Worldwide</title>
-  <meta name="description" content="Promote your boilerplate or service to thousands of developers.  placement and sponsored opportunities available." />
-  <link rel="canonical" href="https://saasboilerplates.dev/advertise" />
+  <title>Advertise | SaasPlates - Reach Developers Worldwide</title>
+  <meta name="description" content="Showcase your SaaS boilerplate or service to a global audience of developers and tech startups. Premium placement opportunities with targeted visibility and analytics tracking." />
+  <link rel="canonical" href="https://saasplates.com/advertise" />
 </svelte:head>
 
 <main class="min-h-screen bg-gray-50">

@@ -11,10 +11,15 @@
 
 <svelte:head>
   {#if post}
-    <title>{post.title} | SaaS Boilerplates Hub Blog</title>
+    <title>{post.title} | SaasPlates Blog</title>
     <meta name="description" content={post.description} />
     <meta name="author" content={author?.name || ''} />
-    <link rel="canonical" href="https://saasboilerplates.dev/blog/{post.slug}" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content={post.title} />
+    <meta property="og:description" content={post.description} />
+    <meta property="article:author" content={author?.name || ''} />
+    <meta property="article:published_time" content={post.publishedAt} />
+    <link rel="canonical" href="https://saasplates.com/blog/{post.slug}" />
   {/if}
 </svelte:head>
 

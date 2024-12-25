@@ -7,7 +7,7 @@
 
   const siteName = 'SaasPlates';
   const siteTitle = 'SaasPlates - Modern SaaS Boilerplates';
-  const siteDescription = 'Discover and download modern SaaS boilerplates for your next project';
+  const siteDescription = 'Discover free open-source and premium SaaS boilerplates for React, Next.js, Svelte, and more. Find modern templates with authentication, payments, and UI components to ship your SaaS faster.';
   const siteUrl = 'https://saasplates.com';
   const siteKeywords = 'saas boilerplates, ui components, react boilerplates, svelte boilerplates, tailwind boilerplates, web development, Next.js boilerplates, admin panels';
 </script>
