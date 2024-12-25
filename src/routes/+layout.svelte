@@ -6,6 +6,7 @@
   import DiscordBanner from '$lib/components/DiscordBanner.svelte';
   import posthog from 'posthog-js'
   import { browser } from '$app/environment';
+  import { onMount } from 'svelte';
 
   const siteName = 'SaasPlates';
   const siteTitle = 'SaasPlates - Premium SaaS Boilerplates';
@@ -13,19 +14,20 @@
   const siteUrl = 'https://saasplates.com';
   const siteKeywords = 'saas boilerplates, saas landing pages, react boilerplates, svelte boilerplates, laravel boilerplates, web development, Next.js boilerplates, admin panels';
 
-  export const load = async () => {
-
-if (browser) {
-  posthog.init('phc_ODRW219zAhADMMyIaM8o1sITkp5g9qd5ZnJpjxsPuRu', {
-    api_host: 'https://us.i.posthog.com',
-    person_profiles: 'identified_only',
-  }
-)
-}
-return
-};
-
-posthog.capture('test', { property: 'value' })
+  onMount(() => {
+    try {
+      if (browser) {
+        posthog.init('phc_ODRW219zAhADMMyIaM8o1sITkp5g9qd5ZnJpjxsPuRu', {
+          api_host: 'https://us.i.posthog.com',
+          loaded: (posthog) => {
+            posthog.capture('page_view');
+          }
+        });
+      }
+    } catch (error) {
+      console.error('PostHog initialization failed:', error);
+    }
+  });
 
 </script>
 
