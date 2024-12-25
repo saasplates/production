@@ -16,7 +16,7 @@
   function handlePriceFilter(price: string) {
     if (activePrices.includes(price)) {
       if (activePrices.length > 1) {
-        activePrices = activePrices.filter(p => p !== price);
+        activePrices = [...activePrices.filter(p => p !== price)];
       }
     } else {
       activePrices = [...activePrices, price];

@@ -140,14 +140,25 @@
 	// Get a random ad when the component loads
 	const ad = getRandomAd();
 
-	function handleFrameworkFilter(event: CustomEvent<{framework: string}>) {
-		activeFramework = event.detail.framework;
-		currentPage = 1;
+	function handleFrameworkFilter(event: CustomEvent) {
+		const { framework } = event.detail;
+		activeFramework = framework;
+		applyFilters();
 	}
 
-	function handlePriceFilter(event: CustomEvent<{prices: string[]}>) {
-		activePrices = event.detail.prices;
-		currentPage = 1;
+	function handlePriceFilter(event: CustomEvent) {
+		const { prices } = event.detail;
+		activePrices = prices;
+		applyFilters();
+	}
+
+	function applyFilters() {
+		filteredBoilerplates = sortedBoilerplates.filter(boilerplate => {
+			const frameworkMatch = activeFramework === 'All' || 
+				boilerplate.framework.includes(activeFramework);
+			const priceMatch = activePrices.includes(boilerplate.price);
+			return frameworkMatch && priceMatch;
+		});
 	}
 
 	// Save scroll position when navigating away

@@ -2,11 +2,16 @@
   export let data;
   const { boilerplate } = data;
   import { scrollPosition } from '$lib/stores/scroll';
+  import { fade } from 'svelte/transition';
+  
+  let imageLoaded = false;
 
   function handleBackClick() {
-    // The scroll position is already saved in the store when navigating away
-    // from the homepage, so we just need to navigate back
     history.back();
+  }
+
+  function onImageLoad() {
+    imageLoaded = true;
   }
 </script>
 
@@ -76,13 +81,20 @@
 
       <!-- Main Content -->
       <div class="flex-1 space-y-8">
-        <img
-          src={boilerplate.mainImage}
-          alt={boilerplate.title}
-          draggable="false"
-          loading="lazy"
-          class="w-full rounded-lg border border-slate-200"
-        />
+        <div class="relative w-full aspect-video bg-gray-100 rounded-lg overflow-hidden">
+          {#if !imageLoaded}
+            <div class="absolute inset-0 animate-pulse bg-gray-200" />
+          {/if}
+          <img
+            src={boilerplate.mainImage}
+            alt={boilerplate.title}
+            draggable="false"
+            on:load={onImageLoad}
+            class="w-full h-full object-cover rounded-lg border border-slate-200 transition-opacity duration-300"
+            class:opacity-0={!imageLoaded}
+            class:opacity-100={imageLoaded}
+          />
+        </div>
 
         <!-- Description -->
         <div class="prose max-w-none">
@@ -165,4 +177,4 @@
   <div class="min-h-screen flex items-center justify-center">
     <p class="text-2xl text-gray-600">Boilerplate not found</p>
   </div>
-{/if} 
+{/if}
