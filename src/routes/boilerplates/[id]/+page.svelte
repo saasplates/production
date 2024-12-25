@@ -5,6 +5,7 @@
   import { fade } from 'svelte/transition';
   import { onMount } from 'svelte';
   import LargeAdvertiseCard from '$lib/components/LargeAdvertiseCard.svelte';
+  import { goto } from '$app/navigation';
 
   let imageLoaded = false;
   let imgElement: HTMLImageElement;
@@ -20,7 +21,21 @@
   });
 
   function handleBackClick() {
-    history.back();
+    try {
+      const currentLength = window.history.length;
+      history.back();
+      
+      // Check after a small delay if we actually navigated back
+      setTimeout(() => {
+        if (window.history.length === currentLength) {
+          // If we're still on the same page, use the fallback
+          goto('/');
+        }
+      }, 100);
+    } catch (e) {
+      // Fallback if history.back() fails
+      goto('/');
+    }
   }
 
   function onImageLoad() {
@@ -76,7 +91,11 @@
           <div class="space-y-2">
             <h2 class="font-semibold text-gray-700">Price</h2>
             <span class="px-3 py-1 rounded-md text-sm inline-block {boilerplate.price === 'Free' ? 'bg-green-100 text-green-800' : 'bg-blue-100 text-blue-800'}">
-              {boilerplate.price}
+              {#if boilerplate.priceAmount}
+                {boilerplate.priceAmount}
+              {:else}
+                {boilerplate.price}
+              {/if}
             </span>
           </div>
 
@@ -84,24 +103,43 @@
           <div>
             <h2 class="font-semibold text-gray-700 mb-2">Links</h2>
             <div class="flex flex-row gap-2">
-              <a
-                href={boilerplate.demoUrl}
-              target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center px-4 py-2 border border-slate-200 text-sm font-medium rounded-md text-gray-600 bg-white hover:bg-gray-50"
-            >
-            Preview
-          </a>
+              {#if boilerplate.demoUrl}
+                <a
+                  href={boilerplate.demoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center px-4 py-2 border border-slate-200 text-sm font-medium rounded-md text-gray-600 bg-white hover:bg-gray-50"
+                >
+                  Preview
+                </a>
+              {/if}
 
-          <a
-            href={boilerplate.sourceCodeUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center px-4 py-2 border border-slate-200 text-sm font-medium rounded-md text-gray-600 bg-white hover:bg-gray-50"
-            >
-            Source Code
-          </a>
-          </div>
+              {#if boilerplate.sourceCodeUrl}
+                <a
+                  href={boilerplate.sourceCodeUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center px-4 py-2 border border-slate-200 text-sm font-medium rounded-md text-gray-600 bg-white hover:bg-gray-50"
+                >
+                  Source Code
+                </a>
+              {/if}
+
+              {#if boilerplate.visitUrl}
+                <a
+                  href={boilerplate.visitUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="w-full inline-flex items-center justify-center px-4 py-2 border border-slate-200 text-sm font-medium rounded-md text-gray-600 bg-white hover:bg-gray-50"
+                >
+                  Visit
+                </a>
+              {/if}
+
+              {#if !boilerplate.demoUrl && !boilerplate.sourceCodeUrl && !boilerplate.visitUrl}
+                <span class="text-sm text-gray-500">No links available</span>
+              {/if}
+            </div>
           </div>
         </div>
       </div>

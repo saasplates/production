@@ -40,6 +40,7 @@
 	"type": "module",
 	"dependencies": {
 		"@radix-ui/themes": "^3.1.6",
+		"lucide-svelte": "^0.469.0",
 		"marked": "^15.0.4",
 		"remark-gfm": "^4.0.0",
 		"svelte-sitemap": "^2.6.0",

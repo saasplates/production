@@ -30,7 +30,7 @@
         'Placement in paid section',
         'Priority support',
         'User Interaction Analytics',
-        '7 day Refund Guarantee',
+        '7 days Refund',
       ]
     }
   ];

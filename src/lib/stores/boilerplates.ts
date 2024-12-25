@@ -31,8 +31,9 @@ export interface Boilerplate {
   framework: string[];
   price: 'Free' | 'Paid';
   priceAmount?: string;
-  demoUrl: string;
-  sourceCodeUrl: string;
+  demoUrl?: string;
+  visitUrl?: string;
+  sourceCodeUrl?: string;
   featured?: boolean;
   sponsored?: boolean;
   features?: Feature[];
@@ -158,11 +159,84 @@ pnpm dev</code></pre>
     description: 'A Lightweight, Production-Ready Remix Stack for your next SaaS application.',
     image: '/plate/remix-saas.webp',
     mainImage: '/plate/remix-saas-main.webp',
-    framework: ['Remix'],
+    framework: ['Remix', 'TypeScript', 'TailwindCSS', 'Prisma'],
     price: 'Free',
     featured: true,
     demoUrl: 'https://github.com/dev-xo/remix-saas',
-    sourceCodeUrl: 'https://github.com/dev-xo/remix-saas'
+    sourceCodeUrl: 'https://github.com/dev-xo/remix-saas',
+    features: [
+      {
+        title: 'Modern Tech Stack',
+        description: 'Built with Vite, Prisma ORM, and TailwindCSS for a powerful development experience'
+      },
+      {
+        title: 'Authentication System',
+        description: 'Email Code, Magic Link and Social Logins with CSRF and Honeypot Protection'
+      },
+      {
+        title: 'Stripe Integration',
+        description: 'Complete subscription plans and customer portal functionality'
+      },
+      {
+        title: 'Email System',
+        description: 'Resend for developers and React Email for customizable templates'
+      },
+      {
+        title: 'Advanced Features',
+        description: 'Server Rate Limiting, File Uploads, I18N support, and Github Actions CI/CD'
+      }
+    ],
+    customContent: [
+      {
+        title: 'Tech Stack',
+        description: 'Built with modern technologies for scalability and performance',
+        links: [
+          {
+            text: 'Documentation',
+            url: 'https://github.com/dev-xo/remix-saas/tree/main/docs#remix-saas-documentation'
+          },
+          {
+            text: 'Live Demo',
+            url: 'https://github.com/dev-xo/remix-saas'
+          }
+        ]
+      }
+    ],
+    children: [
+      {
+        title: 'Key Features',
+        content: `
+          <ul class="list-disc pl-4">
+            <li>⚡ Vite for Next-Gen Frontend Tooling</li>
+            <li>🧩 Prisma ORM for Modern Database Management</li>
+            <li>🛍️ Stripe Integration for Subscriptions</li>
+            <li>🔑 Multiple Authentication Methods</li>
+            <li>🎨 TailwindCSS & ShadCN Components</li>
+            <li>🌙 Light and Dark Mode Support</li>
+            <li>🗺️ Remix Flat Routes</li>
+            <li>🍞 Client & Server Toasts</li>
+            <li>🛡️ Server Rate Limiting</li>
+            <li>🕵️‍♂️ CSRF and Honeypot Protection</li>
+            <li>📧 Resend Email Integration</li>
+            <li>💌 React Email Templates</li>
+            <li>📋 Type-Safe Form Validation</li>
+            <li>📥 File Upload Support</li>
+            <li>🌐 I18N Internationalization</li>
+            <li>⚙️ Github Actions CI/CD</li>
+          </ul>
+        `
+      },
+      {
+        title: 'UI Features',
+        content: `
+          <ul class="list-disc pl-4">
+            <li>💅 Modern UI with Design System</li>
+            <li>🏕 Landing, Onboarding, Dashboard and Admin Pages</li>
+            <li>📱 Fully Responsive Design</li>
+          </ul>
+        `
+      }
+    ]
   },
   {
     id: 'larafast',
@@ -172,9 +246,8 @@ pnpm dev</code></pre>
     mainImage: '/plate/larafast-main.webp',
     framework: ['Laravel'],
     price: 'Paid',
-    priceAmount: '$110',
-    demoUrl: '/boilerplates/larafast',
-    sourceCodeUrl: 'https://github.com/larafast/larafast',
+    priceAmount: '$149.5',
+    visitUrl: 'https://larafast.com',
     // sponsored: true,
   }
 ];
