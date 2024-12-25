@@ -150,7 +150,7 @@ pnpm dev</code></pre>
     framework: ['Nuxt'],
     price: 'Free',
     demoUrl: 'https://saas-template.nuxt.dev/',
-    sourceCodeUrl: 'https://github.com/nuxt-themes/saas-template'
+    sourceCodeUrl: 'https://github.com/nuxt-ui-pro/saas'
   },
   {
     id: 'remix-saas',
