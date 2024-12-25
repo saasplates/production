@@ -22,20 +22,27 @@
   <!-- Content section -->
   <div class="flex-1 p-6 border-t-[1px] border-slate-100">
     <!-- Tags section -->
-    {#if boilerplate.featured || boilerplate.sponsored}
-      <div class="flex gap-2 mb-2">
-        {#if boilerplate.featured}
-          <span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-[10px] font-medium bg-blue-100 text-blue-800">
-            Featured
-          </span>
-        {/if}
-        {#if boilerplate.sponsored}
-          <span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-[10px] font-medium bg-emerald-100 text-emerald-800">
-            Sponsored
-          </span>
-        {/if}
-      </div>
-    {/if}
+    <div class="flex gap-2 mb-2">
+      {#if boilerplate.featured}
+        <span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-[10px] font-medium bg-blue-100 text-blue-800">
+          Featured
+        </span>
+      {/if}
+      {#if boilerplate.sponsored}
+        <span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-[10px] font-medium bg-emerald-100 text-emerald-800">
+          Sponsored
+        </span>
+      {/if}
+      {#if boilerplate.price === 'Free'}
+        <span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-[10px] font-medium bg-green-100 text-green-800">
+          Free
+        </span>
+      {:else}
+        <span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-[10px] font-medium bg-amber-100 text-amber-800">
+          Paid
+        </span>
+      {/if}
+    </div>
 
     <div class="flex-1">
       <h3 class="text-xl font-semibold text-gray-900 line-clamp-1">
@@ -44,6 +51,11 @@
       <p class="mt-2 text-base text-gray-500 line-clamp-2">
         {boilerplate.description}
       </p>
+      {#if boilerplate.price === 'Paid' && boilerplate.priceAmount}
+        <p class="mt-2 text-sm font-medium text-amber-600">
+          {boilerplate.priceAmount}
+        </p>
+      {/if}
     </div>
   </div>
 </a>

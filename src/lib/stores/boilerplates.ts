@@ -30,6 +30,7 @@ export interface Boilerplate {
   mainImage?: string;
   framework: string[];
   price: 'Free' | 'Paid';
+  priceAmount?: string;
   demoUrl: string;
   sourceCodeUrl: string;
   featured?: boolean;
@@ -148,7 +149,8 @@ pnpm dev</code></pre>
     mainImage: '/plate/nuxt-saas-main.webp',
     framework: ['Nuxt'],
     price: 'Free',
-    demoUrl: 'https://saas-template.nuxt.dev/'
+    demoUrl: 'https://saas-template.nuxt.dev/',
+    sourceCodeUrl: 'https://github.com/nuxt-themes/saas-template'
   },
   {
     id: 'remix-saas',
@@ -159,7 +161,8 @@ pnpm dev</code></pre>
     framework: ['Remix'],
     price: 'Free',
     featured: true,
-    demoUrl: '/boilerplates/remix-saas'
+    demoUrl: '/boilerplates/remix-saas',
+    sourceCodeUrl: 'https://github.com/dev-xo/remix-saas'
   },
   {
     id: 'larafast',
@@ -169,8 +172,10 @@ pnpm dev</code></pre>
     mainImage: '/plate/larafast-main.webp',
     framework: ['Laravel'],
     price: 'Paid',
+    priceAmount: '$110',
     demoUrl: '/boilerplates/larafast',
-    sponsored: true
+    sourceCodeUrl: 'https://github.com/larafast/larafast',
+    // sponsored: true,
   }
 ];
 
