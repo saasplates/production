@@ -7,22 +7,28 @@
   import posthog from 'posthog-js'
   import { browser } from '$app/environment';
 
-  export const load = async () => {
-    if (browser) {
-      posthog.init('phc_ODRW219zAhADMMyIaM8o1sITkp5g9qd5ZnJpjxsPuRu', {
-        api_host: 'https://us.i.posthog.com',
-        person_profiles: 'identified_only',
-      });
-    }
-    return
-  };
-  
   const siteName = 'SaasPlates';
-  const siteTitle = 'SaasPlates - Modern SaaS Boilerplates';
+  const siteTitle = 'SaasPlates - Premium SaaS Boilerplates';
   const siteDescription = 'Discover free open-source and premium SaaS boilerplates for React, Next.js, Svelte, and more. Find modern templates with authentication, payments, and UI components to ship your SaaS faster.';
   const siteUrl = 'https://saasplates.com';
-  const siteKeywords = 'saas boilerplates, ui components, react boilerplates, svelte boilerplates, tailwind boilerplates, web development, Next.js boilerplates, admin panels';
+  const siteKeywords = 'saas boilerplates, saas landing pages, react boilerplates, svelte boilerplates, laravel boilerplates, web development, Next.js boilerplates, admin panels';
+
+  export const load = async () => {
+
+if (browser) {
+  posthog.init('phc_ODRW219zAhADMMyIaM8o1sITkp5g9qd5ZnJpjxsPuRu', {
+    api_host: 'https://us.i.posthog.com',
+    person_profiles: 'identified_only',
+  }
+)
+}
+return
+};
+
+posthog.capture('test', { property: 'value' })
+
 </script>
+
 
 <svelte:head>
   <!-- Primary Meta Tags -->
