@@ -5,6 +5,8 @@
   import { fade } from 'svelte/transition';
   import { onMount } from 'svelte';
   import LargeAdvertiseCard from '$lib/components/LargeAdvertiseCard.svelte';
+  import ShareButton from '$lib/components/ShareButton.svelte';
+  import FloatingSubmit from '$lib/components/FloatingSubmit.svelte';
   import { goto } from '$app/navigation';
 
   let imageLoaded = false;
@@ -50,26 +52,29 @@
       <div class="w-80 flex-shrink-0 border-r border-gray-300">
         <div class="top-8 space-y-6 bg-white p-4 pr-6 rounded-lg">
           <!-- Back to Homepage -->
-          <a 
-            href="#"
-            on:click|preventDefault={handleBackClick}
-            class="inline-flex items-center text-sm text-gray-500 hover:text-gray-900 mb-2"
-          >
-            <svg 
-              class="w-4 h-4 mr-2" 
-              fill="none" 
-              stroke="currentColor" 
-              viewBox="0 0 24 24"
+          <div class="flex items-center justify-between mb-2">
+            <a 
+              href="#"
+              on:click|preventDefault={handleBackClick}
+              class="inline-flex items-center text-sm text-gray-500 hover:text-gray-900"
             >
-              <path 
-                stroke-linecap="round" 
-                stroke-linejoin="round" 
-                stroke-width="2" 
-                d="M10 19l-7-7m0 0l7-7m-7 7h18"
-              />
-            </svg>
-            Back to Homepage
-          </a>
+              <svg 
+                class="w-4 h-4 mr-2" 
+                fill="none" 
+                stroke="currentColor" 
+                viewBox="0 0 24 24"
+              >
+                <path 
+                  stroke-linecap="round" 
+                  stroke-linejoin="round" 
+                  stroke-width="2" 
+                  d="M10 19l-7-7m0 0l7-7m-7 7h18"
+                />
+              </svg>
+              Back to Homepage
+            </a>
+            <ShareButton title={boilerplate.title} />
+          </div>
 
           <h1 class="text-2xl font-bold text-gray-900">
             {boilerplate.title}

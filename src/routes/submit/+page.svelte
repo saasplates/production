@@ -3,12 +3,57 @@
   import CustomTextarea from '$lib/components/CustomTextarea.svelte';
   import { Label } from 'flowbite-svelte';
   import { sendToDiscord } from '$lib/discord';
+  import { onMount } from 'svelte';
   
   let loading = false;
   let error = '';
   let success = false;
   let pricingType = 'free';
   let selectedPackage = 'free';
+  let isButtonDisabled = false;
+  let formData = {
+    name: '',
+    email: '',
+    title: '',
+    framework: '',
+    discord: '',
+    x: '',
+    description: '',
+    link: '',
+    price: '',
+    package: 'free'
+  };
+
+  // Save form data to localStorage
+  function saveFormData() {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('submitFormData', JSON.stringify(formData));
+    }
+  }
+
+  // Load form data from localStorage
+  function loadFormData() {
+    if (typeof window !== 'undefined') {
+      const savedData = localStorage.getItem('submitFormData');
+      if (savedData) {
+        formData = JSON.parse(savedData);
+        selectedPackage = formData.package;
+        pricingType = formData.package;
+      }
+    }
+  }
+
+  onMount(() => {
+    loadFormData();
+  });
+
+  // Watch for form changes
+  $: {
+    if (selectedPackage) {
+      formData.package = selectedPackage;
+      saveFormData();
+    }
+  }
 
   const packages = [
     { 
@@ -37,11 +82,14 @@
 
   async function handleSubmit(event: SubmitEvent) {
     event.preventDefault();
+    
+    if (loading) return;
+    
     loading = true;
     error = '';
 
-    const formData = new FormData(event.target as HTMLFormElement);
-    const data = Object.fromEntries(formData);
+    const formDataObj = new FormData(event.target as HTMLFormElement);
+    const data = Object.fromEntries(formDataObj);
 
     try {
       // Send to Discord webhook
@@ -64,6 +112,8 @@
       }
 
       success = true;
+      // Clear localStorage after successful submission
+      localStorage.removeItem('submitFormData');
       setTimeout(() => goto('/'), 2000);
     } catch (e) {
       error = 'Failed to submit form';
@@ -146,6 +196,8 @@
                   name="name" 
                   id="name" 
                   required
+                  bind:value={formData.name}
+                  on:input={saveFormData}
                   placeholder="Arjun Aditya"
                   class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 p-2"
                 >
@@ -157,6 +209,8 @@
                   name="email" 
                   id="email" 
                   required
+                  bind:value={formData.email}
+                  on:input={saveFormData}
                   placeholder="meow@nermalcat69.dev"
                   class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 p-2"
                 >
@@ -168,6 +222,8 @@
                   name="title" 
                   id="title" 
                   required
+                  bind:value={formData.title}
+                  on:input={saveFormData}
                   placeholder="My Awesome SaaS Boilerplate"
                   class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 p-2"
                 >
@@ -179,6 +235,8 @@
                     id="framework" 
                     name="framework" 
                     required
+                    bind:value={formData.framework}
+                    on:change={saveFormData}
                     class="appearance-none mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 p-2 h-[42px] text-base bg-white pr-8"
                   >
                     <option value="" disabled selected>Select a framework</option>
@@ -245,6 +303,8 @@
                   type="text" 
                   name="discord" 
                   id="discord" 
+                  bind:value={formData.discord}
+                  on:input={saveFormData}
                   placeholder="username"
                   class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 p-2"
                 />
@@ -256,6 +316,8 @@
                   type="text" 
                   name="x" 
                   id="x" 
+                  bind:value={formData.x}
+                  on:input={saveFormData}
                   placeholder="@username"
                   class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 p-2"
                 />
@@ -269,6 +331,8 @@
                 name="description" 
                 rows="3"
                 required
+                bind:value={formData.description}
+                on:input={saveFormData}
                 placeholder="Tell us about your boilerplate..."
                 class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 p-2"
               ></textarea>
@@ -281,6 +345,8 @@
                 id="link" 
                 name="link" 
                 required
+                bind:value={formData.link}
+                on:input={saveFormData}
                 placeholder="https://github.com/username/repo"
                 class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 p-2"
               />
@@ -294,6 +360,8 @@
                   name="price" 
                   id="price" 
                   required
+                  bind:value={formData.price}
+                  on:input={saveFormData}
                   min="0"
                   step="0.01"
                   placeholder="29.99"
@@ -305,7 +373,7 @@
             <button 
               type="submit" 
               class="w-full flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 disabled:opacity-50"
-              disabled={loading}
+              disabled={loading || isButtonDisabled}
             >
               {loading ? 'Submitting...' : 'Submit Boilerplate'}
             </button>

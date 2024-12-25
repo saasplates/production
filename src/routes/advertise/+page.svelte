@@ -3,10 +3,50 @@
   import Header from '$lib/components/Header.svelte';
   import CustomTextarea from '$lib/components/CustomTextarea.svelte';
   import { goto } from '$app/navigation';
+  import { onMount } from 'svelte';
 
   let loading = false;
   let error = '';
   let success = false;
+  let formData = {
+    name: '',
+    email: '',
+    company: '',
+    package: '',
+    message: '',
+    discord: '',
+    x_username: ''
+  };
+
+  // Save form data to localStorage
+  function saveFormData() {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('advertiseFormData', JSON.stringify(formData));
+    }
+  }
+
+  // Load form data from localStorage
+  function loadFormData() {
+    if (typeof window !== 'undefined') {
+      const savedData = localStorage.getItem('advertiseFormData');
+      if (savedData) {
+        formData = JSON.parse(savedData);
+        selectedPackage = formData.package;
+      }
+    }
+  }
+
+  onMount(() => {
+    loadFormData();
+  });
+
+  // Watch for form changes
+  $: {
+    if (selectedPackage) {
+      formData.package = selectedPackage;
+      saveFormData();
+    }
+  }
 
   const packages = [
     { 
@@ -79,8 +119,8 @@
     loading = true;
     error = '';
 
-    const formData = new FormData(event.target as HTMLFormElement);
-    const data = Object.fromEntries(formData);
+    const formDataObj = new FormData(event.target as HTMLFormElement);
+    const data = Object.fromEntries(formDataObj);
 
     try {
       const res = await fetch('/api/advertise', {
@@ -99,6 +139,8 @@
       }
 
       success = true;
+      // Clear localStorage after successful submission
+      localStorage.removeItem('advertiseFormData');
       setTimeout(() => goto('/'), 2000);
     } catch (e) {
       error = 'Failed to submit form';
@@ -183,6 +225,8 @@
                   name="name" 
                   id="name" 
                   required
+                  bind:value={formData.name}
+                  on:input={saveFormData}
                   placeholder="Your full name"
                   aria-label="Your full name"
                   class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 p-2"
@@ -195,6 +239,8 @@
                   name="email" 
                   id="email" 
                   required
+                  bind:value={formData.email}
+                  on:input={saveFormData}
                   placeholder="your@email.com"
                   aria-label="Your email address"
                   class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 p-2"
@@ -208,6 +254,8 @@
                 type="text" 
                 name="company" 
                 id="company" 
+                bind:value={formData.company}
+                on:input={saveFormData}
                 placeholder="Your company name"
                 aria-label="Your company name"
                 class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 p-2"
@@ -255,6 +303,8 @@
                 name="message" 
                 rows="4" 
                 required
+                bind:value={formData.message}
+                on:input={saveFormData}
                 placeholder="Tell us about your boilerplate and any specific requirements..."
                 aria-label="Your message"
                 class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 p-2"
@@ -268,6 +318,8 @@
                   type="text" 
                   name="discord" 
                   id="discord"
+                  bind:value={formData.discord}
+                  on:input={saveFormData}
                   placeholder="username"
                   aria-label="Your Discord username"
                   class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 p-2"
@@ -279,6 +331,8 @@
                   type="text" 
                   name="x_username" 
                   id="x_username"
+                  bind:value={formData.x_username}
+                  on:input={saveFormData}
                   placeholder="@username"
                   aria-label="Your X (Twitter) username"
                   class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 p-2"
