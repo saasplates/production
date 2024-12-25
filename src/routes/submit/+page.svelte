@@ -2,7 +2,7 @@
   import { goto } from '$app/navigation';
   import CustomTextarea from '$lib/components/CustomTextarea.svelte';
   import { Label } from 'flowbite-svelte';
-  import { sendToDiscord } from '$lib/discord';
+  import { sendToDiscord, trackInteraction } from '$lib/discord';
   import { onMount } from 'svelte';
   
   let loading = false;
@@ -121,6 +121,15 @@
       loading = false;
     }
   }
+
+  async function handleClick(element: string, action: string, additionalInfo?: string) {
+    await trackInteraction({
+      page: 'submit',
+      element,
+      action,
+      additionalInfo
+    });
+  }
 </script>
 
 <svelte:head>
@@ -135,7 +144,7 @@
   <div class="bg-white">
 
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 text-center">
-      <h1 class="text-3xl font-bold text-gray-900 sm:text-4xl">
+      <h1 class="text-3xl font-bold text-gray-900 sm:text-4xl" on:click={() => handleClick('title', 'clicked')}>
         Submit Your Boilerplate
       </h1>
       <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
@@ -236,7 +245,10 @@
                     name="framework" 
                     required
                     bind:value={formData.framework}
-                    on:change={saveFormData}
+                    on:change={(e) => {
+                      saveFormData();
+                      handleClick('framework-selection', 'selected', `Selected framework: ${e.target.value}`);
+                    }}
                     class="appearance-none mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 p-2 h-[42px] text-base bg-white pr-8"
                   >
                     <option value="" disabled selected>Select a framework</option>
@@ -269,6 +281,7 @@
                     on:click={() => {
                       selectedPackage = pkg.value;
                       pricingType = pkg.value;
+                      handleClick('package-selection', 'selected', `Selected package: ${pkg.name}`);
                     }}
                     on:keydown={(e) => e.key === 'Enter' && (selectedPackage = pkg.value) && (pricingType = pkg.value)}
                     tabindex="0"
@@ -374,6 +387,7 @@
               type="submit" 
               class="w-full flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 disabled:opacity-50"
               disabled={loading || isButtonDisabled}
+              on:click={() => handleClick('submit-button', 'clicked', 'Submit form submission attempted')}
             >
               {loading ? 'Submitting...' : 'Submit Boilerplate'}
             </button>

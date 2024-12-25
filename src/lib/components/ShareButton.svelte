@@ -9,11 +9,20 @@
   // Import fade transition
   import { fade } from 'svelte/transition';
   import { onDestroy } from 'svelte';
+  import { trackInteraction } from '$lib/discord';
 
   function share() {
     // Always copy to clipboard
     navigator.clipboard.writeText(url || window.location.href);
     showTooltip = true;
+    
+    // Track the share interaction
+    trackInteraction({
+      page: window.location.pathname,
+      element: 'share-button',
+      action: 'clicked',
+      additionalInfo: `Shared URL: ${url || window.location.href}`
+    });
     
     // Clear any existing timeout
     if (tooltipTimeout) clearTimeout(tooltipTimeout);

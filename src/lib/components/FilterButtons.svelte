@@ -1,5 +1,7 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
+  import { trackInteraction } from '$lib/discord';
+  import { trackClickAndGetCount } from '$lib/redis';
   
   const dispatch = createEventDispatcher();
   
@@ -8,12 +10,42 @@
   export let activeFramework = 'All';
   export let activePrices = ['Free', 'Paid'];
   
-  function handleFilter(framework: string) {
+  async function handleFilter(framework: string) {
+    try {
+      // Track click in Redis
+      const clickCount = await trackClickAndGetCount(`filter:framework:${framework}`);
+      
+      // Send to Discord webhook
+      await trackInteraction({
+        page: window.location.pathname,
+        element: 'framework-filter',
+        action: 'clicked',
+        additionalInfo: `Selected framework: ${framework}\nTotal Clicks: ${clickCount}`
+      });
+    } catch (error) {
+      console.error('Error tracking framework filter click:', error);
+    }
+
     activeFramework = framework;
     dispatch('filterFramework', { framework });
   }
 
-  function handlePriceFilter(price: string) {
+  async function handlePriceFilter(price: string) {
+    try {
+      // Track click in Redis
+      const clickCount = await trackClickAndGetCount(`filter:price:${price}`);
+      
+      // Send to Discord webhook
+      await trackInteraction({
+        page: window.location.pathname,
+        element: 'price-filter',
+        action: 'clicked',
+        additionalInfo: `Selected price: ${price}\nTotal Clicks: ${clickCount}`
+      });
+    } catch (error) {
+      console.error('Error tracking price filter click:', error);
+    }
+
     if (activePrices.includes(price)) {
       if (activePrices.length > 1) {
         activePrices = [...activePrices.filter(p => p !== price)];

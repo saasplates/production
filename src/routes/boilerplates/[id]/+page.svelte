@@ -1,6 +1,6 @@
 <script lang="ts">
   export let data;
-  const { boilerplate } = data;
+  const { boilerplate, meta } = data;
   import { scrollPosition } from '$lib/stores/scroll';
   import { fade } from 'svelte/transition';
   import { onMount } from 'svelte';
@@ -8,6 +8,8 @@
   import ShareButton from '$lib/components/ShareButton.svelte';
   import FloatingSubmit from '$lib/components/FloatingSubmit.svelte';
   import { goto } from '$app/navigation';
+  import { trackInteraction } from '$lib/discord';
+  import { trackClickAndGetCount } from '$lib/redis';
 
   let imageLoaded = false;
   let imgElement: HTMLImageElement;
@@ -43,7 +45,42 @@
   function onImageLoad() {
     imageLoaded = true;
   }
+
+  async function handleLinkClick(linkType: string, url: string) {
+    try {
+      // Track click in Redis
+      const clickCount = await trackClickAndGetCount(`boilerplate:${boilerplate.id}:${linkType}`);
+      
+      // Send to Discord webhook
+      await trackInteraction({
+        page: window.location.pathname,
+        element: `boilerplate-${linkType}-link`,
+        action: 'clicked',
+        additionalInfo: `Clicked ${linkType} link for ${boilerplate.title}\nTotal Clicks: ${clickCount}`
+      });
+    } catch (error) {
+      console.error(`Error tracking ${linkType} link click:`, error);
+    }
+  }
 </script>
+
+<svelte:head>
+  <title>{meta.title}</title>
+  <meta name="description" content={meta.description} />
+  
+  <!-- OpenGraph -->
+  <meta property="og:title" content={meta.title} />
+  <meta property="og:description" content={meta.description} />
+  <meta property="og:image" content={meta.image} />
+  <meta property="og:url" content={meta.url} />
+  <meta property="og:type" content="website" />
+  
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={meta.title} />
+  <meta name="twitter:description" content={meta.description} />
+  <meta name="twitter:image" content={meta.image} />
+</svelte:head>
 
 {#if boilerplate}
   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -114,6 +151,7 @@
                   target="_blank"
                   rel="noopener noreferrer"
                   class="inline-flex items-center px-4 py-2 border border-slate-200 text-sm font-medium rounded-md text-gray-600 bg-white hover:bg-gray-50"
+                  on:click={() => handleLinkClick('demo', boilerplate.demoUrl)}
                 >
                   Preview
                 </a>
@@ -125,6 +163,7 @@
                   target="_blank"
                   rel="noopener noreferrer"
                   class="inline-flex items-center px-4 py-2 border border-slate-200 text-sm font-medium rounded-md text-gray-600 bg-white hover:bg-gray-50"
+                  on:click={() => handleLinkClick('source', boilerplate.sourceCodeUrl)}
                 >
                   Source Code
                 </a>
@@ -136,6 +175,7 @@
                   target="_blank"
                   rel="noopener noreferrer"
                   class="w-full inline-flex items-center justify-center px-4 py-2 border border-slate-200 text-sm font-medium rounded-md text-gray-600 bg-white hover:bg-gray-50"
+                  on:click={() => handleLinkClick('visit', boilerplate.visitUrl)}
                 >
                   Visit
                 </a>

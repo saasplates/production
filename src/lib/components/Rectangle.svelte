@@ -1,15 +1,53 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
+  import { trackInteraction } from '$lib/discord';
 
   export let url: string = 'https://0auth.example';
   export let title: string = 'Advertisement';
   export let description: string = 'Sponsored content';
   export let imgSrc: string | undefined = undefined;
+
+  async function handleClick() {
+    try {
+      // Track click via API endpoint
+      const response = await fetch('/api/track-click', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          elementId: `ad:${title}`,
+        }),
+      });
+
+      const data = await response.json();
+      const clickCount = data.clickCount || 'N/A';
+      
+      // Send to Discord webhook with click count
+      await trackInteraction({
+        page: window.location.pathname,
+        element: 'rectangle-ad',
+        action: 'clicked',
+        additionalInfo: `Clicked promoted spot: ${title} - ${description}\nTotal Clicks: ${clickCount}`
+      });
+    } catch (error) {
+      console.error('Error tracking click:', error);
+      
+      // Still track the click even if API call fails
+      await trackInteraction({
+        page: window.location.pathname,
+        element: 'rectangle-ad',
+        action: 'clicked',
+        additionalInfo: `Clicked promoted spot: ${title} - ${description}`
+      });
+    }
+  }
 </script>
 
 <a 
   href={url}
   class="block max-w-3xl mx-auto bg-white border border-gray-200 rounded-lg overflow-hidden hover:border-gray-300 transition-colors"
+  on:click={handleClick}
 >
   <div class="p-4 flex flex-row justify-between items-center">
     <div class="flex flex-row items-center flex-grow">

@@ -1,14 +1,35 @@
 <script lang="ts">
+  import { trackInteraction } from '$lib/discord';
+  import { trackClickAndGetCount } from '$lib/redis';
+  
   export let image: string;
   export let href: string;
   export let title: string = "Advertisement";
   export let description: string = "Sponsored content";
+
+  async function handleClick() {
+    try {
+      // Track click in Redis
+      const clickCount = await trackClickAndGetCount(`ad:${title}`);
+      
+      // Send to Discord webhook
+      await trackInteraction({
+        page: window.location.pathname,
+        element: 'large-ad-card',
+        action: 'clicked',
+        additionalInfo: `Clicked ad: ${title} - ${description}\nTotal Clicks: ${clickCount}`
+      });
+    } catch (error) {
+      console.error('Error tracking ad click:', error);
+    }
+  }
 </script>
 
 <a 
   href={href} 
   rel="noopener" 
   class="group block rounded-2xl border border-gray-200 hover:border-gray-300 transition-colors overflow-hidden mx-auto max-w-3xl"
+  on:click={handleClick}
 >
   <div class="relative w-full bg-emerald-50 text-emerald-950">
     <div class="absolute left-4 top-3 z-10">

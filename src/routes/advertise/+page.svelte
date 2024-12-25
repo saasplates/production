@@ -4,6 +4,7 @@
   import CustomTextarea from '$lib/components/CustomTextarea.svelte';
   import { goto } from '$app/navigation';
   import { onMount } from 'svelte';
+  import { trackInteraction } from '$lib/discord';
 
   let loading = false;
   let error = '';
@@ -148,6 +149,15 @@
       loading = false;
     }
   }
+
+  async function handleClick(element: string, action: string, additionalInfo?: string) {
+    await trackInteraction({
+      page: 'advertise',
+      element,
+      action,
+      additionalInfo
+    });
+  }
 </script>
 
 <svelte:head>
@@ -160,7 +170,7 @@
   <!-- Hero Section with lighter background -->
   <div class="bg-white pb-20">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 text-center">
-      <h1 class="text-3xl font-bold text-gray-900 sm:text-4xl">
+      <h1 class="text-3xl font-bold text-gray-900 sm:text-4xl" on:click={() => handleClick('title', 'clicked')}>
         Advertise with Us
       </h1>
       <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
@@ -197,7 +207,7 @@
     </div>
 
     <p class="text-sm text-center text-gray-600">
-      If you're confused about the packages, please join our <a href="/discord" class="text-gray-900 hover:text-gray-700 font-semibold hover:underline">Discord Server</a> and we'll help you out.
+      If you're confused about the packages, please join our <a href="/discord" class="text-gray-900 hover:text-gray-700 font-semibold hover:underline" on:click={() => handleClick('discord-link', 'clicked', 'Clicked Discord link in advertise page')}>Discord Server</a> and we'll help you out.
     </p>
 
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-12">
@@ -268,7 +278,10 @@
                 {#each allPackages as pkg}
                   <div 
                     class="relative flex items-start p-4 border rounded-lg cursor-pointer hover:bg-gray-50 transition-colors {selectedPackage === pkg.value ? 'border-gray-700 bg-gray-100 ring-1 ring-gray-900' : 'border-gray-200'}"
-                    on:click={() => selectedPackage = pkg.value}
+                    on:click={() => {
+                      selectedPackage = pkg.value;
+                      handleClick('package-selection', 'selected', `Selected package: ${pkg.name}`);
+                    }}
                     on:keydown={(e) => e.key === 'Enter' && (selectedPackage = pkg.value)}
                     tabindex="0"
                     role="radio"
@@ -344,6 +357,7 @@
               type="submit" 
               class="w-full flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 disabled:opacity-50"
               disabled={loading}
+              on:click={() => handleClick('submit-button', 'clicked', 'Advertise form submission attempted')}
             >
               {loading ? 'Submitting...' : 'Submit Inquiry'}
             </button>

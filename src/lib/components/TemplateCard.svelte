@@ -1,12 +1,32 @@
 <script lang="ts">
   import type { Boilerplate } from '$lib/stores/boilerplates';
+  import { trackInteraction } from '$lib/discord';
+  import { trackClickAndGetCount } from '$lib/redis';
   
   export let boilerplate: Boilerplate;
+
+  async function handleClick() {
+    try {
+      // Track click in Redis
+      const clickCount = await trackClickAndGetCount(`template:${boilerplate.id}`);
+      
+      // Send to Discord webhook
+      await trackInteraction({
+        page: window.location.pathname,
+        element: 'template-card',
+        action: 'clicked',
+        additionalInfo: `Clicked template: ${boilerplate.title}\nTotal Clicks: ${clickCount}`
+      });
+    } catch (error) {
+      console.error('Error tracking template click:', error);
+    }
+  }
 </script>
 
 <a 
   href={`/boilerplates/${boilerplate.id}`}
   class="flex flex-col rounded-lg border-[1px] border-slate-200 bg-white overflow-hidden hover:border-slate-300 transition-colors"
+  on:click={handleClick}
 >
   <!-- 16:9 aspect ratio container -->
   <div class="relative w-full pt-[56.25%] bg-gray-100"> <!-- 56.25% = 9/16 -->
