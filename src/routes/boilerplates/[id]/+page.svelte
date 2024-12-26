@@ -13,6 +13,11 @@
   let imgElement: HTMLImageElement;
 
   onMount(() => {
+    // Prevent default scroll restoration
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+
     // Reset image loaded state on mount
     imageLoaded = false;
     
@@ -24,6 +29,9 @@
 
   function handleBackClick() {
     try {
+      // Save current scroll position before navigating
+      scrollPosition.set(window.scrollY);
+      
       const currentLength = window.history.length;
       history.back();
       
@@ -243,14 +251,14 @@
         {/if}
       </div>
     </div>
-    <div class="mt-14">
+    <!-- <div class="mt-14">
       <LargeAdvertiseCard
         title="Footer Promotion Card"
         description="Buy this spot for $399 for 3 months."
         href="/advertise"
         image="/rectangle.webp"
       />
-    </div>
+    </div> -->
   </main>
 {:else}
   <div class="min-h-screen flex items-center justify-center">

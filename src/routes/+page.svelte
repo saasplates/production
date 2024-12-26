@@ -163,10 +163,18 @@
 
 	// Save scroll position when navigating away
 	onMount(() => {
+		// Prevent default scroll restoration
+		if ('scrollRestoration' in history) {
+			history.scrollRestoration = 'manual';
+		}
+
 		// Restore scroll position if it exists
 		if ($scrollPosition > 0) {
-			window.scrollTo(0, $scrollPosition);
-			scrollPosition.set(0); // Reset after restoring
+			// Use requestAnimationFrame to ensure the scroll happens after the page is fully rendered
+			requestAnimationFrame(() => {
+				window.scrollTo(0, $scrollPosition);
+				scrollPosition.set(0); // Reset after restoring
+			});
 		}
 
 		// Save scroll position when navigating away
@@ -190,14 +198,14 @@
 		</div>
 
 		<!-- Advertisement Rectangle -->
-		<div class="pb-5 sm:pb-10">
+		<!-- <div class="pb-5 sm:pb-10">
 			<Rectangle 
 				url="/advertise"
 				title="Promoted #1"
 				description="Buy this spot for $459 for 3 months."
 				imgSrc="/logos/star.svg"
 			/>
-		</div>
+		</div> -->
 
 
 		<!-- Add sidebar and main content layout -->
@@ -248,7 +256,7 @@
 				{/if}
 			</div>
 		</div>
-
+<!-- 
 		<div class="mt-14">
 			<LargeAdvertiseCard
 				title="Footer Promotion Card"
@@ -256,7 +264,7 @@
 				href="/advertise"
 				image="/rectangle.webp"
 			/>
-		</div>
+		</div> -->
 
 		<div
 			class="group block bg-white mt-20 rounded-2xl border border-gray-200 transition-colors"
