@@ -334,6 +334,85 @@ pnpm dev</code></pre>
         `
       }
     ]
+  },
+  {
+    id: 'nextjs-ultimate-saas',
+    title: 'Next.js Ultimate SaaS',
+    description: 'A modern, full-featured SaaS template built with Next.js 15.',
+    image: '/plate/nextjs-ultimate.webp',
+    mainImage: '/plate/nextjs-ultimate-main.webp',
+    framework: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Prisma', 'PostgreSQL'],
+    price: 'Free',
+    demoUrl: 'https://nextjs-ultimate-saas.vercel.app',
+    sourceCodeUrl: 'https://github.com/salvinoto/nextjs-ultimate-saas',
+    visitUrl: 'https://www.kabobtech.com',
+    featured: true,
+    features: [
+      {
+        title: 'Authentication System',
+        description: 'Comprehensive auth with Better Auth including email/password, 2FA, passkeys, and session management'
+      },
+      {
+        title: 'Database Integration',
+        description: 'Prisma ORM with PostgreSQL featuring type-safe queries and automatic migrations'
+      },
+      {
+        title: 'Modern Tech Stack',
+        description: 'Built with Next.js 15, TypeScript, Tailwind CSS, and Shadcn UI components'
+      },
+      {
+        title: 'Multi-tenant Architecture',
+        description: 'Full multi-tenant support with team management and invitation system'
+      },
+      {
+        title: 'Subscription Management',
+        description: 'Built-in subscription system with feature usage tracking'
+      }
+    ],
+    customContent: [
+      {
+        title: 'Authentication Features',
+        description: 'Complete authentication system with multiple options',
+        links: [
+          {
+            text: 'Documentation',
+            url: 'https://github.com/salvinoto/nextjs-ultimate-saas#authentication'
+          }
+        ]
+      }
+    ],
+    children: [
+      {
+        title: 'Core Features',
+        content: `
+          <ul class="list-disc pl-4">
+            <li>🔐 Better Auth Integration</li>
+            <li>📱 Two-factor Authentication</li>
+            <li>🔑 Passkey Support</li>
+            <li>👥 Multi-tenant Architecture</li>
+            <li>💾 Prisma with PostgreSQL</li>
+            <li>🎨 Modern UI with Shadcn</li>
+            <li>📊 Feature Usage Tracking</li>
+            <li>👥 Team Management</li>
+            <li>✉️ Invitation System</li>
+          </ul>
+        `
+      },
+      {
+        title: 'Tech Stack',
+        content: `
+          <ul class="list-disc pl-4">
+            <li>Next.js 15 with App Router</li>
+            <li>TypeScript for type safety</li>
+            <li>Tailwind CSS for styling</li>
+            <li>Shadcn UI components</li>
+            <li>React Hook Form</li>
+            <li>Prisma ORM</li>
+            <li>PostgreSQL database</li>
+          </ul>
+        `
+      }
+    ]
   }
 ];
 
