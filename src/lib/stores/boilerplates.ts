@@ -249,6 +249,91 @@ pnpm dev</code></pre>
     priceAmount: '$149.5',
     visitUrl: 'https://larafast.com',
     // sponsored: true,
+  },
+  {
+    id: 'nextjs-saas-boilerplate',
+    title: 'Next.js SaaS Boilerplate',
+    description: 'Production-ready SaaS template with Next.js, Tailwind CSS, Shadcn UI, and more.',
+    image: '/plate/saas-boilerplate.webp',
+    mainImage: '/plate/saas-boilerplate-main.webp',
+    framework: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Shadcn UI', 'Drizzle ORM'],
+    price: 'Free',
+    demoUrl: 'https://react-saas.com',
+    sourceCodeUrl: 'https://github.com/ixartz/SaaS-Boilerplate',
+    featured: true,
+    features: [
+      {
+        title: 'Authentication & Multi-tenancy',
+        description: 'Built-in authentication with Clerk and multi-tenant support with team management'
+      },
+      {
+        title: 'Database & ORM',
+        description: 'Type-safe database operations with Drizzle ORM supporting PostgreSQL, SQLite, and MySQL'
+      },
+      {
+        title: 'Testing Suite',
+        description: 'Comprehensive testing with Vitest, React Testing Library, and Playwright for E2E tests'
+      },
+      {
+        title: 'Internationalization',
+        description: 'Built-in i18n support for multiple language implementations'
+      },
+      {
+        title: 'Monitoring & Logging',
+        description: 'Error reporting with Sentry and logging system for production monitoring'
+      }
+    ],
+    customContent: [
+      {
+        title: 'Key Features',
+        description: 'Production-ready features for modern SaaS applications',
+        links: [
+          {
+            text: 'Documentation',
+            url: 'https://github.com/ixartz/SaaS-Boilerplate#readme'
+          },
+          {
+            text: 'Live Demo',
+            url: 'https://react-saas.com'
+          }
+        ]
+      }
+    ],
+    children: [
+      {
+        title: 'Core Features',
+        content: `
+          <ul class="list-disc pl-4">
+            <li>🔐 Authentication with Clerk</li>
+            <li>👥 Multi-tenancy with Team support</li>
+            <li>🔑 Role-based access control</li>
+            <li>💾 Database with Drizzle ORM</li>
+            <li>🌍 i18n internationalization</li>
+            <li>📊 User Dashboard</li>
+            <li>🎨 Modern UI with Shadcn UI</li>
+            <li>📝 Form handling</li>
+            <li>🔍 SEO optimization</li>
+            <li>📈 Error monitoring with Sentry</li>
+            <li>🧪 Testing suite</li>
+            <li>👤 User impersonation</li>
+          </ul>
+        `
+      },
+      {
+        title: 'Development Features',
+        content: `
+          <ul class="list-disc pl-4">
+            <li>TypeScript for type safety</li>
+            <li>ESLint for code quality</li>
+            <li>Prettier for code formatting</li>
+            <li>GitHub Actions for CI/CD</li>
+            <li>Vitest for unit testing</li>
+            <li>Playwright for E2E testing</li>
+            <li>Automatic database migrations</li>
+          </ul>
+        `
+      }
+    ]
   }
 ];
 
