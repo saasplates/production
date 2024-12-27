@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://saasboilerplates.dev/sitemap.xml 
+Sitemap: https://saasplates.com/sitemap.xml

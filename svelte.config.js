@@ -13,6 +13,21 @@ const config = {
 	kit: {
 		adapter: adapter(),
 		prerender: {
+			entries: [
+				'/',
+				'/blog',
+				'/advertise',
+				'/submit',
+				'/authors/arjun',
+				'/authors/kritika',
+				'/boilerplates/next-saas-starter',
+				'/boilerplates/nuxt-ui-pro-saas',
+				'/boilerplates/remix-saas',
+				'/boilerplates/larafast',
+				'/boilerplates/nextjs-saas-boilerplate',
+				'/boilerplates/nextjs-ultimate-saas',
+				'/boilerplates/saasfly'
+			],
 			handleHttpError: ({ path, referrer, message }) => {
 				// Ignore missing pages that are dynamically generated
 				if (path === '/sverdle') return;

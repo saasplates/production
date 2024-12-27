@@ -1,4 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
+import fs from 'fs';
+import path from 'path';
+
+const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <!-- Main Pages -->
   <url>
@@ -70,4 +73,14 @@
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
-</urlset>
+</urlset>`;
+
+// Ensure the static directory exists
+const staticDir = path.join(process.cwd(), 'static');
+if (!fs.existsSync(staticDir)) {
+  fs.mkdirSync(staticDir, { recursive: true });
+}
+
+// Write the sitemap file
+fs.writeFileSync(path.join(staticDir, 'sitemap.xml'), sitemap);
+console.log('✅ Sitemap generated successfully!'); 
