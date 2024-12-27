@@ -93,7 +93,7 @@
         <!-- Technology Filter -->
         <div>
           <h3 class="text-sm font-medium text-gray-700 mb-2">Technologies</h3>
-          <div class="border border-gray-200 rounded-full p-1 bg-gray-100 inline-flex flex-wrap gap-[1px]">
+          <div class="border border-gray-200 rounded-full p-1.5 bg-gray-100 inline-flex flex-wrap gap-[1px]">
             {#each technologies as tech}
               <button
                 class="px-4 py-2 text-sm font-medium rounded-full transition-all duration-200 ease-in-out {
