@@ -413,6 +413,90 @@ pnpm dev</code></pre>
         `
       }
     ]
+  },
+  {
+    id: 'saasfly',
+    title: 'Saasfly',
+    description: 'A monorepo-based SaaS starter kit built with Next.js.',
+    image: '/plate/saasfly.webp',
+    mainImage: '/plate/saasfly-main.webp',
+    framework: ['Next.js', 'TypeScript', 'Tailwind CSS', 'tRPC', 'Prisma'],
+    price: 'Free',
+    demoUrl: 'https://show.saasfly.io/en',
+    sourceCodeUrl: 'https://github.com/saasfly/saasfly',
+    features: [
+      {
+        title: 'Enterprise Architecture',
+        description: 'Monorepo structure with separate packages for UI, database, auth, and email components'
+      },
+      {
+        title: 'Type-safe Stack',
+        description: 'End-to-end type safety with TypeScript, tRPC, and Kysely query builder'
+      },
+      {
+        title: 'Modern UI Framework',
+        description: 'Beautiful interfaces with Tailwind CSS, Shadcn/ui, and Framer Motion animations'
+      },
+      {
+        title: 'Performance Optimized',
+        description: 'Built-in performance features with Vercel Analytics and Bun package manager'
+      },
+      {
+        title: 'Developer Experience',
+        description: 'Enhanced DX with ESLint, Prettier, Husky, and comprehensive tooling'
+      }
+    ],
+    customContent: [
+      {
+        title: 'Package Structure',
+        description: 'Organized as a monorepo with specialized packages',
+        links: [
+          {
+            text: 'Documentation',
+            url: 'https://github.com/saasfly/saasfly#readme'
+          },
+          {
+            text: 'Live Demo',
+            url: 'https://show.saasfly.io/en'
+          }
+        ]
+      }
+    ],
+    children: [
+      {
+        title: 'Core Features',
+        content: `
+          <ul class="list-disc pl-4">
+            <li>🏢 Monorepo Architecture</li>
+            <li>🔐 NextAuth.js Authentication</li>
+            <li>📧 React-email Integration</li>
+            <li>💳 Stripe Payment Processing</li>
+            <li>🌍 i18n Support</li>
+            <li>🔍 SEO Optimization</li>
+            <li>🎨 Shadcn/ui Components</li>
+            <li>🚀 Vercel Analytics</li>
+            <li>📦 Bun Package Manager</li>
+            <li>🛢️ PostgreSQL Database</li>
+          </ul>
+        `
+      },
+      {
+        title: 'Tech Stack',
+        content: `
+          <ul class="list-disc pl-4">
+            <li>⚛️ Next.js with App Directory</li>
+            <li>🔄 tRPC & React Query</li>
+            <li>🗃️ Kysely Query Builder</li>
+            <li>📨 Resend Email Platform</li>
+            <li>🎭 Framer Motion</li>
+            <li>🎨 Tailwind CSS</li>
+            <li>📝 TypeScript</li>
+            <li>🧹 ESLint & Prettier</li>
+            <li>🐶 Husky Git Hooks</li>
+          </ul>
+        `
+      }
+    ]
   }
 ];
 
