@@ -8,8 +8,10 @@
     <div class="flex justify-between items-center h-16">
       <!-- Logo/Brand -->
       <div class="flex items-center">
-        <a href="/" class="text-xl font-bold text-gray-900">
-          SaasPlates
+        <a href="/" class="flex items-center gap-2">
+          <svg class="w-8 h-8" viewBox="0 0 244 350" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 305.093L156.289 296.286C224.831 276.902 106.583 179.953 64.9537 121.157C50.3496 100.53 131.71 44.5714 228.733 39.9288" stroke="currentColor" stroke-width="60"/>
+          </svg>
         </a>
       </div>
 
