@@ -16,3 +16,7 @@ html, body {
     margin: 0;
     overflow-x: hidden;
 }
+
+h1 {
+ @apply py-1.5 overflow-y-hidden;
+}
