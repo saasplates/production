@@ -243,7 +243,7 @@
 		</div>
 
 		<div
-			class="group block bg-white mt-20 rounded-2xl border border-gray-200 transition-colors"
+			class="group max-w-4xl mx-auto block bg-white mt-20 rounded-2xl border border-gray-200 transition-colors"
 		>
 			<div class="max-w-2xl mx-auto text-start py-16 px-4 sm:py-14">
 				<SectionTwo 

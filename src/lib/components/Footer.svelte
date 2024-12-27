@@ -17,23 +17,22 @@
 				</svg>
 			</a>
 		</div>
-		<div class="mt-8 md:mt-0 md:order-1">
+		<div class="mt-8 md:mt-0">
 			<div class="flex flex-col items-center md:items-start space-y-2">
-				<p class="text-center text-base text-gray-400">
-					&copy; 2024 SaasPlates. Maintained by <a href="https://x.com/arjvnz" class="text-gray-700 hover:text-gray-900 hover:underline font-medium">Arjun Aditya</a>.
+				<p class="text-center text-sm text-gray-500">
+					Maintained by <a href="https://x.com/arjvnz" class="text-gray-700 hover:text-gray-900 hover:underline font-medium">Arjun Aditya</a>.
+					-
+					<span class="">Deployed on{" "}
+						<a 
+							href="https://zerops.io" 
+							target="_blank" 
+							rel="noopener"
+							class="text-gray-700 hover:text-gray-900 font-medium hover:underline"
+						>
+							Zerops
+						</a>
+						</span>
 				</p>
-				<div class="flex items-center gap-1 pt-3 text-sm text-gray-500">
-					<span class="border-neutral-200 border rounded-md px-2 py-1">Deployed on{" "}
-					<a 
-						href="https://zerops.io" 
-						target="_blank" 
-						rel="noopener"
-						class="text-gray-700 hover:text-gray-900 font-medium"
-					>
-						Zerops
-					</a>
-					</span>
-				</div>
 			</div>
 		</div>
 	</div>
