@@ -1,10 +1,10 @@
-<footer class="">
-	<div class="md:flex md:justify-between">
-		<div class="bg-white py-12 px-10 border-t border-r border-gray-300 rounded-tr-lg w-[65%] mr-[-20px]">
+<footer class="border-t border-gray-300">
+	<div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 md:flex md:items-center md:justify-between lg:px-8">
+		<div class="bg-gray-100">
 			<div class="mt-8 md:mt-0 border border-gray-300 py-2 px-4 rounded-full bg-gray-50 inline-flex flex-wrap gap-[1px]">
 				<div class="flex flex-col items-center md:items-start space-y-2">
 					<p class="text-center text-sm text-gray-600">
-						Maintained by <a href="https://x.com/arjvnz" class="text-gray-800 hover:text-gray-900 hover:underline font-medium">Arjun Aditya</a>
+						Maintained by <a href="https://x.com/arjvnz" class="text-gray-800 hover:text-gray-900 hover:underline font-medium">Arjun Aditya</a>.
 						-
 						<span class="">Deployed on{" "}
 							<a 
@@ -20,8 +20,7 @@
 				</div>
 			</div>
 		</div>
-
-		<div class="bg-white py-12 px-10 border-t border-l border-gray-300 rounded-tl-lg">
+		<div>
 			<div class="flex justify-center space-x-6 md:order-2">
 				<a href="/about" class="text-gray-500 hover:text-gray-600">
 					About

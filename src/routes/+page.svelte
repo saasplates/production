@@ -175,7 +175,7 @@
 </script>
 
 <main class="min-h-screen bg-gray-50">
-	<div class="max-w-7xl mx-auto px-10 lg:px-5 py-10">
+	<div class="max-w-7xl mx-auto px-10 lg:px-5 py-20">
 		<div class="text-center py-12">
 			<div class="flex justify-center mb-5">
 				<a target="_blank" href="https://www.producthunt.com/posts/saasplates?embed=true&utm_source=badge-featured&utm_medium=badge&utm_souce=badge-saasplates"><img draggable="false" src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=735284&theme=light" alt="SaasPlates - Premium&#0032;Open&#0032;Source&#0032;&#0038;&#0032;Paid&#0032;Boilerplates | Product Hunt" style="width: 200px; height: 43px;" width="250" height="54" /></a>
@@ -241,7 +241,10 @@
 				{/if}
 			</div>
 		</div>
-
+		<br />
+		<br />
+		<br />
+<!-- 
 		<div
 			class="group max-w-4xl mx-auto block bg-white mt-20 rounded-2xl border border-gray-200 transition-colors"
 		>
@@ -251,6 +254,6 @@
 					features={sectionTwoData.features}
 				/>
 			</div>
-		</div>
+		</div> -->
 	</div>
 </main>
