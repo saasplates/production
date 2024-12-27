@@ -78,7 +78,7 @@
   />
 </svelte:head>
 
-<div class="min-h-screen flex flex-col">
+<div class="min-h-screen bg-gray-50 flex flex-col">
   <!-- <DiscordBanner /> -->
   <Header />
   

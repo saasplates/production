@@ -43,9 +43,9 @@
 <div class="w-full mb-8">
   <!-- View Toggle -->
   <div class="mb-6">
-    <div class="flex justify-center gap-[1px] mb-4 border border-gray-200 rounded-full p-1 bg-gray-100 inline-flex">
+    <div class="flex justify-center gap-[1px] mb-4 border border-gray-200 rounded-[24px] p-1 bg-gray-100 inline-flex">
       <button
-        class="px-6 py-2 text-sm font-medium rounded-full transition-all duration-200 ease-in-out {
+        class="px-6 py-2 text-sm font-medium rounded-[20px] transition-all duration-200 ease-in-out {
           activeView === 'boilerplates'
             ? 'bg-gray-900 text-white'
             : 'text-gray-700 hover:text-gray-900'
@@ -55,7 +55,7 @@
         Boilerplates
       </button>
       <button
-        class="px-6 py-2 text-sm font-medium rounded-full transition-all duration-200 ease-in-out {
+        class="px-6 py-2 text-sm font-medium rounded-[20px] transition-all duration-200 ease-in-out {
           activeView === 'starters'
             ? 'bg-gray-900 text-white'
             : 'text-gray-700 hover:text-gray-900'
@@ -74,10 +74,10 @@
         <!-- Framework Filter -->
         <div>
           <h3 class="text-sm font-medium text-gray-700 mb-2">Frameworks</h3>
-          <div class="border border-gray-200 rounded-full p-1.5 bg-gray-100 inline-flex flex-wrap gap-[1px]">
+          <div class="border border-gray-200 rounded-[24px] p-1.5 bg-gray-100 inline-flex flex-wrap gap-[1px]">
             {#each Frameworks as framework}
               <button
-                class="px-4 py-2 text-sm font-medium rounded-full transition-all duration-200 ease-in-out {
+                class="px-4 py-2 text-sm font-medium rounded-[20px] transition-all duration-200 ease-in-out {
                   activeFramework === framework
                     ? 'bg-gray-900 text-white'
                     : 'text-gray-700 hover:text-gray-900'
@@ -93,10 +93,10 @@
         <!-- Technology Filter -->
         <div>
           <h3 class="text-sm font-medium text-gray-700 mb-2">Technologies</h3>
-          <div class="border border-gray-200 rounded-full p-1.5 bg-gray-100 inline-flex flex-wrap gap-[1px]">
+          <div class="border border-gray-200 rounded-[24px] p-1.5 bg-gray-100 inline-flex flex-wrap gap-[1px]">
             {#each technologies as tech}
               <button
-                class="px-4 py-2 text-sm font-medium rounded-full transition-all duration-200 ease-in-out {
+                class="px-4 py-2 text-sm font-medium rounded-[20px] transition-all duration-200 ease-in-out {
                   activeFramework === tech.id
                     ? 'bg-gray-900 text-white'
                     : 'text-gray-700 hover:text-gray-900'
@@ -115,10 +115,10 @@
     {#if activeView === 'boilerplates'}
       <div class="min-w-[150px]">
         <h3 class="text-sm font-medium text-gray-700 mb-2">Price</h3>
-        <div class="border border-gray-200 rounded-full p-1 bg-gray-100 inline-flex gap-[1px]">
+        <div class="border border-gray-200 rounded-[24px] p-1.5 bg-gray-100 inline-flex gap-1.5">
           {#each prices as price}
             <button
-              class="px-4 py-2 text-sm font-medium rounded-full transition-all duration-200 ease-in-out inline-flex items-center gap-1.5 {
+              class="px-4 py-2 text-sm font-medium rounded-[20px] transition-all duration-200 ease-in-out inline-flex items-center gap-2 {
                 activePrices.includes(price)
                   ? 'bg-gray-900 text-white'
                   : 'text-gray-700 hover:text-gray-900'

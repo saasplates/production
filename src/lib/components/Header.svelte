@@ -3,8 +3,8 @@
   import ShareButton from './ShareButton.svelte';
 </script>
 
-<header>
-  <div class="max-w-7xl border-b border-gray-200 mx-auto px-4 sm:px-6 lg:px-8">
+<header class="fixed top-0 z-50 border-b border-gray-200 left-0 right-0 w-full bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between items-center h-16">
       <!-- Logo/Brand -->
       <div class="flex items-center">
