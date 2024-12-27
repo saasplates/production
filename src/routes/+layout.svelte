@@ -20,8 +20,6 @@
         api_host: 'https://us.i.posthog.com',
         person_profiles: 'identified_only',
       });
-      
-      posthog.capture('test', { property: 'value' });
     }
   });
 </script>
