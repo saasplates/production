@@ -1,2 +1,2 @@
-## Production of Saasplates (very hardcoded for now)
+## Production of SaasPlates (very hardcoded for now)
 
