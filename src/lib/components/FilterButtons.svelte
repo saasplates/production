@@ -74,10 +74,10 @@
         <!-- Framework Filter -->
         <div>
           <h3 class="text-sm font-medium text-gray-700 mb-2">Frameworks</h3>
-          <div class="border border-gray-200 rounded-[24px] p-1.5 bg-gray-100 flex flex-wrap gap-1">
+          <div class="border border-gray-200 rounded-[16px] sm:rounded-[24px] p-1.5 bg-gray-100 flex flex-wrap gap-1">
             {#each Frameworks as framework}
               <button
-                class="px-3 sm:px-4 py-2 text-sm font-medium rounded-[20px] transition-all duration-200 ease-in-out {
+                class="px-3 sm:px-4 py-2 text-sm font-medium rounded-[12px] sm:rounded-[20px] transition-all duration-200 ease-in-out {
                   activeFramework === framework
                     ? 'bg-gray-900 text-white'
                     : 'text-gray-700 hover:text-gray-900'
