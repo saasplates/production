@@ -7,6 +7,7 @@
   import posthog from 'posthog-js'
   import { browser } from '$app/environment';
   import { onMount } from 'svelte';
+  import { onNavigate } from '$app/navigation';
 
   const siteName = 'SaasPlates';
   const siteTitle = 'SaasPlates - Premium SaaS Boilerplates';
@@ -22,9 +23,21 @@
       });
     }
   });
+
+  onNavigate((navigation) => {
+    if (!browser) return;
+    
+    return new Promise((resolve) => {
+      const transition = document.startViewTransition(async () => {
+        window.scrollTo(0, 0);
+        document.body.scrollTo(0, 0);
+        document.documentElement.scrollTo(0, 0);
+        resolve();
+        await navigation.complete;
+      });
+    });
+  });
 </script>
-
-
 
 <div class="min-h-screen bg-gray-50 flex flex-col">
   <!-- <DiscordBanner /> -->

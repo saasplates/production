@@ -30,7 +30,7 @@ export const authors: Author[] = [
     website: 'https://arjunaditya.xyz',
     stats: {
       totalPosts: 5,
-      joinedDate: '2023-12-01'
+      joinedDate: '2024-12-28'
     }
   },
   {
@@ -44,7 +44,7 @@ export const authors: Author[] = [
     website: 'https://bento.me/kaykritika',
     stats: {
       totalPosts: 3,
-      joinedDate: '2024-01-15'
+      joinedDate: '2024-12-28'
     }
   }
 ];
