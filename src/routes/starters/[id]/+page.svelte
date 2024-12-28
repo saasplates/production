@@ -45,119 +45,36 @@
 </script>
 
 {#if starter}
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    <div class="flex gap-8">
-      <!-- Sidebar -->
-      <div class="w-80 flex-shrink-0 border-r border-gray-300">
-        <div class="top-8 space-y-6 bg-white p-4 pr-6 rounded-lg">
-          <!-- Back to Starters -->
-          <div class="flex items-center justify-between mb-2">
-            <a 
-              href="#"
-              on:click|preventDefault={handleBackClick}
-              class="inline-flex items-center text-sm text-gray-500 hover:text-gray-900"
-            >
-              <svg 
-                class="w-4 h-4 mr-2" 
-                fill="none" 
-                stroke="currentColor" 
-                viewBox="0 0 24 24"
-              >
-                <path 
-                  stroke-linecap="round" 
-                  stroke-linejoin="round" 
-                  stroke-width="2" 
-                  d="M10 19l-7-7m0 0l7-7m-7 7h18"
-                />
-              </svg>
-              Back to Starters
-            </a>
-            <ShareButton title={starter.title} />
-          </div>
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 pt-20 sm:pt-24">
+    <!-- Back and Share Button - Always visible -->
+    <div class="flex items-center justify-between mb-4 sm:mb-6">
+      <a 
+        href="#"
+        on:click|preventDefault={handleBackClick}
+        class="inline-flex items-center text-sm text-gray-500 hover:text-gray-900"
+      >
+        <svg 
+          class="w-4 h-4 mr-2" 
+          fill="none" 
+          stroke="currentColor" 
+          viewBox="0 0 24 24"
+        >
+          <path 
+            stroke-linecap="round" 
+            stroke-linejoin="round" 
+            stroke-width="2" 
+            d="M10 19l-7-7m0 0l7-7m-7 7h18"
+          />
+        </svg>
+        Back to Starters
+      </a>
+      <ShareButton title={starter.title} />
+    </div>
 
-          <h1 class="text-2xl font-bold text-gray-900">
-            {starter.title}
-          </h1>
-
-          <!-- Technologies -->
-          <div class="space-y-2">
-            <h2 class="font-semibold text-gray-700">Tech Stack</h2>
-            <div class="flex flex-wrap gap-2">
-              {#each starter.framework as tech}
-                <span class="px-3 py-1 rounded-md text-sm bg-gray-100 text-gray-800">
-                  {tech}
-                </span>
-              {/each}
-            </div>
-          </div>
-
-          <!-- Category -->
-          <div class="space-y-2">
-            <h2 class="font-semibold text-gray-700">Category</h2>
-            <span class="px-3 py-1 rounded-md text-sm bg-blue-100 text-blue-800 capitalize">
-              {starter.category}
-            </span>
-          </div>
-
-          <!-- Price -->
-          <div class="space-y-2">
-            <h2 class="font-semibold text-gray-700">Price</h2>
-            <span class="px-3 py-1 rounded-md text-sm inline-block {starter.price === 'Free' ? 'bg-green-100 text-green-800' : 'bg-blue-100 text-blue-800'}">
-              {#if starter.priceAmount}
-                {starter.priceAmount}
-              {:else}
-                {starter.price}
-              {/if}
-            </span>
-          </div>
-
-          <!-- Links -->
-          <div>
-            <h2 class="font-semibold text-gray-700 mb-2">Links</h2>
-            <div class="flex flex-row gap-2">
-              {#if starter.demoUrl}
-                <a
-                  href={starter.demoUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="inline-flex items-center px-4 py-2 border border-slate-200 text-sm font-medium rounded-md text-gray-600 bg-white hover:bg-gray-50"
-                >
-                  Preview
-                </a>
-              {/if}
-
-              {#if starter.sourceCodeUrl}
-                <a
-                  href={starter.sourceCodeUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="inline-flex items-center px-4 py-2 border border-slate-200 text-sm font-medium rounded-md text-gray-600 bg-white hover:bg-gray-50"
-                >
-                  Source Code
-                </a>
-              {/if}
-
-              {#if starter.visitUrl}
-                <a
-                  href={starter.visitUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="w-full inline-flex items-center justify-center px-4 py-2 border border-slate-200 text-sm font-medium rounded-md text-gray-600 bg-white hover:bg-gray-50"
-                >
-                  Visit
-                </a>
-              {/if}
-
-              {#if !starter.demoUrl && !starter.sourceCodeUrl && !starter.visitUrl}
-                <span class="text-sm text-gray-500">No links available</span>
-              {/if}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Main Content -->
-      <div class="flex-1 space-y-8">
+    <!-- Main Content Area -->
+    <div class="flex flex-col lg:flex-row gap-6 lg:gap-8">
+      <!-- Main Content First on Mobile -->
+      <div class="flex-1 space-y-6">
         <div class="relative w-full aspect-video rounded-lg overflow-hidden bg-gray-100">
           {#if !imageLoaded}
             <div class="absolute inset-0 animate-pulse bg-gray-100" />
@@ -172,6 +89,13 @@
             class:opacity-0={!imageLoaded}
             class:opacity-100={imageLoaded}
           />
+        </div>
+
+        <!-- Title on Mobile -->
+        <div class="lg:hidden">
+          <h1 class="text-xl sm:text-2xl font-bold text-gray-900 mb-4">
+            {starter.title}
+          </h1>
         </div>
 
         <!-- Description -->
@@ -248,6 +172,86 @@
             {/each}
           </div>
         {/if}
+      </div>
+
+      <!-- Sidebar - After main content on mobile -->
+      <div class="w-full lg:w-80 lg:flex-shrink-0">
+        <div class="bg-white rounded-lg border border-gray-200 p-4 sm:p-6">
+          <!-- Title - Only visible on desktop -->
+          <h1 class="hidden lg:block text-xl sm:text-2xl font-bold text-gray-900 mb-6">
+            {starter.title}
+          </h1>
+
+          <div class="space-y-6">
+            <!-- Technologies -->
+            <div class="space-y-2">
+              <h2 class="font-semibold text-gray-700">Tech Stack</h2>
+              <div class="flex flex-wrap gap-2">
+                {#each starter.framework as tech}
+                  <span class="px-3 py-1 rounded-md text-sm bg-gray-100 text-gray-800">
+                    {tech}
+                  </span>
+                {/each}
+              </div>
+            </div>
+
+            <!-- Category -->
+            <div class="space-y-2">
+              <h2 class="font-semibold text-gray-700">Category</h2>
+              <span class="px-3 py-1 rounded-md text-sm bg-blue-100 text-blue-800 capitalize">
+                {starter.category}
+              </span>
+            </div>
+
+            <!-- Price -->
+            <div class="space-y-2">
+              <h2 class="font-semibold text-gray-700">Price</h2>
+              <span class="px-3 py-1 rounded-md text-sm inline-block {starter.price === 'Free' ? 'bg-green-100 text-green-800' : 'bg-blue-100 text-blue-800'}">
+                {#if starter.priceAmount}
+                  {starter.priceAmount}
+                {:else}
+                  {starter.price}
+                {/if}
+              </span>
+            </div>
+
+            <!-- Links -->
+            <div class="grid grid-cols-2 gap-2">
+              {#if starter.demoUrl}
+                <a
+                  href={starter.demoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center justify-center px-4 py-2 border border-slate-200 text-sm font-medium rounded-md text-gray-600 bg-white hover:bg-gray-50"
+                >
+                  Preview
+                </a>
+              {/if}
+
+              {#if starter.sourceCodeUrl}
+                <a
+                  href={starter.sourceCodeUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center justify-center px-4 py-2 border border-slate-200 text-sm font-medium rounded-md text-gray-600 bg-white hover:bg-gray-50"
+                >
+                  Source Code
+                </a>
+              {/if}
+
+              {#if starter.visitUrl}
+                <a
+                  href={starter.visitUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="col-span-2 inline-flex items-center justify-center px-4 py-2 border border-slate-200 text-sm font-medium rounded-md text-gray-600 bg-white hover:bg-gray-50"
+                >
+                  Visit
+                </a>
+              {/if}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </main>

@@ -189,7 +189,7 @@
 		</div>
 
 		<!-- Add sidebar and main content layout -->
-		<div class="mt-10 mx-10">
+		<div class="mt-10 mx-3 sm:mx-10">
 			<!-- Main content -->
 			<div class="max-w-7xl mx-auto">
 				<FilterButtons 

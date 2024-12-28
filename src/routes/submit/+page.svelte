@@ -129,35 +129,35 @@
   <link rel="canonical" href="https://saasboilerplates.dev/submit" />
 </svelte:head>
 
-<main class="mb-20 bg-gray-50">
+<main class="mb-20 bg-gray-50 pt-20 sm:pt-24">
 
   <!-- Hero Section with lighter background -->
   <div class="bg-white">
 
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 text-center">
-      <h1 class="text-3xl font-bold text-gray-900 sm:text-4xl">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20 text-center">
+      <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900">
         Submit Your Boilerplate
       </h1>
-      <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
+      <p class="pt-4 text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
         Share your work with thousands of developers and designers looking for high-quality SaaS boilerplates
       </p>
     </div>
 
-    <div class="max-w-4xl mx-auto mt-4">
-      <div class="grid gap-6  md:grid-cols-2 mb-12">
+    <div class="max-w-4xl mx-auto pt-4 px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-2 mb-8 sm:mb-12">
         {#each packages as pkg}
-          <div class="border border-gray-200 rounded-lg p-6 bg-gray-50 hover:bg-gray-100 transition-colors relative">
+          <div class="border border-gray-200 rounded-lg p-4 sm:p-6 bg-gray-50 hover:bg-gray-100 transition-colors relative mt-4">
             {#if pkg.value === 'paid'}
               <div class="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                <span class="bg-gray-600 text-white text-xs font-semibold px-3 py-1 rounded-full">
+                <span class="bg-gray-600 text-white text-xs font-semibold px-3 py-1 rounded-full z-20">
                   Most Popular
                 </span>
               </div>
             {/if}
             <h3 class="text-lg font-semibold text-gray-900">{pkg.name}</h3>
-            <p class="mt-2 text-sm text-gray-600">{pkg.description}</p>
-            <p class="mt-4 text-2xl font-bold text-gray-900">{pkg.price}</p>
-            <ul class="mt-4 space-y-2">
+            <p class="pt-2 text-sm text-gray-600">{pkg.description}</p>
+            <p class="pt-4 text-2xl font-bold text-gray-900">{pkg.price}</p>
+            <ul class="pt-4 space-y-2">
               {#each pkg.features as feature}
                 <li class="flex items-start">
                   <svg class="h-5 w-5 text-gray-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -172,9 +172,9 @@
       </div>
     </div>
     
-    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
       <div class="bg-white border border-gray-200 rounded-lg">
-        <div class="px-6 py-8 sm:px-12">
+        <div class="px-4 py-6 sm:p-8 md:p-12">
           {#if success}
             <div class="bg-green-50 p-4 rounded-md mb-6">
               <p class="text-green-800">Successfully submitted! Redirecting...</p>
@@ -187,8 +187,8 @@
             </div>
           {/if}
   
-          <form class="space-y-6" on:submit={handleSubmit}>
-            <div class="grid gap-6 md:grid-cols-2">
+          <form class="space-y-4 sm:space-y-6" on:submit={handleSubmit}>
+            <div class="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2">
               <div>
                 <label for="name" class="block text-sm font-medium text-gray-700">Your Name</label>
                 <input 
@@ -199,7 +199,7 @@
                   bind:value={formData.name}
                   on:input={saveFormData}
                   placeholder="Arjun Aditya"
-                  class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 p-2"
+                  class="pt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 p-2"
                 >
               </div>
               <div>
@@ -212,7 +212,7 @@
                   bind:value={formData.email}
                   on:input={saveFormData}
                   placeholder="meow@nermalcat69.dev"
-                  class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 p-2"
+                  class="pt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 p-2"
                 >
               </div>
               <div>
@@ -225,7 +225,7 @@
                   bind:value={formData.title}
                   on:input={saveFormData}
                   placeholder="My Awesome SaaS Boilerplate"
-                  class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 p-2"
+                  class="pt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 p-2"
                 >
               </div>
               <div>
@@ -237,7 +237,7 @@
                     required
                     bind:value={formData.framework}
                     on:change={saveFormData}
-                    class="appearance-none mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 p-2 h-[42px] text-base bg-white pr-8"
+                    class="appearance-none pt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 p-2 h-[42px] text-base bg-white pr-8"
                   >
                     <option value="" disabled selected>Select a framework</option>
                     <option value="nextjs">Next.js</option>
@@ -260,12 +260,12 @@
               </div>
             </div>
 
-            <div class="mb-6">
-              <Label class="mb-4 text-gray-700">Select Package Type</Label>
-              <div class="flex flex-col gap-4">
+            <div class="mb-4 sm:mb-6">
+              <Label class="mb-3 sm:mb-4 text-gray-700">Select Package Type</Label>
+              <div class="flex flex-col gap-3 sm:gap-4">
                 {#each packages as pkg}
                   <div 
-                    class="w-full relative flex items-start p-4 border rounded-lg cursor-pointer hover:bg-gray-50 transition-colors {selectedPackage === pkg.value ? 'border-gray-700 bg-gray-100 ring-1 ring-gray-900' : 'border-gray-200'}"
+                    class="w-full relative flex flex-col sm:flex-row items-start p-3 sm:p-4 border rounded-lg cursor-pointer hover:bg-gray-50 transition-colors {selectedPackage === pkg.value ? 'border-gray-700 bg-gray-100 ring-1 ring-gray-900' : 'border-gray-200'}"
                     on:click={() => {
                       selectedPackage = pkg.value;
                       pricingType = pkg.value;
@@ -284,19 +284,19 @@
                         class="h-4 w-4 text-gray-900 border-gray-300 focus:ring-gray-900"
                       >
                     </div>
-                    <div class="ml-3 flex justify-between w-full">
+                    <div class="ml-0 sm:ml-3 pt-2 sm:pt-0 flex flex-col sm:flex-row justify-between w-full gap-2">
                       <div>
-                        <p class="text-base font-medium text-gray-900">{pkg.name}</p>
-                        <p class="text-sm text-gray-500">{pkg.description}</p>
+                        <p class="text-sm sm:text-base font-medium text-gray-900">{pkg.name}</p>
+                        <p class="text-xs sm:text-sm text-gray-500">{pkg.description}</p>
                       </div>
-                      <p class="text-base font-medium text-gray-900 ml-8">{pkg.price}</p>
+                      <p class="text-sm sm:text-base font-medium text-gray-900 sm:ml-8">{pkg.price}</p>
                     </div>
                   </div>
                 {/each}
               </div>
             </div>
 
-            <div class="grid gap-6 md:grid-cols-2">
+            <div class="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2">
               <div>
                 <label for="discord" class="block text-sm font-medium text-gray-700">Discord Username</label>
                 <input 
@@ -306,7 +306,7 @@
                   bind:value={formData.discord}
                   on:input={saveFormData}
                   placeholder="username"
-                  class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 p-2"
+                  class="pt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 p-2"
                 />
               </div>
 
@@ -319,7 +319,7 @@
                   bind:value={formData.x}
                   on:input={saveFormData}
                   placeholder="@username"
-                  class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 p-2"
+                  class="pt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 p-2"
                 />
               </div>
             </div>
@@ -334,7 +334,7 @@
                 bind:value={formData.description}
                 on:input={saveFormData}
                 placeholder="Tell us about your boilerplate..."
-                class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 p-2"
+                class="pt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 p-2"
               ></textarea>
             </div>
 
@@ -348,7 +348,7 @@
                 bind:value={formData.link}
                 on:input={saveFormData}
                 placeholder="https://github.com/username/repo"
-                class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 p-2"
+                class="pt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 p-2"
               />
             </div>
   
@@ -365,7 +365,7 @@
                   min="0"
                   step="0.01"
                   placeholder="29.99"
-                  class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 p-2"
+                  class="pt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 p-2"
                 />
               </div>
             {/if}
