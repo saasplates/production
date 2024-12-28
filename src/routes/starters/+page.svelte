@@ -24,7 +24,29 @@
     { id: 'ui', name: 'UI Components' },
     { id: 'testing', name: 'Testing' }
   ];
+
+  // SEO metadata
+  const title = "Micro Starters - Ready-to-use SaaS Components | SaasPlates";
+  const description = "Discover ready-to-use starter templates for specific SaaS functionalities like authentication, payments, databases, and more. Easily integrate these components into your project.";
+  const keywords = "micro starters, saas components, authentication templates, payment integration, database starters, api templates, ui components, testing templates";
 </script>
+
+<svelte:head>
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <meta name="keywords" content={keywords} />
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="SaasPlates" />
+  
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+</svelte:head>
 
 <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
   <div class="text-center mb-8 sm:mb-12">

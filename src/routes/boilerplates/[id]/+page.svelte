@@ -15,10 +15,14 @@
   const siteUrl = 'https://saasplates.com';
   const siteName = 'SaasPlates';
 
-  // Reactive SEO data
-  $: seoTitle = boilerplate ? `${boilerplate.title} | ${siteName}` : siteName;
-  $: seoDescription = boilerplate?.description || 'Discover SaaS boilerplates and templates';
-  $: seoKeywords = boilerplate ? `${boilerplate.framework.join(', ')}, saas boilerplate, ${boilerplate.title.toLowerCase()}` : 'saas boilerplates';
+  // Enhanced SEO data
+  $: seoTitle = boilerplate ? `${boilerplate.title} - ${boilerplate.framework.join(', ')} SaaS Boilerplate | ${siteName}` : siteName;
+  $: seoDescription = boilerplate ? 
+    `${boilerplate.description} Built with ${boilerplate.framework.join(', ')}. ${boilerplate.price === 'Free' ? 'Free' : 'Premium'} SaaS boilerplate with modern features and best practices.` : 
+    'Discover SaaS boilerplates and templates';
+  $: seoKeywords = boilerplate ? 
+    `${boilerplate.framework.join(', ')}, saas boilerplate, ${boilerplate.title.toLowerCase()}, ${boilerplate.price.toLowerCase()} saas template, ${boilerplate.framework.map(f => f.toLowerCase() + ' template').join(', ')}` : 
+    'saas boilerplates';
   $: seoImage = boilerplate ? `${siteUrl}${boilerplate.mainImage || boilerplate.image}` : `${siteUrl}/og.png`;
   $: seoUrl = boilerplate ? `${siteUrl}/boilerplates/${boilerplate.id}` : siteUrl;
 
@@ -77,6 +81,13 @@
   <meta property="og:description" content={seoDescription} />
   <meta property="og:image" content={seoImage} />
   <meta property="og:site_name" content={siteName} />
+  <meta property="article:publisher" content={siteUrl} />
+  {#if boilerplate?.publishedAt}
+    <meta property="article:published_time" content={boilerplate.publishedAt} />
+  {/if}
+  {#if boilerplate?.updatedAt}
+    <meta property="article:modified_time" content={boilerplate.updatedAt} />
+  {/if}
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
@@ -85,14 +96,16 @@
   <meta name="twitter:title" content={seoTitle} />
   <meta name="twitter:description" content={seoDescription} />
   <meta name="twitter:image" content={seoImage} />
-  <meta name="twitter:image:alt" content={boilerplate ? `${boilerplate.title} - ${boilerplate.framework.join(', ')} SaaS Boilerplate` : 'SaasPlates'} />
+  <meta name="twitter:image:alt" content={boilerplate ? `${boilerplate.title} - ${boilerplate.framework.join(', ')} SaaS Boilerplate Screenshot` : 'SaasPlates'} />
 
   <!-- Additional SEO -->
   <link rel="canonical" href={seoUrl} />
-  <meta name="robots" content="index, follow" />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+  <meta name="author" content={siteName} />
+  <meta name="language" content="English" />
 
   {#if boilerplate}
-    <!-- Structured Data -->
+    <!-- Enhanced Structured Data -->
     <script type="application/ld+json">
       {JSON.stringify({
         "@context": "https://schema.org",
@@ -104,7 +117,8 @@
         "offers": {
           "@type": "Offer",
           "price": boilerplate.price === "Free" ? "0" : boilerplate.priceAmount || "Contact for Price",
-          "priceCurrency": boilerplate.price === "Free" ? "USD" : undefined
+          "priceCurrency": boilerplate.price === "Free" ? "USD" : undefined,
+          "availability": "https://schema.org/InStock"
         },
         "image": seoImage,
         "url": seoUrl,
@@ -113,7 +127,48 @@
           "name": siteName,
           "url": siteUrl
         },
-        "keywords": [...boilerplate.framework, "saas boilerplate", boilerplate.title.toLowerCase()].join(", ")
+        "keywords": [...boilerplate.framework, "saas boilerplate", boilerplate.title.toLowerCase()].join(", "),
+        "softwareVersion": boilerplate.version || "1.0.0",
+        "datePublished": boilerplate.publishedAt || new Date().toISOString(),
+        "dateModified": boilerplate.updatedAt || new Date().toISOString(),
+        "programmingLanguage": boilerplate.framework.join(", "),
+        "requirements": "Modern web browser",
+        "applicationSubCategory": "SaaS Development",
+        "aggregateRating": boilerplate.rating ? {
+          "@type": "AggregateRating",
+          "ratingValue": boilerplate.rating.value,
+          "ratingCount": boilerplate.rating.count,
+          "bestRating": "5",
+          "worstRating": "1"
+        } : undefined
+      })}
+    </script>
+
+    <!-- BreadcrumbList Structured Data -->
+    <script type="application/ld+json">
+      {JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": siteUrl
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Boilerplates",
+            "item": `${siteUrl}/boilerplates`
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": boilerplate.title,
+            "item": seoUrl
+          }
+        ]
       })}
     </script>
   {/if}

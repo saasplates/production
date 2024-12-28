@@ -8,10 +8,60 @@
   $: postCount = $authorPostCounts.get(author?.id || '') || 0;
 </script>
 
+<svelte:head>
+  {#if author}
+    <title>{author.name} - {author.role} | SaasPlates</title>
+    <meta name="description" content={author.bio} />
+    <meta name="author" content={author.name} />
+
+    <meta property="og:type" content="profile" />
+    <meta property="og:title" content="{author.name} - {author.role} | SaasPlates" />
+    <meta property="og:description" content={author.bio} />
+    <meta property="og:image" content={`https://saasplates.com${author.ogImage}`} />
+    <meta property="og:url" content={`https://saasplates.com/${author.ogImage}`} />
+    <meta property="og:site_name" content="SaasPlates" />
+    <meta property="profile:first_name" content={author.name.split(' ')[0]} />
+    <meta property="profile:last_name" content={author.name.split(' ').slice(1).join(' ')} />
+    <meta property="profile:username" content={author.twitter?.replace('@', '') || ''} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="{author.name} - {author.role} | SaasPlates" />
+    <meta name="twitter:description" content={author.bio} />
+    <meta name="twitter:image" content={`https://saasplates.com${author.ogImage}`} />
+    {#if author.twitter}
+      <meta name="twitter:creator" content={author.twitter} />
+    {/if}
+
+    <link rel="canonical" href={`https://saasplates.com/authors/${author.id}`} />
+    <meta name="robots" content="index, follow" />
+
+    <script type="application/ld+json">
+      {JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": author.name,
+        "description": author.bio,
+        "image": `https://saasplates.com${author.ogImage}`,
+        "jobTitle": author.role,
+        "url": `https://saasplates.com/authors/${author.id}`,
+        ...(author.location && { "homeLocation": author.location }),
+        ...(author.website && { "sameAs": [
+          author.website,
+          ...(author.twitter ? [`https://twitter.com/${author.twitter.replace('@', '')}`] : [])
+        ]}),
+        "memberOf": {
+          "@type": "Organization",
+          "name": "SaasPlates",
+          "url": "https://saasplates.com"
+        }
+      })}
+    </script>
+  {/if}
+</svelte:head>
+
 {#if author}
   <main class="min-h-screen bg-gray-50 py-12">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <!-- Author Header -->
       <div class="bg-white border border-gray-200 rounded-lg p-8 mb-12">
         <div class="md:flex md:items-center md:justify-between">
           <div class="flex items-center">

@@ -12,6 +12,7 @@ export interface Author {
   role: string;
   bio: string;
   avatar: string;
+  ogImage: string;
   location?: string;
   twitter?: string;
   website?: string;
@@ -25,6 +26,7 @@ export const authors: Author[] = [
     role: 'Full Stack Developer',
     bio: 'Passionate about building scalable web applications and sharing knowledge with the developer community. Specialized in React, Svelte, and TypeScript.',
     avatar: '/author/arjun.webp',
+    ogImage: '/author/arjun-og.png',
     location: 'India',
     twitter: '@arjvnz',
     website: 'https://arjunaditya.xyz',
@@ -36,9 +38,10 @@ export const authors: Author[] = [
   {
     id: 'kritika',
     name: 'Kritika Chaudhary',
-    role: 'UI/UX Designer & Developer',
+    role: 'Designer & Developer',
     bio: 'Design-focused developer creating beautiful, user-friendly interfaces. Expert in TailwindCSS, Figma, and frontend development.',
     avatar: '/author/krit.jpg',
+    ogImage: '/author/krit-og.png',
     location: 'India',
     twitter: '@kaykritika',
     website: 'https://bento.me/kaykritika',

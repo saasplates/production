@@ -9,24 +9,30 @@
   export let activeView: 'boilerplates' | 'starters' = 'boilerplates';
   
   function handleFilter(value: string) {
-    activeFramework = value;
-    dispatch('filterFramework', { framework: value });
+    document.startViewTransition(() => {
+      activeFramework = value;
+      dispatch('filterFramework', { framework: value });
+    });
   }
 
   function handlePriceFilter(price: string) {
-    if (activePrices.includes(price)) {
-      if (activePrices.length > 1) {
-        activePrices = [...activePrices.filter(p => p !== price)];
+    document.startViewTransition(() => {
+      if (activePrices.includes(price)) {
+        if (activePrices.length > 1) {
+          activePrices = [...activePrices.filter(p => p !== price)];
+        }
+      } else {
+        activePrices = [...activePrices, price];
       }
-    } else {
-      activePrices = [...activePrices, price];
-    }
-    dispatch('filterPrice', { prices: activePrices });
+      dispatch('filterPrice', { prices: activePrices });
+    });
   }
 
   function handleViewChange(view: 'boilerplates' | 'starters') {
-    activeView = view;
-    dispatch('viewChange', { view });
+    document.startViewTransition(() => {
+      activeView = view;
+      dispatch('viewChange', { view });
+    });
   }
 
   const technologies = [
