@@ -37,7 +37,7 @@
   <meta property="og:url" content={siteUrl} />
   <meta property="og:title" content={siteTitle} />
   <meta property="og:description" content={siteDescription} />
-  <meta property="og:image" content="{siteUrl}/og-image.png" />
+  <meta property="og:image" content="{siteUrl}/og.png" />
   <meta property="og:site_name" content={siteName} />
 
   <!-- Twitter -->
@@ -45,7 +45,7 @@
   <meta property="twitter:url" content={siteUrl} />
   <meta property="twitter:title" content={siteTitle} />
   <meta property="twitter:description" content={siteDescription} />
-  <meta property="twitter:image" content="{siteUrl}/og-image.png" />
+  <meta property="twitter:image" content="{siteUrl}/og.png" />
 
   <!-- Additional SEO -->
   <link rel="canonical" href={siteUrl} />

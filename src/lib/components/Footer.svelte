@@ -2,11 +2,14 @@
 	<div class="max-w-7xl mx-auto py-8 sm:py-12 px-4 sm:px-6 lg:px-8">
 		<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
 			<div class="bg-gray-100 w-full sm:w-auto">
-				<div class="border border-gray-300 py-3 sm:py-2 px-4 rounded-full bg-gray-50">
+				<div class="border border-gray-300 py-3 sm:py-4 px-4 rounded-md bg-gray-50">
 					<p class="text-center sm:text-left text-sm text-gray-600">
-						Maintained by <a href="https://x.com/arjvnz" class="text-gray-800 hover:text-gray-900 hover:underline font-medium">Arjun Aditya</a>
-						<span class="hidden sm:inline"> - </span>
-						<span class="block sm:inline pt-2 sm:pt-0">Deployed on{" "}
+						Maintained by <a href="https://x.com/arjvnz" class="text-gray-800 hover:text-gray-900 hover:underline font-medium">Arjun Aditya</a> & <a href="https://x.com/kaykritika" class="text-gray-800 hover:text-gray-900 hover:underline font-medium">Kritika Chaudhary</a>
+					</p>
+				</div>
+				<div class="py-3 sm:py-4 px-4 text-center sm:text-left text-sm rounded-md bg-gray-50 text-gray-600">
+
+						<span class="block sm:inline pt-2 sm:pt-2">Deployed on{" "}
 							<a 
 								href="https://zerops.io" 
 								target="_blank" 
@@ -16,7 +19,6 @@
 								Zerops
 							</a>
 						</span>
-					</p>
 				</div>
 			</div>
 
