@@ -172,7 +172,7 @@
         {#each packages as pkg}
           <div class="border border-gray-200 rounded-lg p-4 sm:p-6 bg-gray-50 hover:bg-gray-100 transition-colors relative mt-4">
             {#if pkg.value === 'featured'}
-              <div class="absolute -top-3 left-1/2 transform -translate-x-1/2">
+              <div class="relative  pb-3 sm:absolute sm:top-3 sm:left-1/2 sm:transform sm:-translate-x-1/2">
                 <span class="bg-gray-600 text-white text-xs font-semibold px-3 py-1 rounded-full z-20">
                   Most Popular
                 </span>
