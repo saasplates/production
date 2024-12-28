@@ -2,11 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+    font-family: 'Inter';
+    src: url('/fonts/Inter-Variable.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('/fonts/Inter-Italic-Variable.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: italic;
+}
+
 html, body {
     overscroll-behavior: none;
     height: 100%;
     position: fixed;
     width: 100%;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
 * {
@@ -18,5 +33,5 @@ html, body {
 }
 
 h1 {
- @apply py-1.5 overflow-y-hidden;
+    @apply py-1.5 overflow-y-hidden;
 }
