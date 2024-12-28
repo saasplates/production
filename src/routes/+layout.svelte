@@ -30,7 +30,7 @@
   <!-- <DiscordBanner /> -->
   <Header />
   
-  <main class="flex-1">
+  <main class="flex-1 py-10">
     <slot />
   </main>
 

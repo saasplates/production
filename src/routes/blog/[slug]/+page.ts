@@ -18,7 +18,10 @@ export const load: PageLoad = async ({ params }) => {
         date: metadata.date,
         authorId: metadata.author,
         tags: metadata.tags,
-        content: component
+        content: component,
+        ogImage: metadata.ogImage,
+        image: metadata.image,
+        publishedAt: new Date().toISOString()
       }
     };
   } catch (e) {

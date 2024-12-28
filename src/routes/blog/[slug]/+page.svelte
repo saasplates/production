@@ -1,9 +1,14 @@
 <script lang="ts">
   import Header from '$lib/components/Header.svelte';
   import { authorsStore } from '$lib/stores/authors';
-  import { blogStore, authorPostCounts } from '$lib/stores/blog';
+  import { blogStore, authorPostCounts, type BlogPost } from '$lib/stores/blog';
+  import type { SvelteComponent } from 'svelte';
 
-  export let data;
+  interface PageData {
+    post: BlogPost;
+  }
+
+  export let data: PageData;
   const { post } = data;
   const author = $authorsStore.find(a => a.id === post?.authorId);
   $: postCount = $authorPostCounts.get(author?.id || '') || 0;
@@ -19,13 +24,18 @@
     <meta property="og:description" content={post.description} />
     <meta property="article:author" content={author?.name || ''} />
     <meta property="article:published_time" content={post.publishedAt} />
+    <meta property="og:image" content={`https://saasplates.com${post.ogImage || '/default-hero-image.jpg'}`} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={post.title} />
+    <meta name="twitter:description" content={post.description} />
+    <meta name="twitter:image" content={`https://saasplates.com${post.ogImage || '/default-hero-image.jpg'}`} />
     <link rel="canonical" href="https://saasplates.com/blog/{post.slug}" />
   {/if}
 </svelte:head>
 
 {#if post}
   <main class="min-h-screen bg-gray-50 py-12">
-    <article class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+    <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <header class="text-center mb-12">
         <div class="flex items-center justify-center gap-2 text-sm text-gray-500 mb-4">
           <time datetime={post.date}>
@@ -61,8 +71,18 @@
           </div>
         {/if}
       </header>
+      
+      <div class="mb-8">
+        <img 
+          src={post.ogImage || post.image}
+          alt={post.title}
+          class="w-full h-auto rounded-lg border border-gray-200"
+          loading="lazy"
+          draggable="false"
+        />
+      </div>
 
-      <div class="prose prose-gray max-w-none bg-white rounded-lg border border-gray-200 p-8">
+      <div class="prose prose-gray max-w-none bg-white rounded-lg border border-gray-100 p-8">
         <svelte:component this={post.content} />
       </div>
 
@@ -137,4 +157,4 @@
   <div class="min-h-screen flex items-center justify-center">
     <p class="text-2xl text-gray-600">Post not found</p>
   </div>
-{/if} 
+{/if}

@@ -132,7 +132,7 @@
 <main class="mb-20 bg-gray-50 pt-20 sm:pt-24">
 
   <!-- Hero Section with lighter background -->
-  <div class="bg-white">
+  <div class="bg-white border-t border-gray-200">
 
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20 text-center">
       <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900">
@@ -148,7 +148,7 @@
         {#each packages as pkg}
           <div class="border border-gray-200 rounded-lg p-4 sm:p-6 bg-gray-50 hover:bg-gray-100 transition-colors relative mt-4">
             {#if pkg.value === 'paid'}
-            <div class="relative  pb-3 sm:absolute sm:top-3 sm:left-1/2 sm:transform sm:-translate-x-1/2">
+            <div class="relative  pb-3">
               <span class="bg-gray-600 text-white text-xs font-semibold px-3 py-1 rounded-full z-20">
                   Most Popular
                 </span>

@@ -1,5 +1,6 @@
 import type { Writable } from 'svelte/store';
 import { writable, derived } from 'svelte/store';
+import type { SvelteComponent } from 'svelte';
 
 export interface BlogPost {
   slug: string;
@@ -8,8 +9,10 @@ export interface BlogPost {
   date: string;
   authorId: string;
   tags: string[];
-  content?: string;
-  publishedAt?: string;
+  content?: typeof SvelteComponent;
+  publishedAt: string;
+  image?: string;
+  ogImage?: string;
 }
 
 // Initialize empty store
@@ -29,13 +32,25 @@ export const authorPostCounts = derived(blogStore, ($posts) => {
 
 // Function to load blog posts
 export async function loadBlogPosts() {
-  const modules = import.meta.glob('/src/content/blog/*.md');
+  const modules = import.meta.glob<{
+    metadata: {
+      title: string;
+      description: string;
+      date: string;
+      author: string;
+      tags?: string[];
+      image?: string;
+      ogImage?: string;
+    };
+    default: typeof SvelteComponent;
+  }>('/src/content/blog/*.md');
+  
   const deployDate = new Date().toISOString();
 
   const posts = await Promise.all(
     Object.entries(modules).map(async ([path, resolver]) => {
       const { metadata, default: content } = await resolver();
-      const slug = path.split('/').pop()?.replace('.md', '');
+      const slug = path.split('/').pop()?.replace('.md', '') || '';
       
       return {
         slug,
@@ -45,8 +60,10 @@ export async function loadBlogPosts() {
         authorId: metadata.author,
         tags: metadata.tags || [],
         content,
-        publishedAt: deployDate
-      };
+        publishedAt: deployDate,
+        image: metadata.image,
+        ogImage: metadata.ogImage
+      } satisfies BlogPost;
     })
   );
 

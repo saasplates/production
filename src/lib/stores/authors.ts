@@ -25,7 +25,7 @@ export const authors: Author[] = [
     role: 'Full Stack Developer',
     bio: 'Passionate about building scalable web applications and sharing knowledge with the developer community. Specialized in React, Svelte, and TypeScript.',
     avatar: '/author/arjun.webp',
-    location: 'Chandigarh, India',
+    location: 'India',
     twitter: '@arjvnz',
     website: 'https://arjunaditya.xyz',
     stats: {
@@ -39,7 +39,7 @@ export const authors: Author[] = [
     role: 'UI/UX Designer & Developer',
     bio: 'Design-focused developer creating beautiful, user-friendly interfaces. Expert in TailwindCSS, Figma, and frontend development.',
     avatar: '/author/krit.jpg',
-    location: 'Pune, India',
+    location: 'India',
     twitter: '@kaykritika',
     website: 'https://bento.me/kaykritika',
     stats: {

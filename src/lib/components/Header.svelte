@@ -20,6 +20,12 @@
         <div class="flex items-center gap-4">
           <ShareButton compact={true} />
           <a 
+          href="/blog" 
+          class="inline-flex items-center px-3 sm:px-4 py-2 border border-slate-200 text-sm font-medium rounded-md text-gray-600 bg-white hover:bg-gray-50"
+        >
+          Blog
+        </a>
+          <a 
             href="/advertise" 
             class="inline-flex items-center px-3 sm:px-4 py-2 border border-slate-200 text-sm font-medium rounded-md text-gray-600 bg-white hover:bg-gray-50"
           >
