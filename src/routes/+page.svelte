@@ -14,6 +14,13 @@
 	import type { Boilerplate } from '$lib/stores/boilerplates';
 	import type { Starter } from '$lib/stores/starters';
 
+
+	const siteName = 'SaasPlates';
+  const siteTitle = 'SaasPlates - Premium SaaS Boilerplates';
+  const siteDescription = 'Discover free open-source and premium SaaS boilerplates for React, Next.js, Svelte, and more. Find modern templates with authentication, payments, and UI components to ship your SaaS faster.';
+  const siteUrl = 'https://saasplates.com';
+  const siteKeywords = 'saas boilerplates, saas landing pages, react boilerplates, svelte boilerplates, laravel boilerplates, web development, Next.js boilerplates, admin panels';
+
 	const sectionTwoData = {
 		title: "Trusted by thousands of developers and organizations to:",
 		features: [
@@ -173,6 +180,56 @@
 		return undefined;
 	};
 </script>
+
+<svelte:head>
+  <!-- Primary Meta Tags -->
+  <title>{siteTitle}</title>
+  <meta name="title" content={siteTitle} />
+  <meta name="description" content={siteDescription} />
+  <meta name="keywords" content={siteKeywords} />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://saasplates.com" />
+  <meta property="og:title" content={siteTitle} />
+  <meta property="og:description" content={siteDescription} />
+  <meta property="og:image" content="https://saasplates.com/og.png" />
+  <meta property="og:site_name" content={siteName} />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:domain" content="saasplates.com" />
+  <meta name="twitter:url" content="https://saasplates.com" />
+  <meta name="twitter:creator" content="@nermalcat69" />
+  <meta name="twitter:site" content="@nermalcat69" />
+  <meta name="twitter:title" content={siteTitle} />
+  <meta name="twitter:description" content={siteDescription} />
+  <meta name="twitter:image" content="https://saasplates.com/og.png" />
+  <meta name="twitter:image:alt" content="SaasPlates - Premium SaaS Boilerplates" />
+
+  <!-- Additional SEO -->
+  <link rel="canonical" href={siteUrl} />
+  <meta name="robots" content="index, follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#18181B" />
+  
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+    {JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": siteName,
+      "url": siteUrl,
+      "description": siteDescription,
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": `${siteUrl}/search?q={search_term_string}`,
+        "query-input": "required name=search_term_string"
+      }
+    })}
+  </script>
+</svelte:head>
+
 
 <main class="min-h-screen bg-gray-50">
 	<div class="max-w-7xl mx-auto px-10 lg:px-5 py-20">

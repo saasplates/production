@@ -12,6 +12,16 @@
   let imageLoaded = false;
   let imgElement: HTMLImageElement;
 
+  const siteUrl = 'https://saasplates.com';
+  const siteName = 'SaasPlates';
+
+  // Reactive SEO data
+  $: seoTitle = boilerplate ? `${boilerplate.title} | ${siteName}` : siteName;
+  $: seoDescription = boilerplate?.description || 'Discover SaaS boilerplates and templates';
+  $: seoKeywords = boilerplate ? `${boilerplate.framework.join(', ')}, saas boilerplate, ${boilerplate.title.toLowerCase()}` : 'saas boilerplates';
+  $: seoImage = boilerplate ? `${siteUrl}${boilerplate.mainImage || boilerplate.image}` : `${siteUrl}/og.png`;
+  $: seoUrl = boilerplate ? `${siteUrl}/boilerplates/${boilerplate.id}` : siteUrl;
+
   onMount(() => {
     // Prevent default scroll restoration
     if ('scrollRestoration' in history) {
@@ -52,6 +62,62 @@
     imageLoaded = true;
   }
 </script>
+
+<svelte:head>
+  <!-- Primary Meta Tags -->
+  <title>{seoTitle}</title>
+  <meta name="title" content={seoTitle} />
+  <meta name="description" content={seoDescription} />
+  <meta name="keywords" content={seoKeywords} />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content={seoUrl} />
+  <meta property="og:title" content={seoTitle} />
+  <meta property="og:description" content={seoDescription} />
+  <meta property="og:image" content={seoImage} />
+  <meta property="og:site_name" content={siteName} />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:domain" content="saasplates.com" />
+  <meta name="twitter:url" content={seoUrl} />
+  <meta name="twitter:title" content={seoTitle} />
+  <meta name="twitter:description" content={seoDescription} />
+  <meta name="twitter:image" content={seoImage} />
+  <meta name="twitter:image:alt" content={boilerplate ? `${boilerplate.title} - ${boilerplate.framework.join(', ')} SaaS Boilerplate` : 'SaasPlates'} />
+
+  <!-- Additional SEO -->
+  <link rel="canonical" href={seoUrl} />
+  <meta name="robots" content="index, follow" />
+
+  {#if boilerplate}
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+      {JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": boilerplate.title,
+        "description": boilerplate.description,
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Any",
+        "offers": {
+          "@type": "Offer",
+          "price": boilerplate.price === "Free" ? "0" : boilerplate.priceAmount || "Contact for Price",
+          "priceCurrency": boilerplate.price === "Free" ? "USD" : undefined
+        },
+        "image": seoImage,
+        "url": seoUrl,
+        "author": {
+          "@type": "Organization",
+          "name": siteName,
+          "url": siteUrl
+        },
+        "keywords": [...boilerplate.framework, "saas boilerplate", boilerplate.title.toLowerCase()].join(", ")
+      })}
+    </script>
+  {/if}
+</svelte:head>
 
 {#if boilerplate}
   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 pt-20 sm:pt-24">
