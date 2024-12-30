@@ -22,6 +22,11 @@ export interface BoilerplateChild {
   icon?: any; // Component type for Svelte icons
 }
 
+export interface CustomButton {
+  text: string;
+  url: string;
+}
+
 export interface Boilerplate {
   id: string;
   title: string;
@@ -39,6 +44,7 @@ export interface Boilerplate {
   features?: Feature[];
   customContent?: CustomContent[];
   children?: BoilerplateChild[];
+  customButton?: CustomButton;
 }
 
 export const boilerplates: Boilerplate[] = [
@@ -53,6 +59,10 @@ export const boilerplates: Boilerplate[] = [
     demoUrl: 'https://next-saas-start.vercel.app/',
     sourceCodeUrl: 'https://github.com/leerob/next-saas-starter',
     featured: true,
+    customButton: {
+      text: "Deploy on Zerops",
+      url: "https://zerops.io/"
+    },
     features: [
       {
         title: 'Authentication System',
@@ -140,7 +150,7 @@ pnpm dev</code></pre>
           </div>
         `
       }
-    ]
+    ],
   },
   {
     id: 'nuxt-ui-pro-saas',
@@ -151,7 +161,11 @@ pnpm dev</code></pre>
     framework: ['Nuxt'],
     price: 'Free',
     demoUrl: 'https://saas-template.nuxt.dev/',
-    sourceCodeUrl: 'https://github.com/nuxt-ui-pro/saas'
+    sourceCodeUrl: 'https://github.com/nuxt-ui-pro/saas',
+    customButton: {
+      text: "Deploy on Zerops",
+      url: "https://zerops.io/"
+    },
   },
   {
     id: 'remix-saas',
@@ -164,6 +178,10 @@ pnpm dev</code></pre>
     featured: true,
     demoUrl: 'https://github.com/dev-xo/remix-saas',
     sourceCodeUrl: 'https://github.com/dev-xo/remix-saas',
+    customButton: {
+      text: "Deploy on Zerops",
+      url: "https://zerops.io/"
+    },
     features: [
       {
         title: 'Modern Tech Stack',
@@ -248,6 +266,10 @@ pnpm dev</code></pre>
     price: 'Paid',
     priceAmount: '$149.5',
     visitUrl: 'https://larafast.com',
+    customButton: {
+      text: "Deploy on Zerops",
+      url: "https://zerops.io/"
+    },
     // sponsored: true,
   },
   {
@@ -261,6 +283,10 @@ pnpm dev</code></pre>
     demoUrl: 'https://react-saas.com',
     sourceCodeUrl: 'https://github.com/ixartz/SaaS-Boilerplate',
     featured: true,
+    customButton: {
+      text: "Deploy on Zerops",
+      url: "https://zerops.io/"
+    },
     features: [
       {
         title: 'Authentication & Multi-tenancy',
@@ -347,6 +373,10 @@ pnpm dev</code></pre>
     sourceCodeUrl: 'https://github.com/salvinoto/nextjs-ultimate-saas',
     visitUrl: 'https://www.kabobtech.com',
     featured: true,
+    customButton: {
+      text: "Deploy on Zerops",
+      url: "https://zerops.io/"
+    },
     features: [
       {
         title: 'Authentication System',
@@ -422,6 +452,10 @@ pnpm dev</code></pre>
     mainImage: '/plate/saasfly-main.webp',
     framework: ['Next.js', 'TypeScript', 'Tailwind CSS', 'tRPC', 'Prisma'],
     price: 'Free',
+    customButton: {
+      text: "Deploy on Zerops",
+      url: "https://zerops.io/"
+    },
     demoUrl: 'https://show.saasfly.io/en',
     sourceCodeUrl: 'https://github.com/saasfly/saasfly',
     features: [
