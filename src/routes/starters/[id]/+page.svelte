@@ -31,11 +31,14 @@
       
       setTimeout(() => {
         if (window.history.length === currentLength) {
-          goto('/starters');
+          const url = new URL(window.location.href);
+          const framework = url.searchParams.get('framework') || 'all';
+          const prices = url.searchParams.get('prices') || 'Free,Paid';
+          goto(`/?view=starters&framework=${framework}&prices=${prices}`);
         }
       }, 100);
     } catch (e) {
-      goto('/starters');
+      goto('/?view=starters');
     }
   }
 
@@ -66,7 +69,7 @@
             d="M10 19l-7-7m0 0l7-7m-7 7h18"
           />
         </svg>
-        Back to Starters
+        Back to Homepage
       </a>
       <ShareButton title={starter.title} />
     </div>

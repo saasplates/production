@@ -8,6 +8,14 @@
   export let activePrices = ['Free', 'Paid'];
   export let activeView: 'boilerplates' | 'starters' = 'boilerplates';
   
+  const categories = [
+    { id: 'all', name: 'All' },
+    { id: 'auth', name: 'Authentication' },
+    { id: 'payment', name: 'Payments' },
+    { id: 'database', name: 'Database' },
+    { id: 'testing', name: 'Testing' }
+  ];
+
   function handleFilter(value: string) {
     document.startViewTransition(() => {
       activeFramework = value;
@@ -34,16 +42,6 @@
       dispatch('viewChange', { view });
     });
   }
-
-  const technologies = [
-    { id: 'all', name: 'All' },
-    { id: 'nextjs', name: 'Resend' },
-    { id: 'stripe', name: 'Stripe' },
-    { id: 'nextauth', name: 'NextAuth.js' },
-    { id: 'clerk', name: 'Clerk' },
-    { id: 'supabase', name: 'Supabase' },
-    { id: 'postgresql', name: 'PostgreSQL' }
-  ];
 </script>
 
 <div class="w-full mb-8">
@@ -96,20 +94,20 @@
           </div>
         </div>
       {:else}
-        <!-- Technology Filter -->
+        <!-- Categories Filter -->
         <div>
-          <h3 class="text-sm font-medium text-gray-700 mb-2">Technologies</h3>
-          <div class="border border-gray-200 rounded-[24px] p-1.5 bg-gray-100 flex flex-wrap gap-1">
-            {#each technologies as tech}
+          <h3 class="text-sm font-medium text-gray-700 mb-2">Categories</h3>
+          <div class="border border-gray-200 rounded-[16px] sm:rounded-[24px] p-1.5 bg-gray-100 flex flex-wrap gap-1">
+            {#each categories as category}
               <button
-                class="px-3 sm:px-4 py-2 text-sm font-medium rounded-[20px] transition-all duration-200 ease-in-out {
-                  activeFramework === tech.id
+                class="px-3 sm:px-4 py-2 text-sm font-medium rounded-[12px] sm:rounded-[20px] transition-all duration-200 ease-in-out {
+                  activeFramework === category.id
                     ? 'bg-gray-900 text-white'
                     : 'text-gray-700 hover:text-gray-900'
                 }"
-                on:click={() => handleFilter(tech.id)}
+                on:click={() => handleFilter(category.id)}
               >
-                {tech.name}
+                {category.name}
               </button>
             {/each}
           </div>

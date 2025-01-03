@@ -56,13 +56,16 @@
 			// Check after a small delay if we actually navigated back
 			setTimeout(() => {
 				if (window.history.length === currentLength) {
-					// If we're still on the same page, use the fallback
-					goto('/');
+					// Preserve existing URL parameters if they exist
+					const url = new URL(window.location.href);
+					const framework = url.searchParams.get('framework') || 'All';
+					const prices = url.searchParams.get('prices') || 'Free,Paid';
+					goto(`/?view=boilerplates&framework=${framework}&prices=${prices}`);
 				}
 			}, 100);
 		} catch (e) {
 			// Fallback if history.back() fails
-			goto('/');
+			goto('/?view=boilerplates');
 		}
 	}
 

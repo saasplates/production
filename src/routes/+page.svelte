@@ -67,14 +67,41 @@
 	let activeFramework = 'All';
 	let activePrices = ['Free', 'Paid'];
 
-	// Initial sorting and filtering for boilerplates
-	$: sortedBoilerplates = [...boilerplates].sort((a, b) => {
-		if (a.featured && !b.featured) return -1;
-		if (!a.featured && b.featured) return 1;
-		if (a.sponsored && !b.sponsored) return -1;
-		if (!a.sponsored && b.sponsored) return 1;
-		return 0;
-	});
+	function updateURL(view: 'boilerplates' | 'starters', framework: string, prices: string[]) {
+		const url = new URL(window.location.href);
+		url.searchParams.set('view', view);
+		url.searchParams.set('framework', framework);
+		url.searchParams.set('prices', prices.join(','));
+		window.history.replaceState({}, '', url.toString());
+	}
+
+	function handleViewChange(event: CustomEvent) {
+		const { view } = event.detail;
+		document.startViewTransition(() => {
+			activeView = view;
+			activeFramework = view === 'boilerplates' ? 'All' : 'all';
+			currentPage = 1;
+			updateURL(view, activeFramework, activePrices);
+		});
+	}
+
+	function handleFrameworkFilter(event: CustomEvent) {
+		const { framework } = event.detail;
+		document.startViewTransition(() => {
+			activeFramework = framework;
+			currentPage = 1;
+			updateURL(activeView, framework, activePrices);
+		});
+	}
+
+	function handlePriceFilter(event: CustomEvent) {
+		const { prices } = event.detail;
+		document.startViewTransition(() => {
+			activePrices = prices;
+			currentPage = 1;
+			updateURL(activeView, activeFramework, prices);
+		});
+	}
 
 	// Framework options are manually defined, not from boilerplates
 	const Frameworks = [
@@ -86,6 +113,15 @@
 		'SvelteKit',
 		'Laravel'
 	];
+
+	// Initial sorting and filtering for boilerplates
+	$: sortedBoilerplates = [...boilerplates].sort((a, b) => {
+		if (a.featured && !b.featured) return -1;
+		if (!a.featured && b.featured) return 1;
+		if (a.sponsored && !b.sponsored) return -1;
+		if (!a.sponsored && b.sponsored) return 1;
+		return 0;
+	});
 
 	// Filter logic based on active view
 	$: filteredItems = activeView === 'boilerplates'
@@ -100,9 +136,61 @@
 				
 				return frameworkMatch && priceMatch;
 			})
-		: starters.filter(item => {
-				return activeFramework === 'all' || item.framework.includes(activeFramework);
-			});
+		: starters;
+
+	// Add type-safe getters for content
+	$: getBoilerplateContent = (item: CardItem): Boilerplate | undefined => {
+		if (item.type === 'boilerplate' && item.content && 'framework' in item.content) {
+			return item.content as Boilerplate;
+		}
+		return undefined;
+	};
+
+	$: getStarterContent = (item: CardItem): Starter | undefined => {
+		if (item.type === 'starter' && item.content && 'category' in item.content) {
+			return item.content as Starter;
+		}
+		return undefined;
+	};
+
+	// Intersection Observer for infinite scroll
+	let observer: IntersectionObserver;
+
+	onMount(() => {
+		observer = new IntersectionObserver(
+			(entries) => {
+				entries.forEach(entry => {
+					if (entry.isIntersecting && hasMore && !loading) {
+						loadMore();
+					}
+				});
+			},
+			{ rootMargin: '100px' }
+		);
+
+		// Set initial state from URL if present
+		const url = new URL(window.location.href);
+		const viewParam = url.searchParams.get('view') as 'starters' | 'boilerplates' | null;
+		const frameworkParam = url.searchParams.get('framework');
+		const pricesParam = url.searchParams.get('prices');
+
+		if (viewParam === 'starters' || viewParam === 'boilerplates') {
+			activeView = viewParam;
+		}
+		
+		if (frameworkParam) {
+			activeFramework = frameworkParam;
+		} else {
+			activeFramework = activeView === 'boilerplates' ? 'All' : 'all';
+		}
+
+		if (pricesParam) {
+			activePrices = pricesParam.split(',');
+		}
+
+		// Set initial URL if params are missing
+		updateURL(activeView, activeFramework, activePrices);
+	});
 
 	// Add ADDCard to the filtered items
 	$: paginatedItemsWithCards = filteredItems.length > 0
@@ -129,56 +217,6 @@
 			loading = false;
 		}, 500);
 	}
-
-	function handleViewChange(event: CustomEvent) {
-		const { view } = event.detail;
-		activeView = view;
-		activeFramework = view === 'boilerplates' ? 'All' : 'all';
-		currentPage = 1;
-	}
-
-	function handleFrameworkFilter(event: CustomEvent) {
-		const { framework } = event.detail;
-		activeFramework = framework;
-		currentPage = 1;
-	}
-
-	function handlePriceFilter(event: CustomEvent) {
-		const { prices } = event.detail;
-		activePrices = prices;
-		currentPage = 1;
-	}
-
-	// Intersection Observer for infinite scroll
-	let observer: IntersectionObserver;
-
-	onMount(() => {
-		observer = new IntersectionObserver(
-			(entries) => {
-				entries.forEach(entry => {
-					if (entry.isIntersecting && hasMore && !loading) {
-						loadMore();
-					}
-				});
-			},
-			{ rootMargin: '100px' }
-		);
-	});
-
-	// Add type-safe getters for content
-	$: getBoilerplateContent = (item: CardItem): Boilerplate | undefined => {
-		if (item.type === 'boilerplate' && item.content && 'framework' in item.content) {
-			return item.content as Boilerplate;
-		}
-		return undefined;
-	};
-
-	$: getStarterContent = (item: CardItem): Starter | undefined => {
-		if (item.type === 'starter' && item.content && 'category' in item.content) {
-			return item.content as Starter;
-		}
-		return undefined;
-	};
 </script>
 
 <svelte:head>
